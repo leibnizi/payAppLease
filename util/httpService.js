@@ -17,7 +17,6 @@ const parseUrl = (baseUrl,queryStringObject)=>{
 }
 
 export const get = (url,config)=>{
-
     let requstConfig = {
         method:'get',
         url:parseUrl(baseUrl,config.params),
