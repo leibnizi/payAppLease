@@ -1,9 +1,19 @@
+import animModal from '/templates/items/index.js';
+import {get} from '/util/httpService.js'
+
 Page({
-  data: {},
-  onLoad() {},
+  ...animModal.animOp,
+  data: {
+    hidden:true
+  },
+  onLoad() {
+    get("api/v3/test",{params:{a:"aa",b:"bb",c:"cc"}})
+  },
   defaultTap(){
-    my.navigateTo({
-      url:"/page/test/test"
-    });
+   this.setData({
+     hidden:!this.data.hidden
+   });
+   this.createMaskShowAnim();
+   this.createContentShowAnim();
   }
 });
