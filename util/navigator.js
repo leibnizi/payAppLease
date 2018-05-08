@@ -1,4 +1,4 @@
-export const goBack = (delta)=>{
+export const goBack = (delta = 1)=>{
     my.navigateBack({
       delta
     });
@@ -11,10 +11,14 @@ export const push = (path)=>{
           url: path
         });
     } else {
-        my.navigateTo(path);
+        my.navigateTo({
+            url:path
+        });
     }
 }
 
 export const redirectTo = (path)=>{
-    my.navigateTo(path)
+    my.navigateTo({
+        url:path
+    })
 }
