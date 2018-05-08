@@ -1,0 +1,9 @@
+.product{
+  /* display: none; */
+  background: yellow;
+}
+.product-img{
+  width: 160rpx;
+  height: 160rpx;
+  background-color: red;
+}

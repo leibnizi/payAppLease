@@ -1,0 +1,35 @@
+  <view class="product">
+  <!-- 左侧图片 -->
+    <view class="product-img">
+      <image
+        class="product-img"
+        src="{{ thumb }}"
+        mode="aspectFit"
+      ></image>
+      1123
+    </view>
+    <view class="name">name1</view>
+    <!-- 右侧详情 -->
+    <view class="zan-card__detail">
+      <slot a:if="{{ useDetailSlot }}" name="detail-slot"></slot>
+      <block a:else>
+        <view class="zan-card__detail-row">
+          <view class="zan-card__right-col">¥ {{ price }}</view>
+          <view class="zan-card__left-col zan-ellipsis--l2">
+            {{ title }}
+          </view>
+        </view>
+
+        <view class="zan-card__detail-row zan-c-gray-darker">
+          <view a:if="{{ num }}" class="zan-card__right-col">x {{ num }}</view>
+          <view a:if="{{ desc }}" class="zan-card__left-col">
+            {{ desc }}
+          </view>
+        </view>
+
+        <view a:if="{{ status }}" class="zan-card__detail-row">
+          <view class="zan-card__left-col zan-c-red">{{ status }}</view>
+        </view>
+      </block>
+    </view>
+  </view>

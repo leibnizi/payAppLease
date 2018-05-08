@@ -5,6 +5,7 @@ Page({
   ...lifecycle,
   ...animModal.animOp,
   data: {
+    staffA: {firstName: 'san', lastName: 'zhang'},
     ...animModal.data,
     pageName: 'component/index',
     pageInfo: {

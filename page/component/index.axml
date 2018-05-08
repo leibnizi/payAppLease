@@ -1,15 +1,21 @@
 <import src="/util/lifecycle.axml" />
 <import src="/util/grid/index.axml" />
 <import src="/util/items/index.axml" />
+<import src="/page/component/product/product.axml" />
 
 <view class="container">
   <view class="slogon">
     <image src="/image/logo.png" mode="scaleToFill" class="logo" />
     <view class="info">
-      <text class="desc">为你提供一些常用组件</text>
+      <text class="desc">为你提供一些常用组件
+        
+      </text>
     </view>
   </view>
-  <template is="grid" data="{{...arr}}" />
+  <template is="product" data="{{...staffA}}">
+  
+  </template>
+  <!-- <template is="grid" data="{{...arr}}" /> -->
 </view>
 
 <template
