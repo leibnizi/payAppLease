@@ -172,6 +172,7 @@ Page({
         }
       ],
     },
+    debug:true
   },
   onGridItemTap(e) {
     const curIndex = e.target.dataset.index;
