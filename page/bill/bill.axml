@@ -1,3 +1,52 @@
 <view>
-  New Page
+  <view a:if="{{empty === true}}">
+    <view class="container">
+        <view class="btn">
+          <text>返回首页</text>
+        </view>
+    </view>
+
+    
+  </view>
+  <view a:else="{{empty === false}}">
+    <view class="up">
+       <view class="picInfo">
+      <image  src="/image/pic1.png" mode="" />
+      <view class="text">
+        <text>时尚月卡￥499</text>
+        <text>总租金：￥499</text>
+      </view>
+    </view>
+    <view class="seperator"></view>
+    <view class="moneyInfo">
+      <view class="moneyList">
+        <view class="item">
+          <text>300</text>
+          <text>应交押金（元）</text>
+        </view>
+        <view class="item">
+          <text>300</text>
+          <text>已交押金（元）</text>
+        </view>
+        <view class="item">
+          <text>0</text>
+          <text>待交押金（元）</text>
+        </view>
+      </view>
+      <view class="timeEnd">
+        <text>账单到期将通过支付宝免密支付还款，请注意查收信息</text>
+      </view>
+    </view>
+    </view>
+    <view class="payInfo">
+      <view>
+        <text>1期</text>
+        <text>待还款</text>
+      </view>
+      <view>
+        <text>￥399</text>
+        <text>2018年08月29日通过支付宝免密支付</text>
+      </view>
+    </view>
+  </view>
 </view>
