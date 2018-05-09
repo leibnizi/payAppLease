@@ -2,7 +2,8 @@ require('./config$');
 
 function success() {
 require('../..//app');
-require('../..//page/home/home');
-require('../..//page/test/test');
+require('../..//page/rent/rent');
+require('../..//page/cart/cart');
+require('../..//page/user/user');
 }
 self.bootstrapApp ? self.bootstrapApp({ success }) : success();

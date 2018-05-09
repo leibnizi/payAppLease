@@ -1,0 +1,16 @@
+.listItem{
+    display: flex;
+    flex-direction: row;
+    padding:24rpx 30rpx;
+    justify-content: space-between;
+    background: #FFFFFF;
+    border-bottom: 1rpx solid lightgrey;
+}
+
+.listItem .text{
+    font-family: PingFangSC-Regular;
+    font-size: 32rpx;
+    color: #333333;
+    letter-spacing: 0;
+    line-height: 42rpx;
+}
