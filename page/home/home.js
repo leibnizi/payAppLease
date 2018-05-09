@@ -1,5 +1,9 @@
+import animModal from '/templates/items/index.js';
+import {get} from '/util/httpService.js'
+
 Page({
   data: {
+    hidden: true,
     product1: {
       img: 'http://static-r.msparis.com/uploads/7/5/75da5d0ab442a43948093798de962057.jpeg',
       brand:"nike!!!",
@@ -15,10 +19,14 @@ Page({
       money:"0.00"
     }
   },
-  onLoad() {},
+  onLoad() {
+    get("api/v3/test", { params: { a: "aa", b: "bb", c: "cc" } })
+  },
   defaultTap(){
-    my.navigateTo({
-      url:"/page/test/test"
-    });
+   this.setData({
+     hidden:!this.data.hidden
+   });
+   this.createMaskShowAnim();
+   this.createContentShowAnim();
   }
 });

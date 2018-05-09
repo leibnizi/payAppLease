@@ -1,0 +1,5 @@
+<template name="test">
+    <view class="test">
+        This is a Test
+    </view>
+</template>

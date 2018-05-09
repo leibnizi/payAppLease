@@ -1,4 +1,13 @@
 <import src="../component/product/product.axml"/>
-<view>
-  <template is="product" data="{{...product1}}"/>
+<import src='../../templates/test/test.axml'/>
+<import src='../../templates/items/index.axml' />
+<view class="container">
+  New Page1
+
+  <view>
+    <template is="product" data="{{...product1}}"/>
+  </view>
+  <template is="test" />
+  <button type="default" size="defaultSize" onTap="defaultTap"> Button </button>
 </view>
+<template is="items" data="{{hidden:hidden}}"/>
