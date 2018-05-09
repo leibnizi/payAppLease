@@ -1,0 +1,4 @@
+<import src="../component/product/product.axml"/>
+<view>
+  <template is="product" data="{{...product1}}"/>
+</view>
