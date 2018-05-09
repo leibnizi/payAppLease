@@ -15,10 +15,19 @@ const httpRequest = function(obj) {
 
     params = Object.assign({}, params, obj);
 
+    if(!my || !my.httpRequest){
+        console.log('没有找到 my 对象，请在小程序开放工具内执行。');
+
+        return false
+    }
+
+    if(!params.url){
+        console.log('没有找到 my 对象，请在小程序开放工具内执行。');
+
+        return false
+    }
+
     const promise = new Promise(function(resolve, reject){
-        if(!my || !my.httpRequest){
-            console.log('没有找到 my 对象，请在小程序开放工具内执行。');
-        }
 
         let success = function () {
             resolve(data);
