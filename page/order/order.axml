@@ -1,4 +1,5 @@
 <import src='/templates/order/order.axml' />
 <view>
-  <template is="order"/>
+  <template is="order" data="{{list,has_btn}}"/>
+  <view a:if="{{has_btn==1}}" class="btn"><text>订单跟踪</text></view>
 </view>

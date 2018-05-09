@@ -1,5 +1,7 @@
-import "/templates/order/order.js";
+import order from "/templates/order/order.js";
 Page({
-  data: {},
+  data: {
+    ...order,
+  },
   onLoad() {},
 });

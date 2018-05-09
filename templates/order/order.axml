@@ -1,6 +1,6 @@
 <template name="order">
   <view a:if="{{list.length}}" class="order-components">
-    <view a:for="{{list}}" a:key="index" class="{{has_btn==1?'items':''}}">
+    <view a:for="{{list}}" a:key="index" class="{{has_btn== true?'items':''}}">
       <view class="item">
         <view class="left">
           <image src="{{item.image_url}}"></image>
@@ -16,6 +16,5 @@
       </view>
       <view a:if="{{list.length-1 != index}}" class="line" ></view>
     </view>
-    <!-- <view a:if="{{has_btn==1}}" class="btn"><text>订单跟踪</text></view> -->
   </view>
 </template>
