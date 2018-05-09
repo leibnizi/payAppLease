@@ -1,6 +1,14 @@
+import {userList} from '/config/config.js';
+import {push} from '/util/navigator.js';
 Page({
   data: {
-    list:["我的订单","我的账单","我的会员","帮助中心"]
+    list:userList
   },
-  onLoad() {},
+  onLoad() {
+    
+  },
+  goPath(e){
+    console.log(e);
+    push(e.currentTarget.dataset.path)
+  }
 });

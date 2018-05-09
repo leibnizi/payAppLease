@@ -18,7 +18,7 @@ export const push = (path)=>{
 }
 
 export const redirectTo = (path)=>{
-    my.navigateTo({
+    my.redirectTo({
         url:path
     })
 }

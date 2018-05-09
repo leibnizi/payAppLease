@@ -1,10 +1,9 @@
 <view>
   
   <view a:for="{{list}}">
-    <view class="listItem">
-      <text class="text">{{item}}</text>
-      <icon class="icon" type="download" size="26" color="background: #C7C7CC;" />
+    <view data-path="{{item.path}}" class="listItem" onTap="goPath">
+      <text class="text">{{item.name}}</text>
+      <icon class="icon" type="{{item.icon}}" size="26" color="background: #C7C7CC;" />
     </view>
-    
   </view>
 </view>
