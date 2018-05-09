@@ -1,6 +1,5 @@
-<import src="../component/product/product.axml"/>
-<import src='../../templates/test/test.axml'/>
-<import src='../../templates/items/index.axml' />
+<import src="/templates/product/product.axml"/>
+<import src='/templates/items/index.axml' />
 <view class="container">
   New Page1
 
