@@ -1,8 +1,12 @@
 {
   "pages": [
+    "page/bill/bill",
     "page/rent/rent",
     "page/cart/cart",
-    "page/user/user"
+    "page/user/user",
+    "page/order/order",
+    "page/member/member",
+    "page/helpCenter/helpCenter"
   ],
   "window": {
     "enableWK": "YES",
