@@ -1,0 +1,11 @@
+<template name="items">
+    <view class="modal" a:if="{{!hidden}}">
+        <view class="modal-mask" animation="{{animMaskData}}" />
+        <view class="modal-container" animation="{{animContentData}}">
+            <view class="modal-close" onTap="onModalCloseTap">×</view>
+            <view class="modal-content">
+                ModalContent
+            </view>
+        </view>
+    </view>
+</template>
