@@ -1,5 +1,6 @@
 {
   "pages": [
+    "page/order/order",
     "page/bill/bill",
     "page/rent/rent",
     "page/cart/cart",

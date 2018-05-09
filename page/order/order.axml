@@ -1,3 +1,4 @@
+<import src='/templates/order/order.axml' />
 <view>
-  New Page
+  <template is="order"/>
 </view>
