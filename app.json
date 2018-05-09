@@ -1,12 +1,13 @@
 {
   "pages": [
-    "page/home/home",
-    "page/test/test"
+    "page/rent/rent",
+    "page/cart/cart",
+    "page/user/user"
   ],
   "window": {
     "enableWK": "YES",
     "enableDSL": true,
-    "defaultTitle": "小程序",
+    "defaultTitle": "女神派官方租赁",
     "backgroundColor": "#F5F5F9",
     "pullRefresh": false,
     "allowsBounceVertical": true
@@ -17,12 +18,16 @@
     "backgroundColor": "#F5F5F9",
     "items": [
       {
-        "pagePath": "page/home/home",
-        "name": "基础组件"
+        "pagePath": "page/rent/rent",
+        "name": "租赁"
       },
       {
-        "pagePath": "page/test/test",
-        "name": "Test"
+        "pagePath": "page/cart/cart",
+        "name": "购物车"
+      },
+      {
+        "pagePath": "page/user/user",
+        "name": "我的"
       }
     ]
   },

@@ -1,0 +1,10 @@
+<view>
+  
+  <view a:for="{{list}}">
+    <view class="listItem">
+      <text class="text">{{item}}</text>
+      <icon class="icon" type="download" size="26" color="background: #C7C7CC;" />
+    </view>
+    
+  </view>
+</view>

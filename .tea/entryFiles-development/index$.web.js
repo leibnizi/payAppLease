@@ -1,3 +1,4 @@
 require('./config$');
-require('../..//page/home/home');
-require('../..//page/test/test');
+require('../..//page/rent/rent');
+require('../..//page/cart/cart');
+require('../..//page/user/user');
