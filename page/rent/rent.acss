@@ -1,3 +1,4 @@
+@import "../component/product/product.acss";
 @import "/templates/items/index.acss";
 @import "/templates/test/test.acss";
 

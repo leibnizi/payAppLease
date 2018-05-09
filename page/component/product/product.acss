@@ -1,0 +1,49 @@
+.product{
+  display: flex;
+  padding: 40rpx 20rpx 40rpx 40rpx;
+  justify-content: space-between;
+  background-color: #fff;
+}
+.product-img{
+  width: 160rpx;
+  height: 160rpx;
+  background-color: red;
+}
+.product-detail-box{
+  display: flex;
+  flex-grow: 1;
+}
+.product-detail, run-out-product-detail{
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  margin-left: 10rpx;
+  font-size: 28rpx;
+}
+
+.product-detail > .brand{
+  color: #333;
+}
+.product-detail > .name{
+  color: #333;
+}
+.product-detail > .size{
+  color: #ccc;
+  font-size: 24rpx;
+}
+.detail-right{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: #ccc;
+}
+
+.run-out-product-detail > .brand{
+  color: #ccc;
+}
+.run-out-product-detail > .name{
+  color: #ccc;
+}
+.run-out{
+  color: #333;
+}
