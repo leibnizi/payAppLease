@@ -6,7 +6,7 @@
   <view>
     <template is="product" data="{{...product1}}"/>
   </view>
-  <template is="test" />
-  <button type="default" size="defaultSize" onTap="defaultTap"> Button </button>
+
+
 </view>
 <template is="items" data="{{hidden:hidden}}"/>
