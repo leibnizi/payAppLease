@@ -1,6 +1,8 @@
 Page({
   data: {
-    type:""
+    type:"",
+    noPay:true,
+    agree:true
   },
   onLoad(option) {
     this.setData({
