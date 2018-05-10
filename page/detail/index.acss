@@ -1,0 +1,7 @@
+@import "/templates/product/product.acss";
+@import "/templates/items/index.acss";
+
+.container{
+    margin: 20px 30px;
+    color:red;
+}
