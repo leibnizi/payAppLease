@@ -1,5 +1,6 @@
 import Util from '/util/util.js'
 import {get, post} from '/util/httpService.js'
+import AuthLogin from '/util/authLogin.js'
 let setIntervalTime = null;
 Page({
   data: {
@@ -12,7 +13,7 @@ Page({
     access_token: ''
   },
   onLoad() {
-    
+    AuthLogin.getAccessToken();
   },
 
   onChangeMobile(event){
@@ -38,7 +39,14 @@ Page({
 
   },
   onSubmit(){
-    console.log(12122);
+    let userInfo = my.getStorageSync({key:'userInfo'}).data;
+    if(userInfo && userInfo.token_type == 2){
+      my.alert({
+        title: '警告',
+        content: '你已经是绑定过了，请直接体验！'
+      });
+      return false;
+    }
     if(!Util.checkPhone(this.data.mobile)){
       Util.toast({
         type:'none',
@@ -58,18 +66,34 @@ Page({
     post('alipaymini/bind', { 
       mobile: this.data.mobile,
       code: this.data.code,
-      }, {success:(rps)=>{
-        console.log(rps);
-        this.setData({
-          intervalTime: 0
-        });
-    }, fail:(rps)=>{
-        clearInterval(setIntervalTime);
-        this.setData({
-          intervalTime: 0,
-          codeText: '重新获取'
-        });
-    }});
+      },{}).then(
+        (rps)=>{
+          if(rps.data && rps.data.status == 'error' && rps.data.error){
+            clearInterval(setIntervalTime);
+            this.setData({
+              intervalTime: 0,
+              codeText: '重新获取'
+            });
+          }else{
+            clearInterval(setIntervalTime);
+            this.setData({
+              intervalTime: 0,
+              access_token: rps.data.access_token,
+              head_portrait: rps.data.head_portrait,
+              mobile: rps.data.mobile,
+              invitation_code: rps.data.invitation_code,
+              nickname: rps.data.nickname,
+              new_user: rps.data.new_user
+            });
+          }
+        },(rps)=>{
+          clearInterval(setIntervalTime);
+          this.setData({
+            intervalTime: 0,
+            codeText: '重新获取'
+          });
+      }
+    );
   },
   /*
    * 验证码计时
@@ -98,6 +122,15 @@ Page({
    * 获取验证码
    */
   getCode (event){
+    //检测setIntervalTime是不是在执行
+    if(setIntervalTime){
+      Util.toast({
+        type:'none',
+        content: '请稍后再获取验证码！ ',
+        duration: 1000 * 1
+      });
+      return false;
+    }
     if(!Util.checkPhone(this.data.mobile)){
       Util.toast({
         type:'none',
@@ -106,17 +139,25 @@ Page({
       });
       return false;
     }
-    get('common/sms', { params: { mobile: this.data.mobile }, success:(rps)=>{
-        console.log(rps);
-        this.setData({
-          intervalTime: 0
-        });
-    }, fail:(rps)=>{
+    get('common/sms', { params: { mobile: this.data.mobile }}).then((rps)=>{
+        if(rps.data && rps.data.status == 'error' && rps.data.error && rps.data.error.code == '10017'){
+          clearInterval(setIntervalTime);
+          this.setData({
+            intervalTime: 0,
+            codeText: '重新获取'
+          });
+        }else{
+          this.setData({
+            intervalTime: 0
+          });
+          this._setIntervalTime();
+        }
+    }, (rps)=>{
         clearInterval(setIntervalTime);
         this.setData({
           intervalTime: 0,
           codeText: '重新获取'
         });
-    }});
+    });
   },
 });

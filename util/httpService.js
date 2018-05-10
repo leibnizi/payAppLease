@@ -4,6 +4,12 @@
 */
 import {baseUrl} from '/config/config.js';
 import AuthLogin from '/util/authLogin.js';
+const initConfig = {
+    params: {},
+    headrs: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+    }
+};
 const parseUrl = (reUrl,queryStringObject)=>{
     let url = `${baseUrl}/${reUrl}`;
     let access_token = my.getStorageSync({key:'access_token'}).data || '';
@@ -28,7 +34,6 @@ const parseUrl = (reUrl,queryStringObject)=>{
 }
 
 const erroCodeState = (res) => {
-    console.log(res);
     if(res.status == 200){
         if(res.data && res.data.status != 'ok' && res.data.error){
             //支付宝token超时状态 和 单点登录状态 access_token 超时 从新触发登录
@@ -47,6 +52,7 @@ const erroCodeState = (res) => {
 
 export const get = (url,config)=>{
     return new Promise((resolve,reject)=>{
+        config = Object.assign({}, initConfig, config);
         let requstConfig = {
                 method:'get',
                 url:parseUrl(url,config.params),
@@ -63,6 +69,7 @@ export const get = (url,config)=>{
 
 export const post = (url,data,config)=>{
     return new Promise((resolve,reject)=>{
+        config = Object.assign({}, initConfig, config);
         let access_token = my.getStorageSync({key:'access_token'}).data || '';
         let platform = 'alipaymini'; //标识支付宝应用
         data = Object.assign({}, data, {access_token,platform});
@@ -83,6 +90,7 @@ export const post = (url,data,config)=>{
 
 export const put = (url,data,config)=>{
     return new Promise((resolve,reject)=>{
+        config = Object.assign({}, initConfig, config);
         let access_token = my.getStorageSync({key:'access_token'}).data || '';
         let platform = 'alipaymini'; //标识支付宝应用
         data = Object.assign({}, data, {access_token,platform});
@@ -103,6 +111,7 @@ export const put = (url,data,config)=>{
 
 export const del = (url, data, params)=>{
     return new Promise((resolve,reject)=>{
+        config = Object.assign({}, initConfig, config);
         let access_token = my.getStorageSync({key:'access_token'}).data || '';
         let platform = 'alipaymini'; //标识支付宝应用
         data = Object.assign({}, data, {access_token,platform});
@@ -123,6 +132,7 @@ export const del = (url, data, params)=>{
 
 export const request = (config)=>{
     return new Promise((resolve,reject)=>{
+        config = Object.assign({}, initConfig, config);
         let access_token = my.getStorageSync({key:'access_token'}).data || '';
         let platform = 'alipaymini'; //标识支付宝应用
         config.data = Object.assign({}, config.data, {access_token,platform});

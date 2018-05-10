@@ -28,10 +28,10 @@ const AuthLogin = {
         if(authCode){
             //已经拿到用户授权信息 authCode  只需要login 获取token
             my.httpRequest({
-                url: baseUrl + '/login',
-                method:'POST',
+                url: baseUrl + '/alipaymini/login',
+                method:'GET',
                 data: {
-                    code: authCode
+                    authcode: authCode
                 },
                 success: (res) => {
                     if(res.status == 'ok'){
@@ -48,14 +48,23 @@ const AuthLogin = {
 
                                 if (res.authCode) {
                                     my.httpRequest({
-                                            url: baseUrl + '/login',
-                                            method:'POST',
+                                            url: baseUrl + '/alipaymini/login',
+                                            method:'GET',
                                             data: {
-                                            code: res.authCode
-                                        },
+                                                authcode: res.authCode
+                                            },
                                         success: (res) => {
-                                            my.setStorageSync({key:'userInfo', data:res.data.data});
-                                            my.setStorageSync({key:'access_token', data:res.data.data.access_token});
+                                            if(res.data && res.data.status == 'ok'){
+                                                my.setStorageSync({key:'userInfo', data:res.data.data});
+                                                my.setStorageSync({key:'access_token', data:res.data.data.access_token});
+                                            }else{
+                                                if(res.data && res.data.error){
+                                                    my.alert({
+                                                        title: res.data.error.code,
+                                                        content: res.data.error.message,
+                                                    });
+                                                }
+                                            }
                                         },
                                         fail: (res) => {
                                             console.log('authCode 登录换取 access_token ',res);
@@ -71,15 +80,57 @@ const AuthLogin = {
                         });
                     }
                 },
-                fail: () => {
+                fail: (res) => {
                     console.log('authCode 登录换取 access_token ',res);
                 }
             });
+        }else{
+                try {
+                    my.getAuthCode({
+                        scopes: 'auth_user',
+                        success: (res) => {
+                            my.setStorageSync({
+                                key: 'authCode',
+                                data: res.authCode
+                            });
+
+                            if (res.authCode) {
+                                my.httpRequest({
+                                    url: baseUrl + '/alipaymini/login',
+                                    method:'GET',
+                                    data: {
+                                        authcode: res.authCode
+                                    },
+                                    success: (res) => {
+                                        if(res.data && res.data.status == 'ok'){
+                                            my.setStorageSync({key:'userInfo', data:res.data.data});
+                                            my.setStorageSync({key:'access_token', data:res.data.data.access_token});
+                                        }else{
+                                            if(res.data && res.data.error){
+                                                my.alert({
+                                                    title: res.data.error.code,
+                                                    content: res.data.error.message,
+                                                });
+                                            }
+                                        }
+                                    },
+                                    fail: (res) => {
+                                        console.log('authCode 登录换取 access_token ',res);
+                                    }
+                                });
+                            } else {
+                                console.log('获取用户登录态失败！')
+                            }
+
+                        }
+                    });
+
+                } catch (e) {
+                    console.log('调用失败！');
+                }
         }
-    },
-    /*
-     * 用户通用 login 浮层
-    */
+    
+    }
 };
 
 export default AuthLogin
