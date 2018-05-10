@@ -1,0 +1,69 @@
+@import "/templates/product/product.acss";
+@import "/templates/items/index.acss";
+page{
+    background: #FFFFFF;
+}
+.container{
+    margin: 0rpx 15rpx;
+    background: #FFFFFF;
+    overflow: hidden;
+}
+.login-wrap{
+    padding: 0;
+    margin: 400rpx 0;
+    background: #FFFFFF;
+}
+.login-wrap .form-line{
+    margin: 0;
+}
+.form-row{
+    display: block;
+    overflow: hidden;
+    height: 104rpx;
+    padding: 0;
+    margin: 0;
+}
+.form-row-label{
+    width: 200rpx;
+    float: left;
+    height: 100rpx;
+    line-height: 100rpx;
+    color: #333333;
+    font-size: 34rpx;
+}
+.form-row-content{
+    float: left;
+    width: 500rpx;
+    height: 100rpx;
+    display: block;
+    overflow: hidden
+}
+.form-row-content .input{
+    height: 100rpx;
+    line-height: 100rpx;
+    float: left;
+    width: 200rpx;
+}
+.form-row-content .code{
+    float: right;
+    width: 180rpx;
+    border-left: 1px solid #DDDDDD;
+    margin-left: 10rpx;
+    font-size: 28rpx;
+    color: #333333;
+    height: 100rpx;
+    line-height: 100rpx;
+    text-align: right;
+}
+.button-wrap{
+    margin-top: 60rpx;
+}
+.button-wrap .button-submit{
+    background: #F03A80;
+    color: #FFFFFF;
+    font-size: 36rpx;
+    border-radius: 44rpx;
+    border: none;
+    height: 90rpx;
+    line-height: 90rpx;
+}

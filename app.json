@@ -1,6 +1,7 @@
 {
   "pages": [
-    "page/rent/rent",
+    "page/login/index",
+    "page/home/index",
     "page/cart/cart",
     "page/user/user",
     "page/bill/bill",
@@ -22,7 +23,7 @@
     "backgroundColor": "#F5F5F9",
     "items": [
       {
-        "pagePath": "page/rent/rent",
+        "pagePath": "page/home/index",
         "name": "租赁"
       },
       {

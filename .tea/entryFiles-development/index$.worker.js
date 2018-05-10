@@ -2,7 +2,8 @@ require('./config$');
 
 function success() {
 require('../..//app');
-require('../..//page/rent/rent');
+require('../..//page/login/index');
+require('../..//page/home/index');
 require('../..//page/cart/cart');
 require('../..//page/user/user');
 require('../..//page/bill/bill');

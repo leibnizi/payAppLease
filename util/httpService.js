@@ -1,3 +1,4 @@
+'use strict';
 /** http Service 封装后的使用方法与axios一致。
 ** 后续的timeout,公共的headers,将通过config/config.js文件引入 
 */
@@ -5,6 +6,13 @@ import {baseUrl} from '/config/config.js';
 
 const parseUrl = (baseUrl,queryStringObject)=>{
     let url = baseUrl;
+    let access_token = my.getStorageSync({key:'access_token'}) || '';
+    let platform = 'alipaymini'; //标识支付宝应用
+    queryStringObject = Object.assign({}, queryStringObject, {
+        platform,
+        access_token
+    });
+
     if(queryStringObject && typeof queryStringObject === 'object')
     {
         url += '?'
@@ -17,6 +25,10 @@ const parseUrl = (baseUrl,queryStringObject)=>{
         }
     }
     return url;
+}
+
+const erroCodeState = () => {
+
 }
 
 export const get = (url,config)=>{
