@@ -24,7 +24,7 @@ const AuthLogin = {
      * 拿 authCode 去换取 access_token 和 用户信息
     */
     getAccessToken:() => {
-        let authCode = wx.getStorageSync({key:'authCode'});
+        let authCode = my.getStorageSync({key:'authCode'}).data;
         if(authCode){
             //已经拿到用户授权信息 authCode  只需要login 获取token
             my.httpRequest({

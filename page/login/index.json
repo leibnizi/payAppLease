@@ -1,7 +1,4 @@
 {
-  "optionMenu": {
-    "icon": "https://static-rs.msparis.com/favicon.ico"
-    },
   "enableWK": "YES",
   "enableDSL": true,
   "defaultTitle": "登录",

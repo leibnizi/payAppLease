@@ -1,10 +1,11 @@
-import {get} from '/util/httpService.js'
+import Util from '/util/util.js'
+import {get, post} from '/util/httpService.js'
 let setIntervalTime = null;
 Page({
   data: {
     hidden: true,
     code: '',
-    codeText: '获取验证码',//获取验证码 重新获取验证码 60S重新获取
+    codeText: '获取验证码',//获取验证码 重新获取验证码 30S重新获取
     intervalTime: 30,
     mobile: '',
     invitation_code: '',
@@ -37,7 +38,38 @@ Page({
 
   },
   onSubmit(){
-    
+    console.log(12122);
+    if(!Util.checkPhone(this.data.mobile)){
+      Util.toast({
+        type:'none',
+        content: '请输入有效手机号！',
+        duration: 1000 * 1
+      });
+      return false;
+    }
+    if(this.data.code.length != 4){
+      Util.toast({
+        type:'none',
+        content: '请输入有效验证码！',
+        duration: 1000 * 1
+      });
+      return false;
+    }
+    post('alipaymini/bind', { 
+      mobile: this.data.mobile,
+      code: this.data.code,
+      }, {success:(rps)=>{
+        console.log(rps);
+        this.setData({
+          intervalTime: 0
+        });
+    }, fail:(rps)=>{
+        clearInterval(setIntervalTime);
+        this.setData({
+          intervalTime: 0,
+          codeText: '重新获取'
+        });
+    }});
   },
   /*
    * 验证码计时
@@ -61,11 +93,20 @@ Page({
       }
     }, 1000);
   },
+  
   /*
    * 获取验证码
    */
   getCode (event){
-    get('/common/sms', { params: { mobile: this.mobile }, success:(rps)=>{
+    if(!Util.checkPhone(this.data.mobile)){
+      Util.toast({
+        type:'none',
+        content: '请输入有效手机号！ ',
+        duration: 1000 * 1
+      });
+      return false;
+    }
+    get('common/sms', { params: { mobile: this.data.mobile }, success:(rps)=>{
         console.log(rps);
         this.setData({
           intervalTime: 0
@@ -78,15 +119,4 @@ Page({
         });
     }});
   },
-  /*
-   * 手机号check
-   */
-  _checkPhone (phone){
-    if(!(/^1[34578]\d{9}$/.test(phone))){
-      return false;
-    }else {
-      return true;
-    }
-  }
-
 });

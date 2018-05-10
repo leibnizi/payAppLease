@@ -24,16 +24,17 @@ page{
     margin: 0;
 }
 .form-row-label{
-    width: 200rpx;
+    width: 120rpx;
     float: left;
     height: 100rpx;
     line-height: 100rpx;
     color: #333333;
     font-size: 34rpx;
+    text-align: left;
 }
 .form-row-content{
     float: left;
-    width: 500rpx;
+    width: 585rpx;
     height: 100rpx;
     display: block;
     overflow: hidden
@@ -42,7 +43,8 @@ page{
     height: 100rpx;
     line-height: 100rpx;
     float: left;
-    width: 200rpx;
+    width: 380rpx;
+    padding-left: 10rpx;
 }
 .form-row-content .code{
     float: right;

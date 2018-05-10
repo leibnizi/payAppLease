@@ -1,27 +1,27 @@
 <view class="container">
   <view class="login-wrap">
-  <form onSubmit="onSubmit" onReset="onReset">
-    <view class="form-row">
-      <view class="form-row-label">手机号码</view>
-      <view class="form-row-content">
-        <input class="input" value={{mobile}} onInput="onChangeMobile" type="number" placeholder="请输入手机号码" />
+    <form onSubmit="onSubmit" onReset="onReset">
+      <view class="form-row">
+        <view class="form-row-label">手机号</view>
+        <view class="form-row-content">
+          <input class="input" value={{mobile}} onInput="onChangeMobile" type="number" placeholder="请输入手机号" />
+        </view>
       </view>
-    </view>
-
-    <view class="form-line" />
-
-    <view class="form-row">
-      <view class="form-row-label">验证码</view>
-      <view class="form-row-content">
-        <input class="input" value={{code}} onInput="onChangeCode" type="number" placeholder="请输入验证码" />
-        <view class="code" onTap="getCode">{{codeText}}</view>
-      </view>
-    </view>
 
       <view class="form-line" />
-      <view class="button-wrap">
-        <button form-type="submit" class="button-submit">登录</button>
+
+      <view class="form-row">
+        <view class="form-row-label">验证码</view>
+        <view class="form-row-content">
+          <input class="input" value={{code}} onInput="onChangeCode" type="number" placeholder="请输入验证码" />
+          <view class="code" onTap="getCode">{{codeText}}</view>
+        </view>
       </view>
-  </form>
+
+        <view class="form-line" />
+        <view class="button-wrap">
+          <button form-type="submit" class="button-submit">登录</button>
+        </view>
+    </form>
   </view>
 </view>
