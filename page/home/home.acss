@@ -1,0 +1,8 @@
+@import '/templates/product-list/product-list.acss';
+.banner{
+    height: 430rpx;
+    border: 1px solid red;
+}
+.rent-flow{
+    background: #f7f7f7;
+}

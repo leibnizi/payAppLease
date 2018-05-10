@@ -1,0 +1,40 @@
+<template name="product-list">
+  <view class="product-list clearfloat">
+    <block a:for="{{productList}}">
+      <view a:if="{{index % 2 === 0 && index !== 0}}" class="content-box">
+        <view class="item-box">
+          <view class="product-img">
+            <image class="image" mode="aspectFill" src="http://static-r.msparis.com/m-site/images/empty/coupon@3x.png" onError="imageError" onLoad="imageLoad" />
+          </view>
+          <view class="infos">
+            <view class="brand">
+              {{item.brand}}
+            </view>
+            <view class="name">
+              {{item.name}}
+            </view>
+            <view class="size">
+            {{item.size}}
+            </view>
+          </view>
+        </view>
+        <view class="item-box">
+          <view class="product-img">
+            <image class="image" mode="aspectFill" src="http://static-r.msparis.com/m-site/images/empty/coupon@3x.png" onError="imageError" onLoad="imageLoad" />
+          </view>
+          <view class="infos">
+            <view class="brand">
+              {{item.brand}}
+            </view>
+            <view class="name">
+              {{item.name}}
+            </view>
+            <view class="size">
+            {{item.size}}
+            </view>
+          </view>
+        </view>
+      </view>
+    </block>
+  </view>
+</template>

@@ -1,0 +1,15 @@
+<import src="../../templates/product-list/product-list.axml"/>
+<view>
+  <view class="banner">
+    banner1
+  </view> 
+  <view class="rent-flow">
+    <template is="product-list"  data ="{{productList}}" />
+  </view>
+  <view>
+  注册送2800图片
+  </view>
+  <view>
+  免费四件不重样图片
+  </view>
+</view>

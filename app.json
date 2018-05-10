@@ -1,10 +1,18 @@
 {
   "pages": [
+<<<<<<< HEAD
     "page/home/index",
     "page/bill/bill",
     "page/rent/rent",
     "page/login/index",
     "page/cart/cart",
+=======
+    "page/cart/cart",
+    "page/home/home",
+    
+    "page/bill/bill",
+    "page/rent/rent",
+>>>>>>> feature/mly
     "page/user/user",
     "page/order/order",
     "page/member/member",

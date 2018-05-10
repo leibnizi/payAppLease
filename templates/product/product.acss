@@ -3,11 +3,11 @@
   padding: 40rpx 20rpx 40rpx 40rpx;
   justify-content: space-between;
   background-color: #fff;
+  border-bottom: 1px solid #f6f6f6;
 }
 .product-img{
   width: 160rpx;
   height: 160rpx;
-  background-color: red;
 }
 .product-detail-box{
   display: flex;

@@ -1,0 +1,24 @@
+<template name="product-list">
+  <view class="product-list clearfloat">
+    <block a:for="{{productList}}">
+      <navigator url=`/page/member?${item.id}` class="content-box">
+        <view class="item-box">
+          <view class="product-img">
+            <image class="image" src="{{item.cover_image}}" onError="imageError" onLoad="imageLoad" />
+          </view>
+          <view class="infos">
+            <view class="brand">
+              {{item.brand}}
+            </view>
+            <view class="name">
+              {{item.name}}
+            </view>
+            <view class="size">
+            {{item.show_specifications}}
+            </view>
+          </view>
+        </view>
+      </navigator>
+    </block>
+  </view>
+</template>

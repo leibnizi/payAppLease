@@ -1,50 +1,44 @@
 <template name="product">
   <view class="product">
     <!-- 左侧图片 -->
-    <view class="product-img">
+    <view class="product-img-box">
       <image
         class="product-img"
-        src="{{ img }}"
+        src="{{ item.images }}"
         mode="aspectFit"
       ></image>
     </view>
     <!-- 右侧详情 -->
-    <view a:if="{{runOut}}" class="product-detail-box">
+    <view a:if="{{item.status === 2 || item.status === 3}}" class="product-detail-box">
       <view  class="run-out-product-detail">
         <view class="brand">
-          {{brand}}
+          {{item.brand}}
         </view>
         <view class="name">
-          {{name}}
+          {{item.name}}
         </view>
-        <view class="run-out" a:if="{{size}}">
-          {{runOut}}
+        <view class="run-out">
+          {{item.status === 2 ? '对不起，美衣暂时没有租期':''}}
+          {{item.status === 3 ? '对不起，商品已下架':''}}
         </view>
       </view>
     </view>
     <view a:else class="product-detail-box">
       <view class="product-detail">
         <view class="brand" a:if="{{brand}}">
-          {{brand}}
+          {{item.brand}}
         </view>
         <view class="name" a:if="{{name}}">
-          {{name}}
+          {{item.name}}
         </view>
         <view class="size" a:if="{{size}}">
-          尺码：{{size}}
+          尺码：{{item.specification_name}}
         </view>
         <view class="size" a:if="{{money}}">
-          总租金：{{money}}
+          总租金：{{item.money}}
         </view>
       </view>
-      <view a:if="{{}}" class="detail-right">
-        <view>
-          @
-        </view>
-        <view a:if="{{num}}">
-          x{{num}}
-        </view>
-      </view>
+      
     </view>
   </view>
 </template>
