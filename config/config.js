@@ -2,7 +2,7 @@ export const baseUrl = 'http://api.dev.msparis.com';
 export const userList = [
     {
         name:"我的订单",
-        path:"/page/order/order",
+        path:"/page/orderConfirm/orderConfirm?type=order",
         icon:"download"
     },
     {
@@ -12,7 +12,7 @@ export const userList = [
     },
     {
         name:"我的会员",
-        path:"/page/member/member",
+        path:"/page/orderConfirm/orderConfirm?type=card",
         icon:"download"
     },
     {

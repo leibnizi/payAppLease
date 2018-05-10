@@ -1,0 +1,7 @@
+@import '/templates/cardInfo/cardInfo.acss';
+
+.orderInfo{
+    margin-top:8rpx;
+    background: white;
+    height: 616rpx;
+}
