@@ -34,8 +34,8 @@
     border-bottom:1rpx solid #DDDDDD;
 }
 image{
-    width: 123rpx;
-    height: 160rpx;
+    width: 180rpx;
+    height: 220rpx;
 }
 .text{
     padding-left: 20rpx;
@@ -95,4 +95,40 @@ image{
     margin-top:18rpx;
     background: #FFFFFF;
     padding:24rpx 20rpx;
+    height: 90rpx;
+}
+.payInfo .seperate{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.seperate text{
+    font-family: PingFangSC-Regular;
+    font-size: 28rpx;
+    color: #666666;
+    letter-spacing: 0;
+    line-height: 28rpx;
+}
+.payInfo .text{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding:30rpx 0rpx;
+}
+
+.payInfo .text text:first-child{
+    flex:1;
+    font-family: PingFangSC-Regular;
+    font-size: 40rpx;
+    color: #333333;
+    letter-spacing: 0;
+}
+
+.payInfo .text text:last-child{
+    flex:2;
+    font-family: PingFangSC-Regular;
+    font-size: 24rpx;
+    color: #999999;
+    letter-spacing: 0;
+    text-align: right;
 }

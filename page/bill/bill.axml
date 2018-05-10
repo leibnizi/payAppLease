@@ -39,11 +39,11 @@
     </view>
     </view>
     <view class="payInfo">
-      <view>
+      <view class="seperate">
         <text>1期</text>
         <text>待还款</text>
       </view>
-      <view>
+      <view class="text">
         <text>￥399</text>
         <text>2018年08月29日通过支付宝免密支付</text>
       </view>
