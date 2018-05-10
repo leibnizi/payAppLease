@@ -1,11 +1,6 @@
 page {
-<<<<<<< HEAD
   background-color: #FFFFFF;
   border: none;
-=======
-  background-color: #F7F7F7;
->>>>>>> feature/mly
-  box-sizing: border-box;
 }
 
 .page {
@@ -13,6 +8,8 @@ page {
   font-size: 24rpx;
   padding: 32rpx;
   flex: 1;
+  background-color: #FFFFFF;
+  border: none;
 }
 
 .page-description {

@@ -1,22 +1,16 @@
 {
   "pages": [
-<<<<<<< HEAD
-    "page/home/index",
     "page/bill/bill",
     "page/rent/rent",
     "page/login/index",
     "page/cart/cart",
-=======
-    "page/cart/cart",
     "page/home/home",
-    
     "page/bill/bill",
     "page/rent/rent",
->>>>>>> feature/mly
     "page/user/user",
     "page/order/order",
     "page/member/member",
-    "page/helpCenter/helpCenter"
+    "page/help/help"
   ],
   "window": {
     "enableWK": "YES",
@@ -32,7 +26,7 @@
     "backgroundColor": "#F5F5F9",
     "items": [
       {
-        "pagePath": "page/home/index",
+        "pagePath": "page/home/home",
         "name": "租赁"
       },
       {

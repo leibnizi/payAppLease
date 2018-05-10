@@ -49,18 +49,12 @@ export const get = (url,config)=>{
     return new Promise((resolve,reject)=>{
         let requstConfig = {
                 method:'get',
-<<<<<<< HEAD
                 url:parseUrl(url,config.params),
                 headrs:config.headrs || {},
                 success:(...arg)=>{
                     erroCodeState(...arg);
                     resolve(...arg);
                     },
-=======
-                url:parseUrl(`${baseUrl}/${url}`,config.params),
-                headrs: { 'Content-Type': 'text/html; charset=utf-8' },
-                success:(res)=>{resolve(res.data)},
->>>>>>> feature/mly
                 fail:(...arg)=>{reject(...arg)}
             };
         my.httpRequest(requstConfig);
@@ -77,14 +71,10 @@ export const post = (url,data,config)=>{
                 url:parseUrl(url,config.params),
                 headrs:config.headrs || {},
                 data,
-<<<<<<< HEAD
                 success:(...arg)=>{
                     erroCodeState(...arg);
                     resolve(...arg);
                 },
-=======
-                success: (res) => { resolve(res.data)},
->>>>>>> feature/mly
                 fail:(...arg)=>{reject(...arg)}
             };
         my.httpRequest(requstConfig);
@@ -101,14 +91,10 @@ export const put = (url,data,config)=>{
                 url:parseUrl(url,config.params),
                 headrs:config.headrs || {},
                 data,
-<<<<<<< HEAD
                 success:(...arg)=>{
                     erroCodeState(...arg);
                     resolve(...arg);
                 },
-=======
-                success: (res) => { resolve(res.data)},
->>>>>>> feature/mly
                 fail:(...arg)=>{reject(...arg)}
             };
         my.httpRequest(requstConfig);
@@ -125,14 +111,10 @@ export const del = (url, data, params)=>{
                 url:parseUrl(url,config.params),
                 headrs:config.headrs || {},
                 data,
-<<<<<<< HEAD
                 success:(...arg)=>{
                     erroCodeState(...arg);
                     resolve(...arg);
                 },
-=======
-                success: (res) => { resolve(res.data) },
->>>>>>> feature/mly
                 fail:(...arg)=>{reject(...arg)}
             };
         my.httpRequest(requstConfig);
