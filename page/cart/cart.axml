@@ -1,3 +1,18 @@
-<view>
-  New Page
+<import src="../../templates/product/product.axml"/>
+
+<view class="cart-page">
+  <block a:if="{{productList.length}}">
+    <block a:for="{{productList}}">
+      <template a:if="{{item.status === 1}}" is="product"  data ="{{item}}" />
+    </block>
+  </block>
+  <block a:else>
+    <view class="full-page">
+      <view class="content">
+        <view class="empty-img">img</view>
+        <view class="empty-text">购物车是空的哦</view>
+        <view><button class="btn" type="primary">primary</button></view>
+      <view>
+    </view>
+  </block>
 </view>
