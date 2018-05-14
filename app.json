@@ -1,14 +1,15 @@
 {
   "pages": [
-    "page/orderDetail/orderDetail",
     "page/rent/rent",
+    "page/buyCard/buyCard",
     "page/cart/cart",
     "page/user/user",
     "page/order/order",
     "page/bill/bill",
     "page/helpCenter/helpCenter",
-    "page/buyCard/buyCard",
-    "page/member/member"
+    "page/cardConfirm/cardConfirm",
+    "page/member/member",
+    "page/orderDetail/orderDetail"
   ],
   "window": {
     "enableWK": "YES",

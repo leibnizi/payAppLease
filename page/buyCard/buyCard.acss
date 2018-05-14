@@ -1,78 +1,90 @@
-@import '/templates/cardInfo/cardInfo.acss';
-@import '/templates/msButton/msButton.acss';
-
-.orderInfo{
-    margin-top:15rpx;
-    background: white;
-    height: 616rpx;
+.card{
+    padding:50rpx;
+    text-align: center;
+}
+.card image{
+    width: 450rpx;
+    height: 260rpx;
 }
 
-.orderInfo .up{
-    height: 50%;
-    border-bottom: 1rpx solid #DDDDDD;
-    padding: 10rpx;
-}
-
-.orderInfo .up .item{
-    flex: 1;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    padding:10rpx 20rpx;
-    font-family: PingFangSC-Regular;
-    font-size: 28rpx;
-    color: #999999;
-    line-height: 28rpx;
-    margin-bottom: 15rpx;
-}
-
-.orderInfo .up .item:nth-child(5n+2){
-    color: #333333;
-}
-
-
-.orderInfo .down{
-    height: 50%;
-    padding:10rpx
-}
-
-.orderInfo .down .item{
-    flex: 1;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    padding:10rpx 20rpx;
-    font-family: PingFangSC-Regular;
-    font-size: 28rpx;
-    color: #999999;
-    line-height: 28rpx;
-    margin-bottom: 20rpx;
-}
-
-.orderInfo .down .item:nth-child(5n+2),.orderInfo .down .item:nth-child(5n+3){
-    color: #333333;
-}
-
-.btnArea{
+.list .litsItem{
     background: #FFFFFF;
-    padding:65rpx 20rpx;
-    position: absolute;
+    padding:24rpx 30rpx;
+    border-top: 1rpx solid #DDDDDD;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.list .litsItem:last-child{
+    border-bottom: 1rpx solid #DDDDDD;
+}
+.list .litsItem text{
+    font-family: PingFangSC-Regular;
+    font-size: 32rpx;
+    color: #333333;
+    letter-spacing: 0;
+    text-align: left;
+    line-height: 42rpx;
+}
+.list .litsItem:last-child text:last-child{
+    color: #999999;
+}
+
+.operations{
+    height: 204rpx;
+    position: fixed;
     bottom: 0;
     left: 0;
     right: 0;
-    background: white;
 }
-.btnArea label {
+.operations .select{
+    height: 44rpx;
+    padding: 30rpx;
+}
+.operations .select image{
+    width: 44rpx;
+    height: 44rpx;
+    margin-right: 20rpx;
+}
+.operations .select text{
     font-family: PingFangSC-Regular;
     font-size: 28rpx;
     color: #333333;
+    height: 44rpx;
     line-height: 44rpx;
-    margin-bottom: 20rpx;
-}
-.blue{
-    color: dodgerblue;
+    vertical-align:text-bottom;
 }
 
-.a-radio-checked{
+.operations .select text:last-child{
+   color:dodgerblue;
+}
+.operations .apply{
+    display: flex;
+    flex-direction: row;
+}
+.operations .apply .price{
+    width: 531rpx;
+    height: 100rpx;
+    padding-left: 30rpx;
+    text-align: left;
+}
+.operations .apply .price text{
+    font-family: PingFangSC-Regular;
+    font-size: 28rpx;
+    color: #333333;
+    text-align: right;
+    line-height: 100rpx;
+}
+.operations .apply .btn{
+    width: 219rpx;
+    height: 100rpx;
     background: #F03A80;
+    text-align: center;
+}
+.operations .apply .btn text{
+    font-family: PingFangSC-Regular;
+    font-size: 32rpx;
+    color: #FFFFFF;
+    text-align: left;
+    line-height: 100rpx;
 }

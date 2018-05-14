@@ -1,23 +1,11 @@
 Page({
   data: {
-    type:"",
-    noPay:true,
-    agree:true,
-    text:"提交订单",
-    onSubmit:'onSubmit'
+    list:[
+        {name:"原价",value:"￥599"},
+        {name:"有效期",value:"30天"},
+        {name:"押金",value:"￥300"},
+        {name:"优惠券",value:"请选择 >"}
+    ]
   },
-  onLoad(option) {
-    this.setData({
-      type:option.type
-    })
-  },
-  onShow(){
-    
-  }, 
-  onAgreeChange(e){
-    console.log(e)
-  },
-  onSubmit(e){
-    console.log("Hello",e)
-  }
+  onLoad() {},
 });
