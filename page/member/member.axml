@@ -4,7 +4,7 @@
     <view class="textInfo" a:if="{{hasMember === true}}">
       <text>2018.03.01到期</text>
     </view>
-    <view class="memberBtn" a:elif="{{hasMember === false}}">
+    <view class="memberBtn" a:elif="{{hasMember === false}}" onTap="goBuyCard">
       <text>开通会员</text>
     </view>
   </view>

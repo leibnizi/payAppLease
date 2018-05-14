@@ -5,5 +5,6 @@ require('../..//page/user/user');
 require('../..//page/order/order');
 require('../..//page/bill/bill');
 require('../..//page/helpCenter/helpCenter');
-require('../..//page/buyCard/buyCard');
+require('../..//page/cardConfirm/cardConfirm');
 require('../..//page/member/member');
+require('../..//page/buyCard/buyCard');

@@ -1,0 +1,78 @@
+@import '/templates/cardInfo/cardInfo.acss';
+@import '/templates/msButton/msButton.acss';
+
+.orderInfo{
+    margin-top:15rpx;
+    background: white;
+    height: 616rpx;
+}
+
+.orderInfo .up{
+    height: 50%;
+    border-bottom: 1rpx solid #DDDDDD;
+    padding: 10rpx;
+}
+
+.orderInfo .up .item{
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding:10rpx 20rpx;
+    font-family: PingFangSC-Regular;
+    font-size: 28rpx;
+    color: #999999;
+    line-height: 28rpx;
+    margin-bottom: 15rpx;
+}
+
+.orderInfo .up .item:nth-child(5n+2){
+    color: #333333;
+}
+
+
+.orderInfo .down{
+    height: 50%;
+    padding:10rpx
+}
+
+.orderInfo .down .item{
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding:10rpx 20rpx;
+    font-family: PingFangSC-Regular;
+    font-size: 28rpx;
+    color: #999999;
+    line-height: 28rpx;
+    margin-bottom: 20rpx;
+}
+
+.orderInfo .down .item:nth-child(5n+2),.orderInfo .down .item:nth-child(5n+3){
+    color: #333333;
+}
+
+.btnArea{
+    background: #FFFFFF;
+    padding:65rpx 20rpx;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+}
+.btnArea label {
+    font-family: PingFangSC-Regular;
+    font-size: 28rpx;
+    color: #333333;
+    line-height: 44rpx;
+    margin-bottom: 20rpx;
+}
+.blue{
+    color: dodgerblue;
+}
+
+.a-radio-checked{
+    background: #F03A80;
+}

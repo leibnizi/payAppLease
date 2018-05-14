@@ -1,12 +1,13 @@
 {
   "pages": [
+    "page/buyCard/buyCard",
     "page/rent/rent",
     "page/cart/cart",
     "page/user/user",
     "page/order/order",
     "page/bill/bill",
     "page/helpCenter/helpCenter",
-    "page/buyCard/buyCard",
+    "page/cardConfirm/cardConfirm",
     "page/member/member"
   ],
   "window": {

@@ -1,0 +1,52 @@
+<import src="/templates/cardInfo/cardInfo.axml"/>
+<import src="/templates/msButton/msButton.axml"/>
+<view>
+  <template is="cardInfo" />
+  <view class="orderInfo">
+    <view class="up">
+      <view class="item">
+        <text>总租金</text>
+        <text>￥0.00</text>
+      </view>
+      <view class="item">
+        <text>月租金</text>
+        <text>￥599.00</text>
+      </view>
+      <view class="item">
+        <text>租期</text>
+        <text>1个月</text>
+      </view>
+      <view class="item">
+        <text>租金支付方式</text>
+        <text>支付宝免密支付<icon type="info" size="15" color="lightgrey" /></text>
+      </view>
+      <view class="item">
+        <text>如未完成订单，支付宝代扣将在1小时后自动取消</text>
+      </view>
+    </view>
+    <view class="down">
+      <view class="item">
+        <text>总押金</text>
+        <text>6900.00</text>
+      </view>
+      <view class="item">
+        <text>芝麻信用免押金</text>
+        <text>-￥3,000.00</text>
+      </view>
+      <view class="item">
+        <text>需冻结押金</text>
+        <text>￥3,900.00</text>
+      </view>
+      <view class="item" a:if="{{!noPay}}">
+        <text>租金支付方式</text>
+        <text>支付宝免密支付<icon type="info" size="15" color="lightgrey" /></text>
+      </view>
+    </view>
+  </view>
+  <view class="btnArea">
+    <radio-group onChange="onAgreeChange">
+      <label><radio value="{{agree}}" checked="{{agree}}"/> 我已阅读并同意<text class="blue">下单协议待定，回收买断协议待定</text></label>
+    </radio-group>
+    <template is="msButton" data="{{text,onSubmit}}"/>
+  </view>
+</view>
