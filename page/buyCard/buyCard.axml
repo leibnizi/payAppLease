@@ -1,3 +1,4 @@
+<import src="/templates/msProtocal/msProtocal.axml"/>
 <view>
     <view class="card">
         <image src="/image/buyCard/buyCard@2x.png"></image>
@@ -11,11 +12,7 @@
         </block>
     </view>
     <view class="operations">
-        <view class="select">
-            <image src="/image/selected@2x.png"></image>
-            <text>我已阅读并同意</text>
-            <text>女神派用户协议</text>
-        </view>
+        <template is="msProtocal"/>
         <view class="apply">
             <view class="price">
                 <text>总价</text>

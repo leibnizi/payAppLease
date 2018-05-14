@@ -1,7 +1,8 @@
 {
   "pages": [
-    "page/rent/rent",
     "page/buyCard/buyCard",
+    "page/rent/rent",
+
     "page/cart/cart",
     "page/user/user",
     "page/order/order",

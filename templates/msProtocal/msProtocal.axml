@@ -1,0 +1,7 @@
+<template name="msProtocal">
+    <view class="select">
+        <image src="/image/selected@2x.png"></image>
+        <text>我已阅读并同意</text>
+        <text>女神派用户协议</text>
+    </view>
+</template>
