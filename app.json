@@ -1,8 +1,10 @@
 {
   "pages": [
-    
     "page/addressList/addressList",
-    
+    "page/login/index",
+    "page/detail/index",
+    "page/bill/bill",
+    "page/rent/rent",
     "page/cart/cart",
     "page/home/home",
     "page/rent/rent",
@@ -11,7 +13,7 @@
     "page/user/user",
     "page/order/order",
     "page/member/member",
-    "page/helpCenter/helpCenter"
+    "page/help/help"
   ],
   "window": {
     "enableWK": "YES",
@@ -28,7 +30,7 @@
     "items": [
       {
         "pagePath": "page/home/home",
-        "name": "首页"
+        "name": "租赁"
       },
      
       {

@@ -1,0 +1,6 @@
+@import "/templates/product/product.acss";
+@import "/templates/items/index.acss";
+.container{
+    margin:0;
+    color:#333333;
+}
