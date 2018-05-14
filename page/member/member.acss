@@ -1,0 +1,107 @@
+page{
+    background: #FFFFFF;
+}
+.container{
+    width:750rpx;
+    height: 954rpx;
+    padding: 30rpx;
+}
+
+.card{
+    position: relative;
+    background-image: url("../../image/member/memberCard@2x.png");
+    background-size: 100%;
+    background-repeat: no-repeat;
+    width:690rpx;
+    height: 400rpx;
+}
+.card .textInfo{
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    left:69rpx;
+    bottom: 50rpx;
+}
+.card .textInfo text{
+    text-align: left;
+}
+.card .textInfo text:first-child{
+    font-family: PingFangSC-Light;
+    font-size: 33.73rpx;
+    color: #FFFFFF;
+    letter-spacing: 0;
+}
+.card .memberBtn{
+    position: absolute;
+    bottom:50rpx;
+    right:69rpx;
+    border: 1rpx solid #FFFFFF;
+    border-radius: 100rpx;
+    width: 180rpx;
+    height: 56rpx;
+    text-align: center;
+}
+.card .memberBtn text{
+    font-family: PingFangSC-Regular;
+    font-size: 30rpx;
+    color: #FFFFFF;
+    letter-spacing: 0.85rpx;
+    width: 124rpx;
+    height: 42rpx;
+    line-height: 56rpx;
+}
+
+.options{
+    margin-top:60rpx;
+    width: 690rpx;
+}
+.options .title{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.options .optList{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 20rpx 0;
+}
+.options .optList .optItem{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    height: 117rpx;
+}
+.options .optList .optItem text{
+    font-family: PingFangSC-Regular;
+    font-size: 28rpx;
+    color: #999999;
+    text-align: center;
+    line-height: 26rpx;
+}
+.options .optList .optItem image{
+    width: 70rpx;
+    height: 70rpx;
+}
+.options .info{
+    padding:42rpx 30rpx;
+    background: #F5F5F5;
+}
+.options .info .title text{
+    font-family: PingFangSC-Regular;
+    font-size: 28rpx;
+    color: #333333;
+    letter-spacing: 0;
+    text-align: left;
+    line-height: 28rpx;
+    margin-bottom: 20rpx;
+}
+.options .info text{
+    font-family: PingFangSC-Regular;
+    font-size: 24rpx;
+    color: #999999;
+    letter-spacing: 0;
+    text-align: left;
+    line-height: 36rpx;
+}

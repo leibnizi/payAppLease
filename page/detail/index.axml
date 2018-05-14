@@ -25,11 +25,19 @@
   
 
     <view class="page-group">
+<<<<<<< HEAD
       <view class="name">柔粉休闲羽绒棉外套柔粉休闲羽绒棉外套柔粉休闲羽绒棉外套</view>
       <view class="limit-tag">年卡专享</view>
       <view class="price-wrap">
         <view class="price-label">参考价</view>
         <view class="market-price">¥12123123</view>
+=======
+      <view class="name">{{detail.name}}</view>
+      <view a:if="{{detail.limit_tag}}" class="limit-tag">年卡专享</view>
+      <view class="price-wrap">
+        <view class="price-label">参考价</view>
+        <view class="market-price">{{detail.market_price}}</view>
+>>>>>>> develop
       </view>
     </view>
 
@@ -92,6 +100,7 @@
           <view class="wrap-box">
             <view>尺码</view>
             <view class="sect-box">
+<<<<<<< HEAD
               <view class="item-li">
                 XXS/XS
               </view>
@@ -109,13 +118,33 @@
               </view>
               <view class="item-li">
                 SM
+=======
+
+              <view a:for="{{detail.size}}">
+                
+                <block a:if="{{item.current == true}}">
+                  <view class="item-li current" onTap="_selectSize" data-option="{{item}}">
+                    {{item.value}}
+                  </view>
+                </block>
+                <block a:else>
+                  <view class="item-li" onTap="_selectSize" data-option="{{item}}">
+                    {{item.value}}
+                  </view>
+                </block>
+
+>>>>>>> develop
               </view>
             </view>
           </view>
           <view class="wrap-box">
             <view>租期</view>
             <view class="sect-box">
+<<<<<<< HEAD
               <view class="item-li">
+=======
+              <view class="item-li current">
+>>>>>>> develop
                 7天
               </view>
             </view>

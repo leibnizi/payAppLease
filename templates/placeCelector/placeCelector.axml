@@ -1,0 +1,38 @@
+<template>
+  <view>
+        <view class="form-item">
+          <view class="form-item-bd" onTap="showDistpicker">
+              <view class="input {{!provinceName[provinceSelIndex] ? 'input-placeholder' : ''}}">
+                  <block a:if="{{provinceName[provinceSelIndex]}}">{{provinceName[provinceSelIndex]}} {{cityName[citySelIndex]}} {{districtName[districtSelIndex]}}</block>
+                  <block a:else>{{defaultVal}}</block>
+              </view>
+              <input type="text" name="province" value="{{provinceName[provinceSelIndex]}}" class="hidden"/>
+              <input type="text" name="city" value="{{cityName[citySelIndex]}}" class="hidden"/>
+              <input type="text" name="district" value="{{districtName[districtSelIndex]}}" class="hidden"/>
+          </view>
+        </view>
+      <!-- </form> -->
+      <view a:if="{{showDistpicker}}" class="distpicker">
+        <view class="distpicker-btn">
+            <view class="distpicker-cancel-btn" onTap="distpickerCancel">取消</view>
+            <view class="distpicker-sure-btn" onTap="distpickerSure">确定</view>
+        </view>
+        <picker-view indicator-style="height: 40px;" class="distpicker-content" value="{{value}}" bindchange="changeArea">
+            <!-- 省 -->
+            <picker-view-column>
+                <view a:for="{{provinceName}}" a:key="province" class="area-item">{{item}}</view>
+            </picker-view-column>
+            <!-- 市 -->
+            <picker-view-column>
+                <view a:for="{{cityName}}" a:key="city" class="area-item">{{item}}</view>
+            </picker-view-column>
+            <!-- 区 -->
+            <picker-view-column>
+                <view a:for="{{districtName}}" a:key="district" class="area-item">{{item}}</view>
+            </picker-view-column>
+        </picker-view>
+      </view>
+      <view class="mask" catchtap="distpickerCancel" hidden="{{!showDistpicker}}"></view>
+      <view class="message {{showMessage ? 'fade-in' : ''}}" hidden="{{!showMessage}}">{{messageContent}}</view>
+  </view>
+</template>

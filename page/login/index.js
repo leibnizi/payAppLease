@@ -1,6 +1,7 @@
 import Util from '/util/util.js'
 import {get, post} from '/util/httpService.js'
 import AuthLogin from '/util/authLogin.js'
+
 let setIntervalTime = null;
 Page({
   data: {

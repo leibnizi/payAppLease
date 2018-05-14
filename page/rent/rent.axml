@@ -1,4 +1,8 @@
+<import src="/templates/modalList/modalList.axml"/>
+
 <view class="container">
   New Page1
 </view>
+
+<template is="modalList" data="{{show,list}}"/>
    

@@ -1,5 +1,5 @@
 <template name="product">
-  <view class="product">
+  <view class="product {{item.showDelete ? 'active' : 'hide'}}" data-id="{{item.sale_item_id}}"  catchTap="showDeleteFun">
     <!-- 左侧图片 -->
     <view class="product-img-box">
       <image
@@ -7,6 +7,7 @@
         src="{{ item.images }}"
         mode="aspectFit"
       ></image>
+      
     </view>
     <!-- 右侧详情 -->
     <view a:if="{{item.status === 2 || item.status === 3}}" class="product-detail-box">
@@ -38,7 +39,9 @@
           总租金：{{item.money}}
         </view>
       </view>
-      
+    </view>
+    <view catchTap="deleteProduct" class="delete-btn">
+      删除
     </view>
   </view>
 </template>

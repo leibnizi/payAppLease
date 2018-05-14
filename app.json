@@ -1,16 +1,28 @@
 {
   "pages": [
     "page/detail/index",
+<<<<<<< HEAD
+=======
+    "page/home/home",
+    "page/rent/rent",
+    "page/addressList/addressList",
+>>>>>>> develop
     "page/login/index",
     "page/bill/bill",
     "page/rent/rent",
-    "page/cart/cart",
-    "page/home/home",
-    "page/rent/rent",
-    "page/user/user",
     "page/order/order",
+    "page/logistics/logistics",
+    "page/orderDetail/orderDetail",
+    "page/rent/rent",
+    "page/buyCard/buyCard",
+    "page/cart/cart",
+    "page/editAddress/editAddress",
+    "page/user/user",
+    "page/bill/bill",
+    "page/cardConfirm/cardConfirm",
     "page/member/member",
-    "page/help/help"
+    "page/help/help",
+    "page/orderDetail/orderDetail"
   ],
   "window": {
     "enableWK": "YES",

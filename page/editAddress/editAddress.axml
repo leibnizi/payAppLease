@@ -1,0 +1,46 @@
+<import src="../../templates/product-list/product-list.axml"/>
+<view class="address-page">
+  <form onSubmit="formSubmit" onReset="formReset">
+    <view class="section section_gap">
+      <label for="contact_name">收件人姓名</label>
+      <input 
+        id="contact_name" 
+        name="contact_name" 
+        value="{{address_msg.contact_name}}"
+        placeholder-class="placeholder"	
+        placeholder="填写姓名" />
+    </view>
+    <view class="section section_gap">
+      <label for="contact_mobile">收件电话</label>
+      <input 
+        id="contact_mobile" 
+        name="contact_mobile" 
+        maxlength="11" 
+        value="{{address_msg.contact_mobile}}"
+        placeholder-class="placeholder" 
+        placeholder="填写手机号" />
+    </view>
+    <view class="section section_gap">
+      <label for="region_name">所在区域</label>
+      <input 
+        id="region_name" 
+        name="region_name"
+        onFocus=""
+        value="北京省 北京市 东城区"
+        defaultVal="{{address_msg.region_name}}"
+        placeholder-class="placeholder" placeholder="请选择" />
+    </view>
+    <view class="section section_gap">
+      <label for="address_detail">详细地址</label>
+      <input 
+        id="address_detail" 
+        name="address_detail"
+        value="{{address_msg.address_detail}}"
+        placeholder-class="placeholder" 
+        placeholder="详细地址" />
+    </view>
+    <view class="btn-area">
+      <button formType="submit">保存</button>
+    </view>
+  </form>
+</view>

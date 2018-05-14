@@ -1,0 +1,15 @@
+<view>
+  <view class="name">
+    <text class="logistics-icon"></text>
+    <view>
+      <view>
+        <text>物流公司：</text><text>顺丰速运</text>
+      </view>
+      <view>
+        <text>物流单号：</text><text>432530200086</text>
+      </view>
+    </view>
+    <view>复制</view>
+  </view>
+  <view class="list"></view>
+</view>

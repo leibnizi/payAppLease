@@ -1,0 +1,74 @@
+.address-card{
+  position: relative;
+  background: #fff;
+  border-bottom: 1px solid #f2f2f2;
+  padding: 30rpx 40rpx;
+  transition: all 0.5s;
+}
+
+.top-content{
+  display: flex;
+  justify-content: space-between;
+}
+.main-msg{
+  display: flex;
+}
+.user-name, .contact-mobile{
+  font-size: 30rpx;
+  height: 30rpx;
+  line-height: 30rpx;
+  color: #333333;
+}
+.contact-mobile{
+  margin-left: 30rpx;
+  color: #ccc;
+}
+.nav{
+  font-size: 30rpx;
+  color: #F03A80;
+}
+.address-detail{
+  padding: 10rpx 0 0;
+  color: #ccc;
+}
+.show{
+  transform: translateX(-150rpx)
+}
+
+.delete-box{
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  display: flex;
+  height: 140rpx;
+  justify-content: space-between;
+}
+.hide-delete-placeholder{
+  flex-grow: 1;
+  background-color:rgba(0, 0, 0, 0);
+  height: 100%;
+}
+.nav-placeholder{
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 2;
+  width: 150rpx;
+  height: 100rpx;
+  background-color: rgba(0, 0, 0, 0)
+}
+.delete-bar{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  transition: all 0.5s;
+  right: -150rpx;
+  top: 0;
+  background: red;
+  z-index: 3;
+  width: 150rpx;
+  height: 100%;
+  color: #fff;
+}

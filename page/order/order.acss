@@ -1,0 +1,12 @@
+@import "/templates/order/order.acss";
+.tip{
+    display: flex;
+    justify-content: space-between;
+    height: 90rpx;
+    line-height: 90rpx;
+    font-size: 28rpx;
+    color: #333333;
+    background: #FFFFFF;
+    border-bottom: 1px solid #dddddd;
+    padding: 0 30rpx;
+}

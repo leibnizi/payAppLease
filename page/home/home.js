@@ -38,7 +38,8 @@ Page({
   async onShow() {
     loading.show();
     try {
-      const { data, status } = await this.getData();
+      const { data: { data }, status } = await this.getData();
+      // debugger
       if (data && typeof data.rows === "object") {
         this.setData({
           productList: data.rows
@@ -58,7 +59,7 @@ Page({
       page: ++page
     })
     try {
-      const { data, status } = await this.getData();
+      const { data: { data }, status } = await this.getData();
       if (data && typeof data.rows === "object") {
         this.setData({
           productList: data.rows
@@ -74,18 +75,34 @@ Page({
 
   getData() {
     return get('/product/filter', {
-      headrs: {
-        "Content-type": "text/html; charset=utf-8"
-      },
-      dataType: "text",
       params: {
         mode: 1,
         page: this.data.page,
         page_size: 6,
         type: 1,
-        access_token: '9e7ac67598cd1023a065ef66f8829b73',
       }
     })
+    
+    // .then((rps) => {
+    //   if (rps.data && rps.data.status == 'error' && rps.data.error && rps.data.error.code == '10017') {
+    //     clearInterval(setIntervalTime);
+    //     this.setData({
+    //       intervalTime: 0,
+    //       codeText: '重新获取'
+    //     });
+    //   } else {
+    //     this.setData({
+    //       intervalTime: 0
+    //     });
+    //     this._setIntervalTime();
+    //   }
+    // }, (rps) => {
+    //   clearInterval(setIntervalTime);
+    //   this.setData({
+    //     intervalTime: 0,
+    //     codeText: '重新获取'
+    //   });
+    // });
   },
 
   goPath(e){

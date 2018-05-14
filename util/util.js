@@ -158,7 +158,33 @@ const Util = {
         content: params.content || '操作成功',
         duration: params.duration || 3000
     });
-  }   
+  },
+
+    /*
+    * 格式价格
+    */
+  formatPrice (price, type = 2){
+    if(type == 0){
+      return '￥'+Math.floor(price/100)
+    }else{
+    let num = price/100
+    let test = parseFloat(num);
+    if (isNaN(test)) {
+      return 0;
+    }
+    let f = Math.round(num*100)/100;
+    let s = f.toString();
+    let rs = s.indexOf('.');
+    if (rs < 0) {
+      rs = s.length;
+      s += '.';
+    }
+    while (s.length <= rs + parseInt(type)) {
+      s += '0';
+    }
+    return '￥'+s;
+  }
+}
 };
 
 export  default  Util;

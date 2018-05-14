@@ -1,0 +1,86 @@
+.modal {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+.modalMask{
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: lightgrey;
+    opacity: 0.5;
+    z-index: 99;
+}
+.modalContainer{
+    width: 540rpx;
+    height: 512rpx;
+    background: #FFFFFF;
+    border-top-left-radius: 20rpx;
+    border-top-right-radius: 20rpx;
+    z-index: 999;
+    margin:auto 105rpx;
+}
+
+.modalContainer .modalTitle{
+    font-family: PingFangSC-Regular;
+    font-size: 32rpx;
+    color: #000000;
+    letter-spacing: 0;
+    height: 90rpx;
+    line-height: 90rpx;
+    text-align: center;
+}
+
+.modalContainer .modalContent{
+    height: 422rpx;
+    padding:20rpx 50rpx 0rpx 50rpx;
+}
+
+ .modalFoot{
+    height: 90rpx;
+    display: flex;
+    flex-direction: row;
+    margin:0 105rpx;
+}
+.modalFoot view{
+    flex:1;
+    border:1rpx solid #E5E5E5;
+    background: white;
+    text-align: center;
+    vertical-align: center;
+    height: 90rpx;
+    line-height: 90rpx;
+}
+.modalFoot view:first-child{
+    border-bottom-left-radius: 20rpx;
+    font-family: PingFangSC-Regular;
+    font-size: 34rpx;
+    color: #333333;
+    letter-spacing: 0;
+}
+.modalFoot view:last-child{
+    border-bottom-right-radius: 20rpx;
+    font-family: PingFangSC-Regular;
+    font-size: 34rpx;
+    color: #F03A80;
+    letter-spacing: 0;
+}
+
+.reason{
+    font-family: PingFangSC-Regular;
+    font-size: 28rpx;
+    color: #666666;
+    letter-spacing: 0;
+    line-height: 32rpx;
+}
+.radioItem{
+    font-family: PingFangSC-Regular;
+    font-size: 28rpx;
+    color: #666666;
+    letter-spacing: 0;
+    line-height: 28rpx;
+}
