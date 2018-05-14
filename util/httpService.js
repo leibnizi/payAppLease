@@ -3,6 +3,7 @@
  ** 后续的timeout,公共的headers,将通过config/config.js文件引入
  */
 import {baseUrl} from '/config/config.js';
+import Util from '/util/util.js';
 import AuthLogin from '/util/authLogin.js';
 
 const test_access_token = 'ab67e1463d6361375030635b090f2684'
@@ -22,16 +23,8 @@ const parseUrl = (reUrl,queryStringObject)=>{
         access_token
     });
 
-    if(queryStringObject && typeof queryStringObject === 'object')
-    {
-        url += '?'
-        for(let key in queryStringObject)
-        {
-            if(queryStringObject.hasOwnProperty(key))
-            {
-                url = `${url}&${key}=${queryStringObject[key]}`
-            }
-        }
+    if(queryStringObject && !Util.isEmptyObject(queryStringObject)){
+        url += '?' + Util.objectToString(queryStringObject);
     }
     return url;
 }

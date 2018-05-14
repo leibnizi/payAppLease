@@ -1,10 +1,10 @@
 {
   "pages": [
+    "page/detail/index",
     "page/home/home",
     "page/rent/rent",
     "page/addressList/addressList",
     "page/login/index",
-    "page/detail/index",
     "page/bill/bill",
     "page/rent/rent",
     "page/order/order",
