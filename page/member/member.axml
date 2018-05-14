@@ -1,3 +1,33 @@
-<view>
-  New Page
+<view class="container">
+  <view class="card">
+    <!--<image src=""></image>-->
+    <view class="textInfo" a:if="{{hasMember === true}}">
+      <text>2018.03.01到期</text>
+    </view>
+    <view class="memberBtn" a:elif="{{hasMember === false}}">
+      <text>开通会员</text>
+    </view>
+  </view>
+
+  <view class="options">
+    <view class="title">
+      <text>我的权益</text>
+    </view>
+    <view class="optList">
+      <block a:for="{{items}}">
+        <view class="optItem" key="{{item.value}}">
+          <image src="{{item.src}}"/>
+          <text>{{item.name}}</text>
+        </view>
+      </block>
+    </view>
+    <view class="info">
+      <view class="title">
+        <text>特权说明</text>
+      </view>
+      <text>
+       在此期间，预计1年多穿200个新款，少买30件买完后悔的衣服，帮您节省8000元。
+      </text>
+    </view>
+  </view>
 </view>

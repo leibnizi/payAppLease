@@ -1,0 +1,21 @@
+<template name="modalList">
+    <block class="modal" a:if="{{show}}">
+        <view class="modalMask" />
+        <view class="modalContainer">
+            <view class="modalTitle">取消订单</view>
+            <view class="modalContent">
+                <text class="reason">取消原因</text>
+                <block a:for="{{list}}">
+                    <view class="radioItem">
+                        <label for="{{item}}"><radio value="{{item.value}}" checked="{{item.value}}"/>{{item.name}}</label>
+                    </view>
+                </block>
+            </view>
+
+        </view>
+        <view class="modalFoot">
+            <view>取消</view>
+            <view>确认</view>
+        </view>
+    </block>
+</template>

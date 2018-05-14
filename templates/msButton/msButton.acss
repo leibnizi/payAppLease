@@ -1,0 +1,15 @@
+.msBtn{
+    width: 690rpx;
+    height: 88rpx;
+    background: #F03A80;
+    border-radius: 100rpx;
+    text-align: center;
+    line-height: 88rpx;
+    margin:0 auto;
+}
+.msBtn text{
+    font-family: PingFangSC-Regular;
+    font-size: 36rpx;
+    color: #FFFFFF;
+    line-height: 36rpx;
+}
