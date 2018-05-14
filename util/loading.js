@@ -11,7 +11,15 @@ const hide = (option)=>{
     aliApi.hideLoading()
 }
 
+const toast = (params) => {
+    aliApi.showToast({
+        type: params.type || 'none',
+        content: params.content || '操作成功',
+        duration: params.duration || 3000
+    });
+}
 export default {
     show,
-    hide
+    hide,
+    toast
 }

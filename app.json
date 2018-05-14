@@ -2,14 +2,15 @@
   "pages": [
     "page/home/home",
     "page/addressList/addressList",
-    "page/cart/cart",
-    "page/rent/rent",
-    "page/editAddress/editAddress",
+    "page/login/index",
+    "page/detail/index",
     "page/bill/bill",
+    "page/cart/cart",
+    "page/editAddress/editAddress",
     "page/user/user",
     "page/order/order",
     "page/member/member",
-    "page/helpCenter/helpCenter"
+    "page/help/help"
   ],
   "window": {
     "enableWK": "YES",
@@ -26,7 +27,7 @@
     "items": [
       {
         "pagePath": "page/home/home",
-        "name": "首页"
+        "name": "租赁"
       },
      
       {

@@ -1,6 +1,6 @@
 page {
-  background-color: #F7F7F7;
-  box-sizing: border-box;
+  background-color: #FFFFFF;
+  border: none;
 }
 .a-page{
   background-color: #ffffff;
@@ -10,6 +10,8 @@ page {
   font-size: 24rpx;
   padding: 32rpx;
   flex: 1;
+  background-color: #FFFFFF;
+  border: none;
 }
 
 .page-description {
