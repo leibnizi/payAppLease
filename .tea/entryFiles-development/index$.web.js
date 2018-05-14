@@ -1,7 +1,7 @@
 require('./config$');
+require('../..//page/home/home');
 require('../..//page/addressList/addressList');
 require('../..//page/cart/cart');
-require('../..//page/home/home');
 require('../..//page/rent/rent');
 require('../..//page/editAddress/editAddress');
 require('../..//page/bill/bill');

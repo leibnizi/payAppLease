@@ -1,10 +1,8 @@
 {
   "pages": [
-    
-    "page/addressList/addressList",
-    
-    "page/cart/cart",
     "page/home/home",
+    "page/addressList/addressList",
+    "page/cart/cart",
     "page/rent/rent",
     "page/editAddress/editAddress",
     "page/bill/bill",
