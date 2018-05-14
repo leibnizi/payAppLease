@@ -1,15 +1,39 @@
 <view>
   <view class="name">
     <text class="logistics-icon"></text>
-    <view>
-      <view>
-        <text>物流公司：</text><text>顺丰速运</text>
+    <view class="express">
+      <view class="left">
+        <view>
+          <text class="gray">物流公司：</text><text>顺丰速运</text>
+        </view>
+        <view>
+          <text class="gray">物流单号：</text><text>432530200086</text>
+        </view>
       </view>
-      <view>
-        <text>物流单号：</text><text>432530200086</text>
-      </view>
+      <view class="copy">复制</view>
     </view>
-    <view>复制</view>
   </view>
-  <view class="list"></view>
+  <!-- 物流信息列表 -->
+  <view class="list">
+    <view class="item item-first">
+      <view class="time"><text>14:38</text><text>2017.04.26</text></view>
+      <view class="line"></view>
+      <view class="txt">[北京市朝阳区小营公司]  派件员：王俊锦  13311557698  正在为你派件</view>
+    </view>
+    <view class="item">
+      <view class="time"><text>14:38</text><text>2017.04.26</text></view>
+      <view class="line"></view>
+      <view class="txt">[北京市朝阳区小营公司]  已收入</view>
+    </view>
+    <view class="item">
+      <view class="time"><text>14:38</text><text>2017.04.26</text></view>
+      <view class="line"></view>
+      <view class="txt">[北京市转运中心]  已发出  下一站  北京市朝阳区小营公司</view>
+    </view>
+    <view class="item">
+      <view class="time"><text>14:38</text><text>2017.04.26</text></view>
+      <view class="line"></view>
+      <view class="txt">[北京市转运中心]  已收入</view>
+    </view>
+  </view>
 </view>
