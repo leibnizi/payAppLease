@@ -12,7 +12,7 @@
         </block>
     </view>
     <view class="operations">
-        <template is="msProtocal"/>
+        <template is="msProtocal" data="{{selected,onSelect}}"/>
         <view class="apply">
             <view class="price">
                 <text>总价</text>
