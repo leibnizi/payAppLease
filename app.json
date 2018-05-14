@@ -4,10 +4,10 @@
     "page/cart/cart",
     "page/user/user",
     "page/order/order",
-    "page/member/member",
     "page/bill/bill",
     "page/helpCenter/helpCenter",
-    "page/buyCard/buyCard"
+    "page/buyCard/buyCard",
+    "page/member/member"
   ],
   "window": {
     "enableWK": "YES",

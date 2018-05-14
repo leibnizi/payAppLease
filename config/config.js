@@ -12,7 +12,7 @@ export const userList = [
     },
     {
         name:"我的会员",
-        path:"/page/buyCard/buyCard",
+        path:"/page/member/member",
         icon:"download"
     },
     {
