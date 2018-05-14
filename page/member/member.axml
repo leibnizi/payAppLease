@@ -1,10 +1,10 @@
 <view class="container">
   <view class="card">
     <!--<image src=""></image>-->
-    <view class="textInfo">
+    <view class="textInfo" a:if="{{hasMember === true}}">
       <text>2018.03.01到期</text>
     </view>
-    <view class="memberBtn">
+    <view class="memberBtn" a:elif="{{hasMember === false}}">
       <text>开通会员</text>
     </view>
   </view>

@@ -2,22 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="24a16981-7bc1-4df2-a47e-26e608b0b94c" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/image/member/4Free@2x.png" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/image/member/custom@2x.png" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/image/member/discount@2x.png" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/image/member/memberCard@2x.png" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/image/member/noLimit@2x.png" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/image/member/noWash@2x.png" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/.tea/entryFiles-development/config$.js" afterPath="$PROJECT_DIR$/.tea/entryFiles-development/config$.js" />
-      <change beforePath="$PROJECT_DIR$/.tea/entryFiles-development/index$.web.js" afterPath="$PROJECT_DIR$/.tea/entryFiles-development/index$.web.js" />
-      <change beforePath="$PROJECT_DIR$/.tea/entryFiles-development/index$.worker.js" afterPath="$PROJECT_DIR$/.tea/entryFiles-development/index$.worker.js" />
-      <change beforePath="$PROJECT_DIR$/app.json" afterPath="$PROJECT_DIR$/app.json" />
-      <change beforePath="$PROJECT_DIR$/config/config.js" afterPath="$PROJECT_DIR$/config/config.js" />
-      <change beforePath="$PROJECT_DIR$/page/member/member.acss" afterPath="$PROJECT_DIR$/page/member/member.acss" />
       <change beforePath="$PROJECT_DIR$/page/member/member.axml" afterPath="$PROJECT_DIR$/page/member/member.axml" />
       <change beforePath="$PROJECT_DIR$/page/member/member.js" afterPath="$PROJECT_DIR$/page/member/member.js" />
-      <change beforePath="$PROJECT_DIR$/page/member/member.json" afterPath="$PROJECT_DIR$/page/member/member.json" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -73,11 +59,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="member.axml" pinned="false" current-in-tab="false">
+      <file leaf-file-name="member.axml" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/page/member/member.axml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="420">
-              <caret line="28" column="48" lean-forward="false" selection-start-line="28" selection-start-column="48" selection-end-line="28" selection-end-column="48" />
+            <state relative-caret-position="165">
+              <caret line="11" column="24" lean-forward="true" selection-start-line="11" selection-start-column="24" selection-end-line="11" selection-end-column="24" />
               <folding />
             </state>
           </provider>
@@ -93,7 +79,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="app.json" pinned="false" current-in-tab="true">
+      <file leaf-file-name="app.json" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app.json">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="135">
@@ -116,9 +102,11 @@
       <file leaf-file-name="member.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/page/member/member.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="165">
-              <caret line="11" column="3" lean-forward="true" selection-start-line="11" selection-start-column="3" selection-end-line="11" selection-end-column="3" />
-              <folding />
+            <state relative-caret-position="60">
+              <caret line="10" column="6" lean-forward="true" selection-start-line="10" selection-start-column="6" selection-end-line="10" selection-end-column="6" />
+              <folding>
+                <element signature="e#34#416#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -176,11 +164,11 @@
         <option value="$PROJECT_DIR$/page/rent/rent.js" />
         <option value="$PROJECT_DIR$/page/rent/rent.axml" />
         <option value="$PROJECT_DIR$/page/member/member.json" />
-        <option value="$PROJECT_DIR$/page/member/member.js" />
-        <option value="$PROJECT_DIR$/page/member/member.axml" />
         <option value="$PROJECT_DIR$/page/member/member.acss" />
         <option value="$PROJECT_DIR$/config/config.js" />
         <option value="$PROJECT_DIR$/app.json" />
+        <option value="$PROJECT_DIR$/page/member/member.js" />
+        <option value="$PROJECT_DIR$/page/member/member.axml" />
       </list>
     </option>
   </component>
@@ -331,12 +319,12 @@
       <workItem from="1526218367631" duration="26000" />
       <workItem from="1526219181012" duration="424000" />
       <workItem from="1526223241844" duration="1000" />
-      <workItem from="1526262389379" duration="9605000" />
+      <workItem from="1526262389379" duration="9948000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="26100000" />
+    <option name="totallyTimeSpent" value="26443000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="6" />
@@ -704,22 +692,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/page/member/member.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="11" column="3" lean-forward="true" selection-start-line="11" selection-start-column="3" selection-end-line="11" selection-end-column="3" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/page/member/member.axml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="28" column="48" lean-forward="false" selection-start-line="28" selection-start-column="48" selection-end-line="28" selection-end-column="48" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/page/member/member.acss">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="30">
@@ -740,6 +712,24 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="135">
           <caret line="9" column="24" lean-forward="true" selection-start-line="9" selection-start-column="24" selection-end-line="9" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/page/member/member.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="10" column="6" lean-forward="true" selection-start-line="10" selection-start-column="6" selection-end-line="10" selection-end-column="6" />
+          <folding>
+            <element signature="e#34#416#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/page/member/member.axml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="11" column="24" lean-forward="true" selection-start-line="11" selection-start-column="24" selection-end-line="11" selection-end-column="24" />
           <folding />
         </state>
       </provider>
