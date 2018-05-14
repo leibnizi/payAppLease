@@ -1,0 +1,20 @@
+<template name="order">
+  <view a:if="{{list.length}}" class="order-components">
+    <view a:for="{{list}}" a:key="index" class="{{has_btn== true?'items':''}}">
+      <view class="item">
+        <view class="left">
+          <image src="{{item.image_url}}"></image>
+        </view>
+
+        <view class="right">
+          <view class="info">
+            <view class="name">{{item.name}}</view>
+            <view class="size">尺码：{{item.specification}}</view>
+            <view class="price">总租金：{{item.price}}</view>
+          </view>
+        </view>
+      </view>
+      <view a:if="{{list.length-1 != index}}" class="line" ></view>
+    </view>
+  </view>
+</template>

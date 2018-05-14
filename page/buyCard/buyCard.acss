@@ -1,0 +1,91 @@
+@import "/templates/msProtocal/msProtocal.acss";
+.card{
+    padding:50rpx;
+    text-align: center;
+}
+.card image{
+    width: 450rpx;
+    height: 260rpx;
+}
+
+.list .litsItem{
+    background: #FFFFFF;
+    padding:24rpx 30rpx;
+    border-top: 1rpx solid #DDDDDD;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.list .litsItem:last-child{
+    border-bottom: 1rpx solid #DDDDDD;
+}
+.list .litsItem text{
+    font-family: PingFangSC-Regular;
+    font-size: 32rpx;
+    color: #333333;
+    letter-spacing: 0;
+    text-align: left;
+    line-height: 42rpx;
+}
+.list .litsItem:last-child text:last-child{
+    color: #999999;
+}
+
+.operations{
+    height: 204rpx;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+.select{
+    height: 44rpx;
+    padding: 30rpx;
+}
+.select image{
+    width: 44rpx;
+    height: 44rpx;
+    margin-right: 20rpx;
+}
+.select text{
+    font-family: PingFangSC-Regular;
+    font-size: 28rpx;
+    color: #333333;
+    height: 44rpx;
+    line-height: 44rpx;
+    vertical-align:text-bottom;
+}
+
+.select text:last-child{
+    color:dodgerblue;
+}
+.operations .apply{
+    display: flex;
+    flex-direction: row;
+}
+.operations .apply .price{
+    width: 531rpx;
+    height: 100rpx;
+    padding-left: 30rpx;
+    text-align: left;
+}
+.operations .apply .price text{
+    font-family: PingFangSC-Regular;
+    font-size: 28rpx;
+    color: #333333;
+    text-align: right;
+    line-height: 100rpx;
+}
+.operations .apply .btn{
+    width: 219rpx;
+    height: 100rpx;
+    background: #F03A80;
+    text-align: center;
+}
+.operations .apply .btn text{
+    font-family: PingFangSC-Regular;
+    font-size: 32rpx;
+    color: #FFFFFF;
+    text-align: left;
+    line-height: 100rpx;
+}

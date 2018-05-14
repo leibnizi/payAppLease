@@ -1,0 +1,58 @@
+<view class="layout-view">
+  <!-- 订单状态 -->
+  <view class="order-status">
+    <view class="left">
+      <view class="status">
+        <text class="status-icon"></text>
+        <text>待发货</text> 
+      </view>
+      <view class="txt">显示第三方物流轨迹或固定文案：您的包裹已交由{快递公司}配送</view>
+      <view class="time">2017年11月24日09:30</view>
+    </view>
+    <view class="right"></view>
+  </view>
+  <!-- 地址信息 -->
+  <view class="address-info">
+    <view class="user">
+      <text>陈凤美</text>
+      <text>181****0093</text>
+    </view>
+    <view class="address">
+      <text class="address-icon"></text>
+      <text>北京北京市海淀区中关村街道双宜数东里3号楼友谊鲜果（菜鸟驿站:13423475456）</text>
+    </view>
+  </view>
+  <view class="gradient gap"></view>
+  <!-- 商品模版 -->
+  <import src='/templates/order/order.axml' />
+  <view class="gap">
+    <template is="order" data="{{list}}"/>
+  </view>
+  <!-- 租金&租期 -->
+  <view class="order-item gap">
+    <view>
+      <text>总租金</text>
+      <text>¥0.00</text>
+    </view>
+    <view >
+      <text>租期</text>
+      <text>2018/03/09-2018/03/15</text>
+    </view>
+  </view>
+  <!-- 订单编号&下单时间 -->
+  <view class="order-item gap">
+    <view>
+      <text>订单编号</text>
+      <text>11807571321180757132</text>
+    </view>
+    <view>
+      <text>下单时间</text>
+      <text>2017年11月24日 09:25</text>
+    </view>
+  </view>
+</view>
+
+<!-- 浮层 -->
+<view class="supernatant">
+  <view class="btns"><text>联系客服</text><text>查看物流</text><text class="on">确认收货</text></view>
+</view>

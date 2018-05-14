@@ -1,0 +1,7 @@
+<template name="msProtocal">
+    <view class="{{selected === true?'select active':'select'}}" data-selected="{{selected}}" onTap="{{onSelect}}">
+        <image></image>
+        <text>我已阅读并同意</text>
+        <text>女神派用户协议</text>
+    </view>
+</template>

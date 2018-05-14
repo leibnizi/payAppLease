@@ -1,3 +1,7 @@
-.{
-    
+
+@import "/templates/modalList/modalList.acss";
+.container{
+    margin: 20px 30px;
+    color:red;
 }
+

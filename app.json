@@ -6,14 +6,21 @@
     "page/login/index",
     "page/detail/index",
     "page/bill/bill",
-    
+    "page/rent/rent",
+    "page/order/order",
+    "page/logistics/logistics",
+    "page/orderDetail/orderDetail",
+    "page/rent/rent",
+    "page/buyCard/buyCard",
     "page/cart/cart",
-    
     "page/editAddress/editAddress",
     "page/user/user",
-    "page/order/order",
+    "page/bill/bill",
+    "page/helpCenter/helpCenter",
+    "page/cardConfirm/cardConfirm",
     "page/member/member",
-    "page/help/help"
+    "page/help/help",
+    "page/orderDetail/orderDetail"
   ],
   "window": {
     "enableWK": "YES",
@@ -32,7 +39,6 @@
         "pagePath": "page/home/home",
         "name": "租赁"
       },
-     
       {
         "pagePath": "page/cart/cart",
         "name": "购物车"

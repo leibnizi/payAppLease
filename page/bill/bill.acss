@@ -1,3 +1,4 @@
+@import '/templates/cardInfo/cardInfo.acss';
 .container{
     padding-left: 30rpx;
 }
@@ -19,37 +20,10 @@
 .up{
     background: #FFFFFF;
 }
-.picInfo{
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    width:750rpx;
-    height: 240rpx;
-    padding:40rpx 30rpx;
-    background: #FFFFFF;
-}
 .seperator{
     margin-left: 30rpx;
     width: 690rpx;
     border-bottom:1rpx solid #DDDDDD;
-}
-image{
-    width: 180rpx;
-    height: 220rpx;
-}
-.text{
-    padding-left: 20rpx;
-    height: 160rpx;
-    display: inline-flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
-.text text{
-    flex: 1;
-    font-family: PingFangSC-Regular;
-    font-size: 28rpx;
-    color: #333333;
-    line-height: 28rpx;
 }
 .moneyInfo{
     width: 750rpx;
