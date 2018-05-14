@@ -1,3 +1,4 @@
+import {push} from '/util/navigator.js';
 Page({
     data: {
         items: [
@@ -11,4 +12,7 @@ Page({
     },
     onLoad() {
     },
+    goBuyCard(){
+        push('/page/buyCard/buyCard')
+    }
 });
