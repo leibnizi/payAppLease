@@ -1,59 +1,59 @@
-.item{
+.order-components .item{
     display: flex;
     justify-content:space-between;
     height: 160rpx;
     background-color: #ffffff;
     padding: 40rpx 30rpx;
 }
-.items:last-child >.item{
+.order-components .items:last-child >.item{
     padding: 40rpx 30rpx 0;
 }
-.left{
+.order-components .left{
     width: 160rpx;
 }
-.left>image{
+.order-components .left>image{
     display: block;
     margin: 0 auto;
-    width: 123rpx;
+    width: 100%;
     height: 100%;
     object-fit: contain;
 }
 
-.right{
+.order-components .right{
     width: 510rpx;
 }
-.name{
+.order-components .name{
     font-size: 28rpx;
     color: #333333;
     line-height: 28rpx;
 }
-.size{
+.order-components .size{
     font-size: 24rpx;
     color: #999999;
     line-height: 24rpx;
     margin-top: 20rpx;
     margin-bottom: 16rpx;
 }
-.price{
+.order-components .price{
     font-size: 28rpx;
     color: #333333;
     line-height: 28rpx;
 }
 
-.line{
+.order-components .line{
     height: 2rpx;
     width: 670rpx;
     margin-left: 80rpx;    
     background-color: #dddddd;
 }
-.btn{
+.order-components .btn{
     height: 48rpx;
     width: 690rpx;
     background-color: #ffffff;
     padding: 20rpx 30rpx 40rpx;
     text-align: right;
 }
-.btn>text{
+.order-components .btn>text{
     display: inline-block;
     width: 160rpx;
     line-height: 48rpx;
