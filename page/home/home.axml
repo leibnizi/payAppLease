@@ -1,10 +1,11 @@
 <import src="../../templates/product-list/product-list.axml"/>
 <view>
+  <navigator url="/page/addressList/addressList"> 去地址列表 </navigator>
   <view class="banner">
     banner1
   </view> 
   <view class="rent-flow">
-    <template is="product-list"  data ="{{productList}}" />
+    <template is="product-list"  data ="{{productList,a}}" />
   </view>
   <view>
   注册送2800图片

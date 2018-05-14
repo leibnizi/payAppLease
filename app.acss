@@ -2,7 +2,9 @@ page {
   background-color: #F7F7F7;
   box-sizing: border-box;
 }
-
+.a-page{
+  background-color: #ffffff;
+}
 .page {
   font-family: -apple-system-font,Helvetica Neue,Helvetica,sans-serif;
   font-size: 24rpx;
@@ -111,4 +113,7 @@ button {
   display: flex;
   align-items:centers;
   justify-content: center
+}
+.highlight{
+  color: #F03A80;
 }

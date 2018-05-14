@@ -1,9 +1,11 @@
 .product{
+  position: relative;
   display: flex;
   padding: 40rpx 20rpx 40rpx 40rpx;
   justify-content: space-between;
   background-color: #fff;
   border-bottom: 1px solid #f6f6f6;
+  transition: all 0.5s;
 }
 .product-img{
   width: 160rpx;
@@ -37,6 +39,33 @@
   justify-content: space-between;
   color: #ccc;
 }
+.active{
+  transform: translateX(-100rpx)
+}
+
+.delete-btn{
+  position: absolute;
+  z-index: 3;
+  top: 0;
+  width: 100rpx;
+  height: 100%;
+  background: #F03A80;
+  font-weight: 400;
+  font-size: 24rpx;
+  text-align: center;
+  color:#fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.active .delete-btn{
+  right: -100rpx;
+}
+.hide .delete-btn{
+  right: -100rpx;
+}
+
+
 
 .run-out-product-detail > .brand{
   color: #ccc;

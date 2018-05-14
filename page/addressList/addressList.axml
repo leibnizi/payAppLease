@@ -1,0 +1,22 @@
+<import src="/templates/addressCard/addressCard.axml"/>
+<view class="address-page">
+  <view a:for="{{addressList}}">
+    <template 
+      is="address-card" 
+      data="{{
+        item, 
+        editAddress, 
+        selectedAddress, 
+        showDeleteAddressStart, 
+        showDeleteAddressEnd,
+        hideDeleteBar
+        }}" />
+  </view>
+  <view class="btn-box">
+    <button type="default">
+       <navigator url="/page/editAddress/editAddress?from=add" hover-class="navigator-hover">
+        添加一个新地址
+      </navigator>
+    </button>
+  </view>
+</view>

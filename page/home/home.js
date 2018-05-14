@@ -83,7 +83,7 @@ Page({
         page: this.data.page,
         page_size: 6,
         type: 1,
-        access_token: '9e7ac67598cd1023a065ef66f8829b73',
+        access_token: 'ab67e1463d6361375030635b090f2684',
       }
     })
   },

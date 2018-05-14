@@ -1,0 +1,37 @@
+<template name="address-card">
+    <view  class="address-card {{item.showDelete ? 'show': 'hide'}}" onTouchStart="showDeleteAddressStart" onTouchEnd="showDeleteAddressEnd"  onTap="selectedAddress" data-id="{{item.id}}">
+        <view class="top-content">
+            <view class="main-msg">
+                <view class="user-name">
+                    {{item.contact_name}}
+                </view>
+                <view class="contact-mobile">
+                    {{item.contact_mobile}}
+                </view>
+            </view>
+            <view>
+                <view class="nav">编辑</view>
+                <view data-id="{{item.id}}" catchTap="editAddress" class="nav-placeholder">
+                
+                </view>
+            </view>
+        </view>
+        <view class="address-detail">
+            {{item.address_detail}} 
+        </view>
+        <view class="delete-box">
+            <view 
+                a:if="{{item.showDelete}}" 
+                class="hide-delete-placeholder"
+                data-id="{{item.id}}"
+                onTap="hideDeleteBar"
+                >
+            
+            </view>
+            <view class="delete-bar">
+                删除
+            </view>
+        </view>
+        
+    </view>
+</template>

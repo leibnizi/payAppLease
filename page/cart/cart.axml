@@ -1,17 +1,56 @@
 <import src="../../templates/product/product.axml"/>
 
-<view class="cart-page">
+<view class="cart-page" onTap="showDeleteFun">
   <block a:if="{{productList.length}}">
+    <view a:if="{{showTop}}" class="top-prompt-line">
+      <view class="top-content">
+        购买
+        <view class="highlight">
+          会员卡
+        </view>,
+        可以免租金 
+        <view class="highlight">
+          300元
+        </view>,
+        <navigator 
+          url="/page/navigate/navigate?title=navigate" 
+        >
+          查看详情 >
+        </navigator>
+      </view>
+      <view class="close" onTap="closeTopFun">X</view>
+    </view>
+    <view class="title-box">
+      有效商品
+    </view>
     <block a:for="{{productList}}">
-      <template a:if="{{item.status === 1}}" is="product"  data ="{{item}}" />
+      <template   a:if="{{item.status === 1}}" is="product"  data ="{{item}}" />
     </block>
+    <view class="title-box">
+      <view>失效商品</view>
+      <view class="delete-lose">清空失效宝贝</view>
+    </view>
+    <block a:for="{{productList}}">
+      <template 
+        a:if="{{item.status === 2 || item.status === 3}}" 
+        is="product"  
+        data ="{{item,showDelete}}" />
+    </block>
+    <view class="buy-box">
+      <button 
+        onTap="goToBuy"
+        class="buy-btn"
+      >
+        立即租赁
+      </button>
+    </view>
   </block>
   <block a:else>
     <view class="full-page">
       <view class="content">
         <view class="empty-img">img</view>
         <view class="empty-text">购物车是空的哦</view>
-        <view><button class="btn" type="primary">primary</button></view>
+        <navigator class="btn" open-type="switchTab" url="/page/home/home">去逛逛</button></navigator>
       <view>
     </view>
   </block>

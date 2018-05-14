@@ -23,7 +23,7 @@ export const get = (url,config)=>{
     return new Promise((resolve,reject)=>{
         let requstConfig = {
                 method:'get',
-                url:parseUrl(`${baseUrl}/${url}`,config.params),
+                url:parseUrl(`${baseUrl}${url}`,config.params),
                 headrs: { 'Content-Type': 'text/html; charset=utf-8' },
                 success:(res)=>{resolve(res.data)},
                 fail:(...arg)=>{reject(...arg)}
@@ -36,7 +36,7 @@ export const post = (url,data,config)=>{
     return new Promise((resolve,reject)=>{
         let requstConfig = {
                 method:'post',
-                url:parseUrl(baseUrl,config.params),
+                url: parseUrl(`${baseUrl}${url}`, config.params),
                 headrs:config.headrs || {},
                 data,
                 success: (res) => { resolve(res.data)},
@@ -50,7 +50,7 @@ export const put = (url,data,config)=>{
     return new Promise((resolve,reject)=>{
         let requstConfig = {
                 method:'put',
-                url:parseUrl(baseUrl,config.params),
+                url: parseUrl(`${baseUrl}${url}`, config.params),
                 headrs:config.headrs || {},
                 data,
                 success: (res) => { resolve(res.data)},
@@ -60,11 +60,12 @@ export const put = (url,data,config)=>{
     })
 }
 
-export const del = (url,params)=>{
+export const del = (url, data, config)=>{
+    console.log("deldeldel")
     return new Promise((resolve,reject)=>{
         let requstConfig = {
                 method:'delete',
-                url:parseUrl(baseUrl,config.params),
+                url: parseUrl(`${baseUrl}${url}`, config.params),
                 headrs:config.headrs || {},
                 data,
                 success: (res) => { resolve(res.data) },
