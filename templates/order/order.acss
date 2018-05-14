@@ -46,14 +46,14 @@
     margin-left: 80rpx;    
     background-color: #dddddd;
 }
-.order-components .btn{
+ .btn{
     height: 48rpx;
     width: 690rpx;
     background-color: #ffffff;
     padding: 20rpx 30rpx 40rpx;
     text-align: right;
 }
-.order-components .btn>text{
+ .btn>text{
     display: inline-block;
     width: 160rpx;
     line-height: 48rpx;
