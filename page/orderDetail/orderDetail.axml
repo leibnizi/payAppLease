@@ -54,5 +54,5 @@
 
 <!-- 浮层 -->
 <view class="supernatant">
-  <view class="btns"><text>订单跟踪</text><text>订单跟踪</text></view>
+  <view class="btns"><text>联系客服</text><text>查看物流</text><text class="on">确认收货</text></view>
 </view>

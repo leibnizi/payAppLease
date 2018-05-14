@@ -5,10 +5,8 @@
     display: flex;
     justify-content:space-between;
     padding: 40rpx 30rpx 30rpx 40rpx;
-    /* height: 260rpx;
-    box-sizing: border-box; */
-    background: #FF94BE;
     color: #FFFFFF;
+    background: url("/image/order/status-bg@2x.png") no-repeat center center;background-size: contain;
 }
 .status{
     display: flex;
@@ -112,4 +110,8 @@
     font-size: 24rpx;
     color: #F03A80;
     margin-right: 24rpx;
+}
+.btns>text.on{
+    color: #FFFFFF;
+    background-color: #F03A80;
 }
