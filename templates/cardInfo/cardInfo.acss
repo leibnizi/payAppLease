@@ -8,8 +8,8 @@
     background: #FFFFFF;
 }
 .picInfo image{
-    width: 180rpx;
-    height: 220rpx;
+    width: 160rpx;
+    height: 160rpx;
 }
 .picInfo .text{
     padding-left: 20rpx;

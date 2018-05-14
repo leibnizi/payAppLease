@@ -8,7 +8,7 @@ require('../..//page/user/user');
 require('../..//page/order/order');
 require('../..//page/member/member');
 require('../..//page/bill/bill');
-require('../..//page/orderConfirm/orderConfirm');
 require('../..//page/helpCenter/helpCenter');
+require('../..//page/buyCard/buyCard');
 }
 self.bootstrapApp ? self.bootstrapApp({ success }) : success();

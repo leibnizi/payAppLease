@@ -1,12 +1,7 @@
 <import src="/templates/cardInfo/cardInfo.axml"/>
+<import src="/templates/msButton/msButton.axml"/>
 <view>
-  <block a:if="{{type === 'order'}}">
-      <text>Order</text>
-  </block>
-  <block a:elif="{{type === 'card'}}">
-    <template is="cardInfo" />
-  </block>
-
+  <template is="cardInfo" />
   <view class="orderInfo">
     <view class="up">
       <view class="item">
@@ -48,11 +43,10 @@
       </view>
     </view>
   </view>
-
   <view class="btnArea">
-    <label><radio value="{{agree}}" checked="{{}}" onChange="{{}}"/> 我已阅读并同意<text class="blue">下单协议待定，回收买断协议待定</text></label>
-      <view class="btn">
-          <text>提交订单</text>
-      </view>
+    <radio-group onChange="onAgreeChange">
+      <label><radio value="{{agree}}" checked="{{agree}}"/> 我已阅读并同意<text class="blue">下单协议待定，回收买断协议待定</text></label>
+    </radio-group>
+    <template is="msButton" data="{{text,onSubmit}}"/>
   </view>
 </view>

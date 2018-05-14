@@ -6,8 +6,8 @@
     "page/order/order",
     "page/member/member",
     "page/bill/bill",
-    "page/orderConfirm/orderConfirm",
-    "page/helpCenter/helpCenter"
+    "page/helpCenter/helpCenter",
+    "page/buyCard/buyCard"
   ],
   "window": {
     "enableWK": "YES",
