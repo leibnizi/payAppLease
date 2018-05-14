@@ -10,14 +10,13 @@ Page({
     total: 0,
     noMoreList: true,
     page_size: 10,
-    access_token: 'ab67e1463d6361375030635b090f2684',
     distanceStart: 0,
     distanceEnd: 0,
     // isIphoneX: app.globalData.isIphoneX ? true : false,
   },
   async onShow(){
     try {
-      const { data: { rows, total }, status } = await this.geAddressList()
+      const { data: { data: { rows, total }}, status } = await this.geAddressList()
       const addressList = rows.sort((a,b) => a.id - b.id < 0)
       this.setData({
         addressList ,
@@ -36,7 +35,7 @@ Page({
       page: ++page
     })
     try {
-      const { data, status } = await this.geAddressList();
+      const { data:{data}, status } = await this.geAddressList();
       if (data && typeof data.rows === "object") {
         this.setData({
           productList: data.rows
@@ -58,7 +57,7 @@ Page({
       page: 1
     })
     try {
-      const { data, status } = await this.geAddressList();
+      const { data: { data }, status } = await this.geAddressList();
       if (data && typeof data.rows === "object") {
         this.setData({
           productList: data.rows
@@ -143,11 +142,8 @@ Page({
     //   this.setData({
     //   })
     // }
-    // console.log(e.changedTouches[0].clientX, "ccc")
   },
   hideDeleteBar(e){
-
-    console.log("ssssss")
     const { addressList } = this.data
     const newAddressList = addressList.map((item, index) => {
     const { id } = e.target.dataset

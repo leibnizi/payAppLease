@@ -1,11 +1,14 @@
 {
   "pages": [
     "page/home/home",
+    "page/rent/rent",
     "page/addressList/addressList",
     "page/login/index",
     "page/detail/index",
     "page/bill/bill",
+    
     "page/cart/cart",
+    
     "page/editAddress/editAddress",
     "page/user/user",
     "page/order/order",

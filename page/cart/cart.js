@@ -17,7 +17,7 @@ Page({
   async onShow() {
     loading.show();
     try {
-      const { data, status } = await this.getData();
+      const { data: { data }, status } = await this.getData();
       if (data && typeof data.items === "object") {
         this.setData({
           productList: data.items
@@ -36,10 +36,8 @@ Page({
     try {
       const { status } = await del('/cart/mall', { 
         sale_item_id: id,
-        access_token: 'ab67e1463d6361375030635b090f2684',
       } ,{
         params: {
-          access_token: 'ab67e1463d6361375030635b090f2684',
         }
       })
       if (status === "ok") {
@@ -110,14 +108,12 @@ Page({
 
     }, {
       params: {
-        access_token: 'ab67e1463d6361375030635b090f2684',
       }
     })
   },
   getData() {
     return get('/cart/mall', {
       params: {
-        access_token: 'ab67e1463d6361375030635b090f2684',
       }
     })
   },

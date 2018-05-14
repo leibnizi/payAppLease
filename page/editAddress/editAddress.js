@@ -85,7 +85,7 @@ Page({
         address_msg: {},
       });
     }
-    const { data } =await this.getConfigMsg();
+    const { data: { data } } =await this.getConfigMsg();
     const citys = data["send_cities"]["send_cities"];
     const newCtiys = this.disposeCitys(citys)
     // const provinceObj = {};
@@ -129,7 +129,6 @@ Page({
 
     if (!this.savePersonInfo(value)) return false;
     const { status } = await this.postForm({
-      access_token: 'ab67e1463d6361375030635b090f2684',
       address_detail,
       contact_mobile,
       contact_name,
@@ -184,14 +183,12 @@ Page({
     return get('/common/configs', {
       params: {
         send_cities: "0",
-        access_token: 'ab67e1463d6361375030635b090f2684',
       }
     })
   },
   postForm (data) {
     return post('/user/address', data,{
       params: {
-        access_token: 'ab67e1463d6361375030635b090f2684',
       }
     })
   }

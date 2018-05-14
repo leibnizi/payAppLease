@@ -1,11 +1,13 @@
 require('./config$');
 require('../..//page/home/home');
-require('../..//page/addressList/addressList');
-require('../..//page/cart/cart');
 require('../..//page/rent/rent');
-require('../..//page/editAddress/editAddress');
+require('../..//page/addressList/addressList');
+require('../..//page/login/index');
+require('../..//page/detail/index');
 require('../..//page/bill/bill');
+require('../..//page/cart/cart');
+require('../..//page/editAddress/editAddress');
 require('../..//page/user/user');
 require('../..//page/order/order');
 require('../..//page/member/member');
-require('../..//page/helpCenter/helpCenter');
+require('../..//page/help/help');
