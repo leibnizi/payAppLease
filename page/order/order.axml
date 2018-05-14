@@ -1,5 +1,9 @@
-<import src='/templates/order/order.axml' />
-<view>
+<view onTap="handleTap1">
+  <view class="tip">
+    <text>租期：2018-03-09至2018-03-15</text>
+    <text>待收货</text>
+  </view>
+  <import src='/templates/order/order.axml' />
   <template is="order" data="{{list,has_btn}}"/>
   <view a:if="{{has_btn==1}}" class="btn"><text>订单跟踪</text></view>
 </view>
