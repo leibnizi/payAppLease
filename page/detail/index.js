@@ -1,12 +1,11 @@
 import Util from '/util/util.js';
-import bmap from '/libs/bmap-wx.min.js';
 import animModal from '/templates/items/index.js';
 import {get, post} from '/util/httpService.js';
 import AuthLogin from '/util/authLogin.js';
 
 Page({
   data: {
-    id:'7836',//产品id
+    id:'',//产品id
     indicatorDots: true,
     autoplay: true,
     vertical: false,
@@ -19,14 +18,14 @@ Page({
         'https://static-rs.msparis.com/uploads/4/9/49201651c32306bd26e5745b930c0fc6.png'
       ],
       name:'',
-      id: '42595',
-      brand:'R13',
+      id: '',
+      brand:'',
       brand_desc: '',
-      brand_id: '624',
+      brand_id: '',
       tags: [],
-      market_price: 12312312,
-      rental_price: 40000,
-      size: ['XXS/XS', 'S', 'M', 'L', 'XL']
+      market_price: '',
+      rental_price: '',
+      size: []
     },
     tabView: 1,
     specification_key:'',
@@ -40,6 +39,10 @@ Page({
   },
   onLoad(query) {
     console.log(query);
+    this.setData({
+      id: query.id
+    });
+
     this.getDetailInfo();
     //创建地址应用
     this._getLocation();
@@ -75,9 +78,6 @@ Page({
     this.setData({
       tabView: 2
     });
-  },
-  _actionSheetTap() {
-    const items = ['XXS/XS', 'S', 'M', 'L', 'XL'];
   },
 
   /*
@@ -200,37 +200,13 @@ Page({
   _getLocation(){
     var that = this;
     my.getLocation({
+      type: 1,
       success(res) {
         my.hideLoading();
         console.log(res)
-        // 新建百度地图对象
-        var BMap = new bmap.BMapWX({
-          ak: "y1dFiNhy70Q8xKFwrnvciFlbF2OrlkB3"
-        });
-
-        var fail = function(data) {
-          console.log(data);
-        };
-
-        var success = function(data) {
-          console.log(data);
-          /*
-          wx.setStorageSync(
-            "district",
-            data.originalData.result.addressComponent.district
-          );
-          */
-        };
-
-        // 发起regeocoding检索请求
-        BMap.regeocoding({
-          fail: fail,
-          success: success
-        });
-
         that.setData({
           hasLocation: true,
-          location: that._formatLocation(res.longitude, res.latitude)
+          location: res
         })
       },
       fail() {
@@ -238,15 +214,5 @@ Page({
         my.alert({ title: '定位失败' });
       },
     })
-  },
-
-  _formatLocation(longitude, latitude) {
-    longitude = Number(longitude).toFixed(2)
-    latitude = Number(latitude).toFixed(2)
-
-    return {
-      longitude: longitude.toString().split('.'),
-      latitude: latitude.toString().split('.')
-    }
-  },
+  }
 });

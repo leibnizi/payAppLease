@@ -305,3 +305,24 @@
   background-size: 100%;
   z-index: 999999;
 }
+
+/* 配送 区域*/
+.page-group-location{
+  margin-top: 20rpx; 
+  background: #FFFFFF;
+  height: 80rpx;
+  line-height: 80rpx;
+  padding-left: 30rpx;
+  padding-right: 30rpx;
+  color: #333333;
+}
+.page-group-location .label{
+  width: 200rpx;
+  float: left;
+}
+.page-group-location .location{
+  width: 390rpx;
+  float: right;
+  text-align: right;
+  color: #999999;
+}

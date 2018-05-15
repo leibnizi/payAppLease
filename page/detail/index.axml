@@ -23,7 +23,7 @@
         <image src="/image/detail_tag.png" mode="widthFix"/>
     </view>
       
-    <view class="page-group" onTap="_getCenterLocationTest">
+    <view class="page-group">
       <view class="name">{{detail.name}}</view>
       <view a:if="{{detail.limit_tag}}" class="limit-tag">年卡专享</view>
       <view class="price-wrap">
@@ -31,6 +31,13 @@
         <view class="market-price">{{detail.market_price}}</view>
       </view>
     </view>
+
+    <view class="page-group-location">
+      <view class="location-wrap">
+        <view class="label">配送区域</view> <view class="location">{{location.district}}</view>
+      </view>
+    </view>
+
 
     <view class="detail-info-box">
       <view class="tab-box">
