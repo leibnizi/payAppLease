@@ -1,9 +1,8 @@
 {
   "pages": [
-    "page/addressList/addressList",
+    "page/cart/cart",
     "page/home/home",
-    "page/rent/rent",
-    
+    "page/addressList/addressList",
     "page/login/index",
     "page/detail/index",
     "page/bill/bill",
@@ -11,16 +10,12 @@
     "page/order/order",
     "page/logistics/logistics",
     "page/orderDetail/orderDetail",
-    "page/rent/rent",
     "page/buyCard/buyCard",
-    "page/cart/cart",
     "page/editAddress/editAddress",
     "page/user/user",
-    "page/bill/bill",
     "page/cardConfirm/cardConfirm",
     "page/member/member",
-    "page/help/help",
-    "page/orderDetail/orderDetail"
+    "page/help/help"
   ],
   "window": {
     "enableWK": "YES",

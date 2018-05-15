@@ -4,37 +4,48 @@ import loading from '/util/loading.js'
 
 Page({
   data: {
-    productList:[
-      {
-        brand:"hhhh",
-        name:"www",
-      }
-    ],
-    showTop: true,
-    showDelete: false
+    productList:[],
+    activeProductList:[],
+    loseProductList:[],
+    showDelete: false,
+    has_card: true,
   },
   onLoad() {},
   async onShow() {
     loading.show();
     try {
       const { data: { data }, status } = await this.getData();
+      const { has_card } = await this.getCheckCardStatus();
+      // console.log(has_card,"kkuu")
       if (data && typeof data.items === "object") {
+
+        const activeProductList = data.filter((item) => {
+          return item.status === 1
+        })
+        
+        const loseProductList = data.filter((item) => {
+          return item.status === 2 || item.status === 3
+        })
+
         this.setData({
-          productList: data.items
+          productList: data.items,
+          activeProductList,
+          loseProductList,
+          has_card
         })
       }
     }
     catch (e) {
       console.log("Result", e)
     } finally {
-      loading.hide();
+      // loading.hide();
     }
   },
   async deleteProduct(e) { 
     const { id } = e.target.dataset;
     loading.show();
     try {
-      const { status } = await del('/cart/mall', { 
+      const { status } = await post('/alipaymini-plan/cart-product-del', { 
         sale_item_id: id,
       } ,{
         params: {
@@ -54,17 +65,13 @@ Page({
     }
   },
   async goToBuy(){
-    loading.show();
     try {
+      loading.show();
       const {data, status, error} = await this.postConfirm()
-      console.log(error, "mmmm", data)
       if (data && data instanceof Object) {
         my.navigateTo({
           url:'/page/order'
         })
-        // this.setData({
-        //   productList: data.items
-        // })
       }
       else if (error && error instanceof Object ){
         my.showToast({
@@ -79,7 +86,9 @@ Page({
     }
     catch (e) {
       console.log("Result", e)
-    } finally {
+    } 
+    finally {
+      loading.hide();
     }
   },
   showDeleteFun(e){
@@ -99,8 +108,9 @@ Page({
     })
   },
   closeTopFun(){
+    //手动关闭却改变语义完全的不同的状态名，会不会有啥问题
     this.setData({
-      showTop: false
+      has_card: true
     })
   },
   postConfirm() {
@@ -111,10 +121,38 @@ Page({
       }
     })
   },
-  getData() {
-    return get('/cart/mall', {
-      params: {
+  async deleteLoseFun() {
+    loading.show();
+    try {
+      const { status } = await this.postDeleteLose()
+      if (status === "ok") {
+        this.setData({
+          loseProductList: []
+        })
       }
+    }
+    catch (e) {
+    } finally {
+      loading.hide();
+    }
+  },
+
+
+  getData() {
+    const { data } = my.getStorageSync({ key: 'globalAddress' });
+    return get('/alipaymini-plan/cart', {
+      params: {
+        delivery_region: data && data.region_code
+      }
+    })
+  },
+  getCheckCardStatus() {
+    return get('/alipaymini-user/own-card')
+  },
+  postDeleteLose() {
+    return post('/alipaymini-plan/cart', {
+      plan_id: '1',
+      plan_item_ids: '2'
     })
   },
 });

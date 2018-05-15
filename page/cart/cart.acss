@@ -23,14 +23,17 @@
   padding-top: 240rpx;
   text-align: center;
 }
-.empty-img{
+.empty-img image{
   width: 280rpx;
   height: 280rpx;
-  border: 1px solid #ccc;
   margin: auto;
 }
 .empty-text{
-  margin: 20rpx auto 40rpx;
+  margin: 20rpx auto 50rpx;
+  font-family: PingFangSC-Regular;
+  font-size: 28rpx;
+  color: #666666;
+  line-height: 28rpx;
 }
 .cart-page {
   min-height: 100vh;
