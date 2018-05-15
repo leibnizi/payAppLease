@@ -15,3 +15,4 @@ require('../..//page/user/user');
 require('../..//page/cardConfirm/cardConfirm');
 require('../..//page/member/member');
 require('../..//page/help/help');
+require('../..//page/selectDistrict/index');

@@ -166,14 +166,14 @@ Page({
     }
   },
   getConfigMsg() {
-    return get('/common/configs', {
+    return get('common/configs', {
       params: {
         send_cities: "0",
       }
     })
   },
   postForm (data) {
-    return post('/user/address', data,{
+    return post('user/address', data,{
     })
   },
   showPlaceCelectorFun(){
