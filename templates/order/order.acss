@@ -42,8 +42,7 @@
 
 .order-components .line{
     height: 2rpx;
-    width: 670rpx;
-    margin-left: 80rpx;    
+    width: 750rpx;   
     background-color: #dddddd;
 }
  .btn{

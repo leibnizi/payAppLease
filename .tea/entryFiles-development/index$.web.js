@@ -1,4 +1,5 @@
 require('./config$');
+require('../..//page/rentConfirm/rentConfirm');
 require('../..//page/buyCard/buyCard');
 require('../..//page/home/home');
 require('../..//page/rent/rent');
