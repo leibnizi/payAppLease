@@ -1,6 +1,8 @@
 .select{
     height: 44rpx;
-    padding: 30rpx;
+    padding: 40rpx 30rpx;
+    display: flex;
+    align-items: center;
 }
 .select image{
     width: 44rpx;

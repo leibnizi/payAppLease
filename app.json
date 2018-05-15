@@ -1,5 +1,6 @@
 {
   "pages": [
+    "page/return/return",
     "page/rentConfirm/rentConfirm",
     "page/buyCard/buyCard",
     "page/home/home",
