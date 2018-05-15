@@ -1,8 +1,12 @@
 @import '/templates/product-list/product-list.acss';
 .banner{
     height: 430rpx;
-    border: 1px solid red;
 }
 .rent-flow{
     background: #f7f7f7;
+}
+.liucheng image {
+    width:690rpx; 
+    height:180rpx;
+    margin: 30rpx;
 }
