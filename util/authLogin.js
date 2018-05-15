@@ -35,8 +35,15 @@ const AuthLogin = {
                 },
                 success: (res) => {
                     if(res.status == 'ok'){
-                        my.setStorageSync({key:'userInfo', data:res.data.data});
-                        my.setStorageSync({key:'access_token', data:res.data.data.access_token});
+                        if(res.data && res.data.data){
+                            my.setStorageSync({key:'userInfo', data:res.data.data});
+                            my.setStorageSync({key:'access_token', data:res.data.data.access_token});
+                            if(res.data.data.token_type  && res.data.data.token_type == 1){
+                                my.navigateTo({
+                                    url:'/page/login/index'
+                                });
+                            }
+                        }
                     }else if(res.data && res.data.error && res.data.error.code == '26001') {
                         my.getAuthCode({
                             scopes: 'auth_user',
@@ -55,8 +62,15 @@ const AuthLogin = {
                                             },
                                         success: (res) => {
                                             if(res.data && res.data.status == 'ok'){
-                                                my.setStorageSync({key:'userInfo', data:res.data.data});
-                                                my.setStorageSync({key:'access_token', data:res.data.data.access_token});
+                                                if(res.data && res.data.data){
+                                                    my.setStorageSync({key:'userInfo', data:res.data.data});
+                                                    my.setStorageSync({key:'access_token', data:res.data.data.access_token});
+                                                    if(res.data.data.token_type  && res.data.data.token_type == 1){
+                                                        my.navigateTo({
+                                                            url:'/page/login/index'
+                                                        });
+                                                    }
+                                                } 
                                             }else{
                                                 if(res.data && res.data.error){
                                                     my.alert({
@@ -103,8 +117,15 @@ const AuthLogin = {
                                     },
                                     success: (res) => {
                                         if(res.data && res.data.status == 'ok'){
-                                            my.setStorageSync({key:'userInfo', data:res.data.data});
-                                            my.setStorageSync({key:'access_token', data:res.data.data.access_token});
+                                            if(res.data && res.data.data){
+                                                my.setStorageSync({key:'userInfo', data:res.data.data});
+                                                my.setStorageSync({key:'access_token', data:res.data.data.access_token});
+                                                if(res.data.data.token_type  && res.data.data.token_type == 1){
+                                                    my.navigateTo({
+                                                        url:'/page/login/index'
+                                                    });
+                                                }
+                                            }
                                         }else{
                                             if(res.data && res.data.error){
                                                 my.alert({

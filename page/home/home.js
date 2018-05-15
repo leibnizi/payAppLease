@@ -1,7 +1,8 @@
 import {userList} from '/config/config.js';
 import { push } from '/util/navigator.js';
 import { get } from '/util/httpService.js';
-import loading from '/util/loading.js'
+import loading from '/util/loading.js';
+import Util from '/util/util.js'
 
 Page({
   data: {
@@ -20,7 +21,10 @@ Page({
     try {
       const { data: { data }, status } = await this.getData();
       // debugger
-      if (data && typeof data.rows === "object") {
+      if (data && Util.isArray(data.rows) && data.rows.length > 0) {
+        data.rows.map( (item, idx) => {
+          data.rows[idx]['toDetailUrl'] = '/page/detail/index?id=' + item.id;
+        });
         this.setData({
           productList: data.rows
         })
@@ -40,7 +44,11 @@ Page({
     })
     try {
       const { data: { data }, status } = await this.getData();
-      if (data && typeof data.rows === "object") {
+      if (data && Util.isArray(data.rows) && data.rows.length > 0) {
+        data.rows.map( (item, idx) => {
+          data.rows[idx]['toDetailUrl'] = '/page/detail/index?id=' + item.id;
+        });
+        console.log(data.rows);
         this.setData({
           productList: [...productList, ...data.rows]
         })

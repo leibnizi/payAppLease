@@ -1,32 +1,188 @@
+import Util from '/util/util.js'
 import animModal from '/templates/items/index.js';
-import {get} from '/util/httpService.js'
+import {get, post} from '/util/httpService.js';
+import AuthLogin from '/util/authLogin.js'
 
 Page({
   data: {
-    hidden: true,
-    product1: {
-      img: 'http://static-r.msparis.com/uploads/7/5/75da5d0ab442a43948093798de962057.jpeg',
-      brand:"nike!!!",
-      name: "裤衩子",
-      size: 'S M L',
-      num:"1",
-      price: '0'
+    id:'7836',//产品id
+    indicatorDots: true,
+    autoplay: true,
+    vertical: false,
+    interval: 3000,
+    circular: true,//是否启用无限滑动
+    'indicator-active-color': '#F03A80',//当前选中的指示点颜色
+    'indicator-color': '#F15F97',//指示点颜色
+    detail:{
+      image: [],
+      name:'',
+      id: '42595',
+      brand:'R13',
+      brand_desc: '',
+      brand_id: '624',
+      tags: [],
+      market_price: 12312312,
+      rental_price: 40000,
+      size: ['XXS/XS', 'S', 'M', 'L', 'XL']
     },
-    product2:{
-      img: 'http://static-r.msparis.com/uploads/7/5/75da5d0ab442a43948093798de962057.jpeg',
-      brand: "nike!!!",
-      name: "裤衩子",
-      money:"0.00"
+    tabView: 1,
+    specification_key:'',
+    selectInfoState: false, //加入购物车的选择浮层的状态
+    days: 7,//租期默认7天
+    delivery_region:'110101', //配送区域
+    cartNum: 0,//购物车小标的数据显示
+  },
+
+  onLoad(query) {
+    console.log(query);
+    this.getDetailInfo();
+  },
+
+  getDetailInfo(){
+    get('product', { params: { id: this.data.id }}).then((rps)=>{
+      var viewData = {};
+      if(rps.data && rps.data.data && rps.data.status == 'ok'){
+
+        viewData = rps.data.data;
+       
+        viewData =   Object.assign({},viewData, {'size': viewData.specifications[0] && viewData.specifications[0].options,'market_price': Util.formatPrice(viewData.market_price)});
+
+        this.setData({
+          detail: viewData
+        });
+      }
+    }, (rps)=>{
+        
+    });
+  },
+  _productIntroduction(event){
+    console.log(event);
+    this.setData({
+      tabView: 1
+    });
+  },
+  _productSize(event){
+    this.setData({
+      tabView: 2
+    });
+  },
+  _actionSheetTap() {
+    const items = ['XXS/XS', 'S', 'M', 'L', 'XL'];
+  },
+
+  /*
+  *  选择尺寸
+  */
+  _selectSize(event){
+    var targetData = event.target.dataset.option;
+    console.log(event.target.dataset.option);
+  
+    var viewData = this.data.detail;
+    var viewSzie = this.data.detail.size;
+
+    viewSzie.map((item, idx) => {
+      if(targetData.id == item.id){
+        viewSzie[idx] = Object.assign({}, item, {current: true});
+      }else{
+        viewSzie[idx] = Object.assign({}, item, {current: false});
+      }
+    });
+
+    viewData['size'] = viewSzie;
+
+    this.setData({
+      detail: viewData,
+      specification_key: targetData.id
+    });
+  },
+
+  /*
+  * 关闭浮层
+  */
+  _closeSelectInfo(){
+    this.setData({
+      selectInfoState: false,
+      specification_key: ''
+    });
+  },
+
+  /*
+   * 加入购物车
+   */
+  _addCart(){
+    let authCode = my.getStorageSync({key:'authCode'}).data;
+
+    if(authCode){
+      AuthLogin.getAuthCode();
     }
+
+    this.setData({
+      selectInfoState: true
+    });
   },
-  onLoad() {
-    get("api/v3/test", { params: { a: "aa", b: "bb", c: "cc" } })
+
+  /*
+   * 确认添加购物车
+  */
+  _affirmAddCart(){
+    if(!this.data.specification_key){
+      Util.toast({
+        type:'none',
+        content: '请选择尺码信息！',
+        duration: 1000
+      });
+      return false;
+    }
+    post('alipaymini-plan/product', { 
+      delivery_region: this.data.delivery_region,
+      product_id: this.data.id,
+      source: 1,
+      specification_key: this.data.specification_key
+      },{}).then(
+        (rps)=>{
+          if(rps.data && rps.data.status == 'error' && rps.data.error){
+            Util.toast({
+              type:'fail',
+              content: res.data.error.message || '',
+              duration: 3000
+            });
+          }else{
+            Util.toast({
+              type:'success',
+              content: '添加购物车成功！',
+              duration: 3000
+            });
+
+            this.setData({
+              selectInfoState: false,
+              specification_key: ''
+            });
+          }
+        },(rps)=>{
+            Util.toast({
+              type:'fail',
+              content: '添加购物车失败！',
+              duration: 3000
+            });
+        }
+    );
   },
-  defaultTap(){
-   this.setData({
-     hidden:!this.data.hidden
-   });
-   this.createMaskShowAnim();
-   this.createContentShowAnim();
+
+  /*
+   * 获取购物车数据
+   */
+  _getCart(){
+    get('alipaymini-plan/cart', { params: { 'delivery_region': this.data.delivery_region }}).then((rps)=>{
+      var viewData = [];
+      if(rps.data && rps.data.data && rps.data.status == 'ok'){
+        viewData = rps.data.data;
+        this.setData({
+          cartNum: viewData.length
+        });
+      }
+    }, (rps)=>{
+        
+    });
   }
+
 });

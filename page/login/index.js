@@ -1,6 +1,7 @@
 import Util from '/util/util.js'
 import {get, post} from '/util/httpService.js'
 import AuthLogin from '/util/authLogin.js'
+
 let setIntervalTime = null;
 Page({
   data: {
@@ -10,10 +11,15 @@ Page({
     intervalTime: 30,
     mobile: '',
     invitation_code: '',
-    access_token: ''
+    access_token: '',
+    toUrl: '', //登录成功后返回地址
   },
-  onLoad() {
+  onLoad(query) {
+    console.log(query);
     AuthLogin.getAccessToken();
+    this.setData({
+      toUrl: ''
+    });
   },
 
   onChangeMobile(event){

@@ -1,3 +1,135 @@
 <view class="container">
-  detail
+    <view class="swiper-section">
+      <swiper
+        indicator-dots="{{indicatorDots}}"
+        autoplay="{{autoplay}}"
+        vertical="{{vertical}}"
+        interval="{{interval}}"
+        circular="{{circular}}"
+        indicator-color="#F15F97"
+        indicator-active-color="#F03A80"
+      >
+        <block a:for="{{detail.image}}">
+          <swiper-item>
+            <view class="swiper-item">
+              <image mode="widthFix" src="{{item}}" />
+            </view>
+          </swiper-item>
+        </block>
+      </swiper>
+    </view>
+
+    <view class="page-ali-tag">
+        <image src="/image/detail_tag.png" mode="widthFix"/>
+    </view>
+  
+
+    <view class="page-group">
+      <view class="name">{{detail.name}}</view>
+      <view a:if="{{detail.limit_tag}}" class="limit-tag">年卡专享</view>
+      <view class="price-wrap">
+        <view class="price-label">参考价</view>
+        <view class="market-price">{{detail.market_price}}</view>
+      </view>
+    </view>
+
+    <view class="detail-info-box">
+      <view class="tab-box">
+        <view class="tab-menu-box">
+          <block a:if="{{tabView == 1}}">
+            <view class="tab-menu current" onTap="_productIntroduction">商品介绍</view>
+          </block>
+          <block a:else>
+            <view class="tab-menu" onTap="_productIntroduction">商品介绍</view>
+          </block>
+
+          <block a:if="{{tabView == 2}}">
+            <view class="tab-menu current" onTap="_productSize">尺码说明</view>
+          </block>
+          <block a:else>
+            <view class="tab-menu" onTap="_productSize">尺码说明</view>
+          </block>
+        </view>
+        <view class="tab-container-box">
+          <block a:if="{{tabView == 1}}">
+            <view class="tab-container current">
+
+                <view class="des-box">
+                <view class="label">面料</view> <view class="text">91%聚酯纤维 9%氨纶</view>
+                </view>
+                
+                <view class="des-box">
+                <view class="label">品牌</view> <view class="text">JUST CAVALLI</view>
+                </view>
+
+                <view class="des-box-evaluate">
+                <view class="label">设计师点评</view> <view class="text-evaluate">美衣整体设计非常出彩，整体剪裁很好的展现穿搭者的身材比好高呀例，特别推荐超级百搭。</view>
+                </view>
+                
+            </view>
+          </block>
+          <block a:elif="{{tabView == 2}}">
+            <view class="tab-container current">
+              <image class="img" mode="widthFix" src="http://static-r.msparis.com/m-site/images/product/size@3x.jpg" />
+            </view>
+          </block>
+          
+        </view>
+      </view>
+    </view>
+
+    <view class="tab-bar-box">
+      <view class="tab-bar">
+        <navigator url="/page/home/home">
+          <view class="home">home</view>
+        </navigator>
+        <navigator url="/page/cart/cart">
+        <view class="cart">
+          <view class="num-tag" a:if={{cartNum}}>{{cartNum}}</view>
+        </view>
+        </navigator>
+        <view class="add-cart" onTap="_addCart">加入购物车</view>
+      </view>
+      <block a:if="{{selectInfoState}}">
+      <view class="mask"></view>
+      <view class="select-info">
+          <view class="close-box" onTap="_closeSelectInfo"></view>
+
+          <view class="wrap-box">
+            <view>尺码</view>
+            <view class="sect-box">
+
+              <view a:for="{{detail.size}}">
+                <block a:if="{{item.current == true}}">
+                  <view class="item-li current" onTap="_selectSize" data-option="{{item}}">
+                    {{item.value}}
+                  </view>
+                </block>
+                <block a:else>
+                  <view class="item-li" onTap="_selectSize" data-option="{{item}}">
+                    {{item.value}}
+                  </view>
+                </block>
+              </view>
+
+            </view>
+
+          </view>
+
+          <view class="wrap-box">
+            <view>租期</view>
+            <view class="sect-box">
+              <view class="item-li current">
+                7天
+              </view>
+            </view>
+          </view>
+
+          <view class="wrap-box">
+            <view class="submit-confirm" onTap="_affirmAddCart">确定</view>
+          </view>
+
+        </view>
+        </block>
+    <view>
 <view>

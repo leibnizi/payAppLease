@@ -39,6 +39,7 @@ Page({
       console.log("Result", e)
     } finally {
       // loading.hide();
+      my.hideLoading()
     }
   },
   async deleteProduct(e) { 
