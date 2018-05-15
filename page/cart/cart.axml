@@ -2,7 +2,7 @@
 
 <view class="cart-page" onTap="showDeleteFun">
   <block a:if="{{productList.length}}">
-    <view a:if="{{showTop}}" class="top-prompt-line">
+    <view a:if="{{!has_card}}" class="top-prompt-line">
       <view class="top-content">
         购买
         <view class="highlight">
@@ -23,18 +23,17 @@
     <view class="title-box">
       有效商品
     </view>
-    <block a:for="{{productList}}">
-      <template   a:if="{{item.status === 1}}" is="product"  data ="{{item}}" />
+    <block a:for="{{activeProductList}}">
+      <template a:if="{{item.status === 1}}" is="product"  data ="{{item,showDelete,deleteProduct}}" />
     </block>
     <view class="title-box">
       <view>失效商品</view>
-      <view class="delete-lose">清空失效宝贝</view>
+      <view class="delete-lose" catchTap="deleteLoseFun">清空失效宝贝</view>
     </view>
-    <block a:for="{{productList}}">
+    <block a:for="{{loseProductList}}">
       <template 
-        a:if="{{item.status === 2 || item.status === 3}}" 
         is="product"  
-        data ="{{item,showDelete}}" />
+        data ="{{item,showDelete, deleteProduct}}" />
     </block>
     <view class="buy-box">
       <button 
@@ -48,7 +47,9 @@
   <block a:else>
     <view class="full-page">
       <view class="content">
-        <view class="empty-img">img</view>
+        <view class="empty-img">
+          <image  src="../../image/cartEmpty.png"></image>
+        </view>
         <view class="empty-text">购物车是空的哦</view>
         <navigator class="btn" open-type="switchTab" url="/page/home/home">去逛逛</button></navigator>
       <view>

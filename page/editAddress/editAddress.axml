@@ -1,4 +1,7 @@
 <import src="../../templates/product-list/product-list.axml"/>
+<import src="../../templates/placeCelector/placeCelector.axml"/>
+
+
 <view class="address-page">
   <form onSubmit="formSubmit" onReset="formReset">
     <view class="section section_gap">
@@ -26,9 +29,12 @@
         id="region_name" 
         name="region_name"
         onFocus=""
-        value="北京省 北京市 东城区"
-        defaultVal="{{address_msg.region_name}}"
+        class="place-control-placeholder"
+        value="{{changeAddress.fullname || address_msg.region_name}}"
         placeholder-class="placeholder" placeholder="请选择" />
+        <view catchTap="showPlaceCelectorFun" class="place-real-control">
+          {{changeAddress.fullname  || address_msg.region_name}}
+        </view>
     </view>
     <view class="section section_gap">
       <label for="address_detail">详细地址</label>
@@ -43,4 +49,7 @@
       <button formType="submit">保存</button>
     </view>
   </form>
+  <view a:if="{{showPlaceCelector}}" catchTap="hidePlaceCelectorFun"  class="shadow">
+    <template is="cascade" data="{{onChange, citys, ...cityMsg, stopBubbling}}" />
+  </view>
 </view>

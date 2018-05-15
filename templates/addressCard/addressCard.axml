@@ -24,11 +24,11 @@
                 a:if="{{item.showDelete}}" 
                 class="hide-delete-placeholder"
                 data-id="{{item.id}}"
-                onTap="hideDeleteBar"
+                catchTap="hideDeleteBar"
                 >
             
             </view>
-            <view class="delete-bar">
+            <view data-id="{{item.id}}" catchTap="deleteFun" class="delete-bar">
                 删除
             </view>
         </view>

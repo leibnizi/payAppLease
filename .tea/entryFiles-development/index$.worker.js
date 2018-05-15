@@ -15,10 +15,8 @@ require('../..//page/orderDetail/orderDetail');
 require('../..//page/buyCard/buyCard');
 require('../..//page/cart/cart');
 require('../..//page/user/user');
-require('../..//page/bill/bill');
 require('../..//page/cardConfirm/cardConfirm');
 require('../..//page/member/member');
 require('../..//page/help/help');
-require('../..//page/orderDetail/orderDetail');
 }
 self.bootstrapApp ? self.bootstrapApp({ success }) : success();

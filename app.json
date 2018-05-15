@@ -13,11 +13,9 @@
     "page/buyCard/buyCard",
     "page/cart/cart",
     "page/user/user",
-    "page/bill/bill",
     "page/cardConfirm/cardConfirm",
     "page/member/member",
-    "page/help/help",
-    "page/orderDetail/orderDetail"
+    "page/help/help"
   ],
   "window": {
     "enableWK": "YES",

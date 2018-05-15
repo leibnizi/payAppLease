@@ -1,8 +1,14 @@
 import * as aliApi from './util/aliApi'
+import { get } from '/util/httpService.js';
 
 App({
-  onLaunch(options) {
+  async onLaunch(options) {
     console.log('App Launch', options);
+    const { data: { data: { rows } }, status } = await this.getAddress();
+    rows.sort((a, b) => {
+      return b.id - a.id
+    })
+    this.globalData.globalAddressList = rows
   },
   onShow() {
     console.log('App Show');
@@ -17,6 +23,17 @@ App({
   globalData: {
     hasLogin: false,
     item_id: '2018032901000222123469565693',
-    category: 'ZMSC_1_4_1' //线上租赁服装服饰
+    category: 'ZMSC_1_4_1',
+    globalAddressList:[],
+    defaultGlobalAddress: {}
+  },
+  getAddress() {
+    return get('/user/address', {
+      params: {
+        type: 2,
+        page: 1,
+        page_size: 20
+      }
+    })
   }
 });

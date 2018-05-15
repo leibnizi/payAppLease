@@ -9,7 +9,8 @@
         selectedAddress, 
         showDeleteAddressStart, 
         showDeleteAddressEnd,
-        hideDeleteBar
+        hideDeleteBar,
+        deleteFun
         }}" />
   </view>
   <view class="btn-box">
