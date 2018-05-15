@@ -38,9 +38,6 @@ Page({
         onReceive:'onReceive'
 
     },
-    onLoad() {
-        console.log(this)
-    },
     async onShow(){
         const config = {
             params:{
@@ -50,7 +47,6 @@ Page({
         }
         try{
             const response = await get("user/coupon",config);
-            console.log("Coupons",response)
             if(response.data.status == 'ok') {
                 const rowData = response.data.data.rows,
                     formatedData = this.formatCoupon(rowData);
@@ -59,9 +55,7 @@ Page({
                 })
             }
         }
-        catch(e){
-            console.log(e)
-        }
+        catch(e){}
     },
     onSelected(e){
         onChange(e,this)
