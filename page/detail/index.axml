@@ -86,9 +86,10 @@
         </view>
         <view class="add-cart" onTap="_actionSheetTap">加入购物车</view>
       </view>
-        <view class="mask"></view>
+      <block a:if="{{selectInfoState}}"></block>
+      <view class="mask"></view>
       <view class="select-info">
-                <view class="close-box"></view>
+          <view class="close-box"></view>
           <view class="wrap-box">
             <view>尺码</view>
             <view class="sect-box">
@@ -117,7 +118,7 @@
             </view>
           </view>
           <view class="wrap-box">
-            <view class="submit-confirm">确定</view>
+            <view class="submit-confirm" onTap="_addCart">确定</view>
           </view>
         </view>
     <view>

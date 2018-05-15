@@ -25,7 +25,10 @@ Page({
       size: ['XXS/XS', 'S', 'M', 'L', 'XL']
     },
     tabView: 1,
+    specification_key:'',
+    selectInfoState: false, //加入购物车的选择浮层的状态
   },
+
   onLoad(query) {
     console.log(query);
     this.getDetailInfo();
@@ -63,13 +66,16 @@ Page({
   _actionSheetTap() {
     const items = ['XXS/XS', 'S', 'M', 'L', 'XL'];
   },
+
+  /*
+  *  选择尺寸
+  */
   _selectSize(event){
     var targetData = event.target.dataset.option;
     console.log(event.target.dataset.option);
   
     var viewData = this.data.detail;
     var viewSzie = this.data.detail.size;
-    console.log(viewSzie);
 
     viewSzie.map((item, idx) => {
       if(targetData.id == item.id){
@@ -77,14 +83,22 @@ Page({
       }else{
         viewSzie[idx] = Object.assign({}, item, {current: false});
       }
-    })
-    console.log(viewSzie,'viewSzie');
+    });
 
-    viewData['size'] = viewSzie
+    viewData['size'] = viewSzie;
 
-    console.log(viewData);
     this.setData({
-      detail: viewData
-    })
+      detail: viewData,
+      specification_key: targetData.id
+    });
+  },
+
+  /*
+   * 加入购物车
+   */
+
+  _addCart(){
+
   }
+
 });
