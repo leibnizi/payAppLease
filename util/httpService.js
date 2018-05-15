@@ -6,7 +6,6 @@ import {baseUrl} from '/config/config.js';
 import Util from '/util/util.js';
 import AuthLogin from '/util/authLogin.js';
 
-const test_access_token = 'ab67e1463d6361375030635b090f2684'
 
 const initConfig = {
     params: {},
@@ -16,7 +15,7 @@ const initConfig = {
 };
 const parseUrl = (reUrl,queryStringObject)=>{
     let url = `${baseUrl}/${reUrl}`;
-    let access_token = my.getStorageSync({ key: 'access_token' }).data || test_access_token;
+    let access_token = my.getStorageSync({ key: 'access_token' }).data || '';
     let platform = 'alipaymini'; //标识支付宝应用
     queryStringObject = Object.assign({}, queryStringObject, {
         platform,
