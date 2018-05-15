@@ -28,10 +28,13 @@
     text-align: left;
     line-height: 42rpx;
 }
+
 .list .litsItem:last-child text:last-child{
     color: #999999;
 }
-
+.list .litsItem:last-child text:last-child.active{
+    color: #F03A80;
+}
 .operations{
     height: 204rpx;
     position: fixed;

@@ -1,5 +1,7 @@
 import {push} from '/util/navigator.js';
 import {imagePath} from "../../config/config";
+import {get} from "../../util/httpService";
+import loading from "/util/loading";
 
 Page({
     data: {
@@ -12,7 +14,22 @@ Page({
         ],
         hasMember: false
     },
-    onLoad() {
+    async onShow(){
+        loading.show("加载中");
+        try{
+            const res =await get("alipaymini-user/own-card",)
+            console.log("OwnCard----",res)
+            if(res.data.status == 'ok')
+            {
+                this.setData({
+                    hasMember:false
+                })
+            }
+        } catch (e){
+
+        } finally {
+            loading.hide()
+        }
     },
     goBuyCard() {
         push('/page/buyCard/buyCard')

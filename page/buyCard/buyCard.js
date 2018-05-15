@@ -34,7 +34,8 @@ Page({
         cardImage:`${imagePath}/buyCard/buyCard@2x.png`,
         couponList:[],
         selectedCoupon:null,
-        onClose:'onClose'
+        onClose:'onClose',
+        onReceive:'onReceive'
 
     },
     onLoad() {
@@ -111,5 +112,8 @@ Page({
     },
     onClose(){
         couponList.op.onClose(this);
+    },
+    onReceive(e){
+        couponList.op.onReceive(e,this)
     }
 });

@@ -9,7 +9,8 @@
                        <view class="des">{{item.value}}</view>
                        <view class="expire">
                            <view>{{item.date}}</view>
-                           <view class="btn">领取</view>
+                           <view a:if="{{currentIndex === index}}" class="btn active" data-id="{{item.id}}" data-index="{{index}}" onTap="{{onReceive}}">已领取</view>
+                           <view a:else="{{currentIndex !== index}}" class="btn" data-id="{{item.id}}" data-index="{{index}}" onTap="{{onReceive}}">领取</view>
                        </view>
                    </view>
                 </block>
