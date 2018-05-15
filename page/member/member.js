@@ -22,7 +22,7 @@ Page({
             if(res.data.status == 'ok')
             {
                 this.setData({
-                    hasMember:false
+                    hasMember:res.data.data.has_card
                 })
             }
         } catch (e){
