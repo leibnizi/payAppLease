@@ -1,0 +1,37 @@
+.address-page{
+    background: #fff;
+}
+.section{
+    background: #fff;
+    border-bottom: 1px solid #f2f2f2;
+    padding: 20rpx 40rpx;
+    font-size: 28rpx;
+}
+.section input {
+    font-family: PingFangSC-Light;
+    font-size: 28rpx;
+    color: #777777;
+    letter-spacing: 0;
+    font-weight: 200;
+}
+.section label{
+    font-size: 28rpx;
+    color: #333333;
+    letter-spacing: 0;
+    width: 170rpx;
+}
+.placeholder{
+    font-size: 28rpx;
+    color: #999999;
+    letter-spacing: 0;
+    font-weight: 200;
+}
+.btn-area button{
+    background: #F03A80;
+    border-radius: 100px;
+    color: #fff;
+    width: 650rpx;
+    margin: 70rpx auto 0;
+    font-size: 36rpx;
+    font-weight: 200;
+}

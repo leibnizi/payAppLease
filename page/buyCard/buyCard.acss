@@ -1,3 +1,4 @@
+@import "/templates/msProtocal/msProtocal.acss";
 .card{
     padding:50rpx;
     text-align: center;
@@ -37,16 +38,16 @@
     left: 0;
     right: 0;
 }
-.operations .select{
+.select{
     height: 44rpx;
     padding: 30rpx;
 }
-.operations .select image{
+.select image{
     width: 44rpx;
     height: 44rpx;
     margin-right: 20rpx;
 }
-.operations .select text{
+.select text{
     font-family: PingFangSC-Regular;
     font-size: 28rpx;
     color: #333333;
@@ -55,8 +56,8 @@
     vertical-align:text-bottom;
 }
 
-.operations .select text:last-child{
-   color:dodgerblue;
+.select text:last-child{
+    color:dodgerblue;
 }
 .operations .apply{
     display: flex;

@@ -1,0 +1,26 @@
+@import '/templates/addressCard/addressCard.acss';
+.address-page{
+  box-sizing: border-box;
+  padding-bottom: 300rpx;
+  background-color: #fff;
+  width: 100%;
+  overflow: hidden;
+}
+.btn-box{
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  
+}
+.btn-box button {
+  margin-top: 0;
+  margin-bottom: 0;
+  font-weight: 200;
+  font-size: 26rpx;
+  background-color: #F03A80;
+  border-radius: none;
+  border: none;
+  color: #fff;
+  height: 80rpx;
+  line-height: 80rpx;
+}

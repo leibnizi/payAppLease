@@ -1,16 +1,22 @@
 {
   "pages": [
+    "page/home/home",
+    "page/rent/rent",
+    "page/addressList/addressList",
+    "page/login/index",
+    "page/bill/bill",
+    "page/detail/index",
     "page/order/order",
     "page/logistics/logistics",
     "page/orderDetail/orderDetail",
-    "page/rent/rent",
     "page/buyCard/buyCard",
     "page/cart/cart",
+    "page/editAddress/editAddress",
     "page/user/user",
     "page/bill/bill",
-    "page/helpCenter/helpCenter",
     "page/cardConfirm/cardConfirm",
     "page/member/member",
+    "page/help/help",
     "page/orderDetail/orderDetail"
   ],
   "window": {
@@ -27,7 +33,7 @@
     "backgroundColor": "#F5F5F9",
     "items": [
       {
-        "pagePath": "page/rent/rent",
+        "pagePath": "page/home/home",
         "name": "租赁"
       },
       {

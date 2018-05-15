@@ -1,0 +1,8 @@
+{
+  "enableWK": "YES",
+  "enableDSL": true,
+  "defaultTitle": "商品详情",
+  "backgroundColor": "#FFFFF",
+  "pullRefresh": false,
+  "allowsBounceVertical": true
+}

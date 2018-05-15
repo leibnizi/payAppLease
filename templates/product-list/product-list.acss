@@ -1,0 +1,46 @@
+.product-list{
+  display: block;
+}
+.content-box{
+  float: left;
+  width: 375rpx;
+  margin-top: 20rpx;
+  background-color: #fff;
+}
+.item-box{
+  box-sizing: border-box;
+  width: 375rpx;
+  padding: 60rpx 30rpx;
+  background: #ffffff;
+  box-sizing: border-box;
+}
+.product-img{
+  width: 100%;
+  height: 480rpx;
+}
+.product-img>.image{
+  width: 100%;
+}
+.infos{
+  margin-top: 30rpx;
+}
+.brand{
+  margin-top: 39rpx;
+  font-family: PingFangSC-Semibold;
+  font-size: 28rpx;
+  color: #333333;
+  line-height: 28rpx;
+}
+.name{
+  font-size: 24rpx;
+  color: #999999;
+  line-height: 24rpx;
+  margin-top: 8rpx;
+}
+.size{
+  font-family: PingFangSC-Light;
+  font-size: 28rpx;
+  color: #333333;
+  letter-spacing: 0;
+  margin-top: 15rpx;
+}

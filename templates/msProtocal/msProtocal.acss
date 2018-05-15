@@ -1,0 +1,25 @@
+.select{
+    height: 44rpx;
+    padding: 30rpx;
+}
+.select image{
+    width: 44rpx;
+    height: 44rpx;
+    margin-right: 20rpx;
+    background-image: url("/image/noSelected@2x.png");
+}
+.select.active image{
+    background-image: url("/image/selected@2x.png");
+}
+.select text{
+    font-family: PingFangSC-Regular;
+    font-size: 28rpx;
+    color: #333333;
+    height: 44rpx;
+    line-height: 44rpx;
+    vertical-align:text-bottom;
+}
+
+.select text:last-child{
+    color:dodgerblue;
+}
