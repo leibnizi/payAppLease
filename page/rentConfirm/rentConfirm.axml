@@ -1,4 +1,4 @@
-<view>
+<view class="layout-view">
   <!-- 地址信息 -->
   <view class="address-info">
     <view class="user">
@@ -14,8 +14,17 @@
     </view>
   </view>
   <view class="gradient gap"></view>
+  <!-- 商品信息模版 -->
   <import src='/templates/order/order.axml' />
   <template is="order" data="{{list}}"/>
-  <import src="/templates/msProtocal/msProtocal.axml"/>
-  <template is="msProtocal" data="{{selected,onSelect}}"/>
+  <!-- 浮层 -->
+  <view class="supernatant">
+    <!-- 协议模版 -->
+    <import src="/templates/msProtocal/msProtocal.axml"/>
+    <template is="msProtocal" data="{{selected,onSelect}}"/>
+    <!-- 按钮模版 -->
+    <import src="/templates/msButton/msButton.axml"/>
+    <template is="msButton" data="{{text,onSubmit}}"/>
+  </view>
+  
 </view>
