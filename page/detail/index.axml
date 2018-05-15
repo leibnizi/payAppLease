@@ -12,7 +12,7 @@
         <block a:for="{{detail.image}}">
           <swiper-item>
             <view class="swiper-item">
-              <image mode="widthFix" src="{{item}}" />
+              <image class="image" style="with:750px;height:1125px" mode="widthFix" src="{{item}}" />
             </view>
           </swiper-item>
         </block>
@@ -22,8 +22,7 @@
     <view class="page-ali-tag">
         <image src="/image/detail_tag.png" mode="widthFix"/>
     </view>
-  
-
+      
     <view class="page-group">
       <view class="name">{{detail.name}}</view>
       <view a:if="{{detail.limit_tag}}" class="limit-tag">年卡专享</view>
@@ -32,6 +31,13 @@
         <view class="market-price">{{detail.market_price}}</view>
       </view>
     </view>
+
+    <view class="page-group-location">
+      <view class="location-wrap">
+        <view class="label">配送区域</view> <view class="location">{{location.district}}</view>
+      </view>
+    </view>
+
 
     <view class="detail-info-box">
       <view class="tab-box">
@@ -55,22 +61,22 @@
             <view class="tab-container current">
 
                 <view class="des-box">
-                <view class="label">面料</view> <view class="text">91%聚酯纤维 9%氨纶</view>
+                <view class="label">面料</view> <view class="text">{{detail.fabric}}</view>
                 </view>
                 
                 <view class="des-box">
-                <view class="label">品牌</view> <view class="text">JUST CAVALLI</view>
+                <view class="label">品牌</view> <view class="text">{{detail.brand}}</view>
                 </view>
 
                 <view class="des-box-evaluate">
-                <view class="label">设计师点评</view> <view class="text-evaluate">美衣整体设计非常出彩，整体剪裁很好的展现穿搭者的身材比好高呀例，特别推荐超级百搭。</view>
+                <view class="label">品牌描述</view> <view class="text-evaluate">{{detail.brand_desc}}</view>
                 </view>
                 
             </view>
           </block>
           <block a:elif="{{tabView == 2}}">
             <view class="tab-container current">
-              <image class="img" mode="widthFix" src="http://static-r.msparis.com/m-site/images/product/size@3x.jpg" />
+              <image class="img" mode="widthFix" src="/image/detail_size.jpg" />
             </view>
           </block>
           
@@ -80,22 +86,26 @@
 
     <view class="tab-bar-box">
       <view class="tab-bar">
-        <view class="home">home</view>
+        <navigator url="/page/home/home">
+          <view class="home">home</view>
+        </navigator>
+        <navigator url="/page/cart/cart">
         <view class="cart">
-          <view class="num-tag">2</view>
+          <view class="num-tag" a:if={{cartNum}}>{{cartNum}}</view>
         </view>
-        <view class="add-cart" onTap="_actionSheetTap">加入购物车</view>
+        </navigator>
+        <view class="add-cart" onTap="_addCart">加入购物车</view>
       </view>
-      <block a:if="{{selectInfoState}}"></block>
+      <block a:if="{{selectInfoState}}">
       <view class="mask"></view>
       <view class="select-info">
-          <view class="close-box"></view>
+          <view class="close-box" onTap="_closeSelectInfo"></view>
+
           <view class="wrap-box">
             <view>尺码</view>
             <view class="sect-box">
 
               <view a:for="{{detail.size}}">
-                
                 <block a:if="{{item.current == true}}">
                   <view class="item-li current" onTap="_selectSize" data-option="{{item}}">
                     {{item.value}}
@@ -107,8 +117,11 @@
                   </view>
                 </block>
               </view>
+
             </view>
+
           </view>
+
           <view class="wrap-box">
             <view>租期</view>
             <view class="sect-box">
@@ -117,10 +130,12 @@
               </view>
             </view>
           </view>
-          <view class="wrap-box">
-            <view class="submit-confirm" onTap="_addCart">确定</view>
-          </view>
-        </view>
-    <view>
 
+          <view class="wrap-box">
+            <view class="submit-confirm" onTap="_affirmAddCart">确定</view>
+          </view>
+
+        </view>
+        </block>
+    <view>
 <view>

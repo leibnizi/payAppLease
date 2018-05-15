@@ -3,18 +3,20 @@
   color:#333333;
   padding: 0;
   background: #f4f4f4; 
+  margin-bottom: 100rpx;
 }
 .swiper-section{
   background: #FFFFFF;
+  height: 1120rpx;
 }
 .swiper-item{
   display: block;
-  height: 1125rpx;
+  height: 1120rpx;
   width: 750rpx;
   overflow: hidden;
 }
-.swiper-item image{
-    height: 1125rpx;
+.swiper-item .image{
+    height: 1120rpx;
     width: 750rpx;
 }
 .page-section{
@@ -90,6 +92,7 @@
 }
 .tab-container-box{
   width: 750rpx;
+  min-height: 650rpx;
 }
 .tab-container{
   width: 750rpx;
@@ -104,6 +107,7 @@
   font-size: 28rpx;
   color: #878787;
   overflow: hidden;
+  border-bottom: 1px solid #F5F5F5;
 }
 .tab-menu-box .tab-menu.current{
   color: #F03A80;
@@ -161,7 +165,7 @@
   font-size: 24rpx;
   line-height: 32rpx;
 }
-/* 购物车 */
+/* 购物车bar */
 .tab-bar-box{
   width: 750rpx;
   height: 100rpx;
@@ -300,4 +304,25 @@
   background-repeat: no-repeat;
   background-size: 100%;
   z-index: 999999;
+}
+
+/* 配送 区域*/
+.page-group-location{
+  margin-top: 20rpx; 
+  background: #FFFFFF;
+  height: 80rpx;
+  line-height: 80rpx;
+  padding-left: 30rpx;
+  padding-right: 30rpx;
+  color: #333333;
+}
+.page-group-location .label{
+  width: 200rpx;
+  float: left;
+}
+.page-group-location .location{
+  width: 390rpx;
+  float: right;
+  text-align: right;
+  color: #999999;
 }

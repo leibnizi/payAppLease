@@ -1,7 +1,9 @@
+@import '../../templates/placeCelector/placeCelector.acss';
 .address-page{
     background: #fff;
 }
 .section{
+    position: relative;
     background: #fff;
     border-bottom: 1px solid #f2f2f2;
     padding: 20rpx 40rpx;
@@ -34,4 +36,28 @@
     margin: 70rpx auto 0;
     font-size: 36rpx;
     font-weight: 200;
+}
+.shadow{
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 100;
+}
+.place-control-placeholder{
+    position: absolute;
+    z-index: -1;
+    opacity: 0;
+}
+.place-real-control{
+    position: absolute;
+    top: 12rpx;
+    left: 226rpx;
+    width: 400rpx;
+    height: 60rpx;
+    line-height: 60rpx;
+    color: #777;
 }

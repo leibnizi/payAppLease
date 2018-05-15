@@ -1,7 +1,8 @@
 import {userList} from '/config/config.js';
 import { push } from '/util/navigator.js';
 import { get } from '/util/httpService.js';
-import loading from '/util/loading.js'
+import loading from '/util/loading.js';
+import Util from '/util/util.js'
 
 Page({
   data: {
@@ -10,59 +11,46 @@ Page({
         brand: "nike",
         name: 'ttt',
         size: 'S M L XL'
-      },
-      {
-        brand: "nike",
-        name: 'ttt',
-        size: 'S M L XL'
-      },
-      {
-        brand: "nike",
-        name: 'ttt',
-        size: 'S M L XL'
-      },
-      {
-        brand: "nike",
-        name: 'ttt',
-        size: 'S M L XL'
-      },
-      {
-        brand: "nike",
-        name: 'ttt',
-        size: 'S M L XL'
-      },
+      }
     ],
-    page: 1
+    page: 1,
+    page_size: 10,
   },
-
+  async onLoad() {
+  },
   async onShow() {
     loading.show();
     try {
       const { data: { data }, status } = await this.getData();
       // debugger
-      if (data && typeof data.rows === "object") {
+      if (data && Util.isArray(data.rows) && data.rows.length > 0) {
+        data.rows.map( (item, idx) => {
+          data.rows[idx]['toDetailUrl'] = '/page/detail/index?id=' + item.id;
+        });
         this.setData({
           productList: data.rows
         })
       }
     }
     catch (e) {
-      console.log("Result", e)
     } finally {
       loading.hide();
     }
   },
   async onReachBottom(){
-    let { page } = this.data
+    let { page, productList } = this.data
     loading.show();
     this.setData({
       page: ++page
     })
     try {
       const { data: { data }, status } = await this.getData();
-      if (data && typeof data.rows === "object") {
+      if (data && Util.isArray(data.rows) && data.rows.length > 0) {
+        data.rows.map( (item, idx) => {
+          data.rows[idx]['toDetailUrl'] = '/page/detail/index?id=' + item.id;
+        });
         this.setData({
-          productList: data.rows
+          productList: [...productList, ...data.rows]
         })
       }
     }
@@ -72,7 +60,6 @@ Page({
       loading.hide();
     }
   },
-
   getData() {
     return get('/product/filter', {
       params: {
@@ -83,30 +70,8 @@ Page({
       }
     })
     
-    // .then((rps) => {
-    //   if (rps.data && rps.data.status == 'error' && rps.data.error && rps.data.error.code == '10017') {
-    //     clearInterval(setIntervalTime);
-    //     this.setData({
-    //       intervalTime: 0,
-    //       codeText: '重新获取'
-    //     });
-    //   } else {
-    //     this.setData({
-    //       intervalTime: 0
-    //     });
-    //     this._setIntervalTime();
-    //   }
-    // }, (rps) => {
-    //   clearInterval(setIntervalTime);
-    //   this.setData({
-    //     intervalTime: 0,
-    //     codeText: '重新获取'
-    //   });
-    // });
   },
-
   goPath(e){
-    console.log(e);
     push(e.currentTarget.dataset.path)
-  }
+  },
 });

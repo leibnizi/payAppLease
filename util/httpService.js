@@ -69,6 +69,7 @@ export const post = (url,data,config)=>{
         let access_token = my.getStorageSync({ key: 'access_token' }).data || test_access_token;
         let platform = 'alipaymini'; //标识支付宝应用
         data = Object.assign({}, data, {access_token,platform});
+    
         let requstConfig = {
             method:'post',
             url:parseUrl(url,config.params),

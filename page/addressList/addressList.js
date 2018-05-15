@@ -7,104 +7,89 @@ Page({
   data: {
     page: 1,
     addressList:[],
-    total: 0,
     noMoreList: true,
     page_size: 10,
     distanceStart: 0,
     distanceEnd: 0,
+    touchAddressId: ''
     // isIphoneX: app.globalData.isIphoneX ? true : false,
   },
-  async onShow(){
-    try {
-      const { data: { data: { rows, total }}, status } = await this.geAddressList()
-      const addressList = rows.sort((a,b) => a.id - b.id < 0)
-      this.setData({
-        addressList ,
-        total
-      })
-    }
-    catch (e) {
-    } finally {
-      loading.hide();
-    }
-  },
-  async onReachBottom() {
-    let { page } = this.data
-    loading.show();
+  onShow(){
+    const app = getApp()
+    const addressList = app.globalData.globalAddressList
     this.setData({
-      page: ++page
+      addressList
     })
-    try {
-      const { data:{data}, status } = await this.geAddressList();
-      if (data && typeof data.rows === "object") {
-        this.setData({
-          productList: data.rows
-        })
-      }
-    }
-    catch (e) {
-      this.setData({
-        page: --page
-      })
-    } finally {
-      loading.hide();
-    }
+    // try {
+    //   loading.show();
+    //   const { data: { data: { rows, total }}, status } = await this.getAddressList()
+    //   const addressList = rows.sort((a,b) => a.id - b.id < 0)
+    //   this.setData({
+    //     addressList ,
+    //     total
+    //   })
+    // }
+    // catch (e) {
+
+    // } finally {
+    //   loading.hide();
+    // }
   },
-  async onPullDownRefresh(){
-    let { page } = this.data
-    loading.show();
-    this.setData({
-      page: 1
-    })
-    try {
-      const { data: { data }, status } = await this.geAddressList();
-      if (data && typeof data.rows === "object") {
-        this.setData({
-          productList: data.rows
-        })
-      }
-    }
-    catch (e) {
-      my.showToast({
-        type: 'fail',
-        content: e,
-        duration: 2000,
-      });
-    } finally {
-      loading.hide();
-      my.stopPullDownRefresh()
-    }
-  },
+  // async onReachBottom() {
+  //   let { page } = this.data
+  //   loading.show();
+  //   this.setData({
+  //     page: ++page
+  //   })
+  //   try {
+  //     const { data:{data}, status } = await this.getAddressList();
+  //     if (data && typeof data.rows === "object") {
+  //       this.setData({
+  //         productList: data.rows
+  //       })
+  //     }
+  //   }
+  //   catch (e) {
+  //     this.setData({
+  //       page: --page
+  //     })
+  //   } finally {
+  //     loading.hide();
+  //   }
+  // },
   selectedAddress(e){
     const { addressList } = this.data
-    const globalAddress = addressList.filter((addressItem) => addressItem.id === e.target.dataset.id);
-    my.setStorageSync({
-      key: 'globalAddress',
-      data: globalAddress[0]
+    const defaultGlobalAddress = addressList.filter((addressItem) => addressItem.id === e.target.dataset.id);
+    const app = getApp()
+    app.globalData.defaultGlobalAddress = defaultGlobalAddress[0]
+    
+    my.showToast({
+      type: 'success',
+      content: '设置默认地址成功',
+      duration: 1000,
+      success: () => {
+        my.navigateBack({
+          delta: 1
+        })
+      },
     });
-    my.navigateBack({
-      delta: 1
-    })
   },
   editAddress(e){
     const { addressList } = this.data
-    const globalAddress = addressList.filter((addressItem) => addressItem.id === e.target.dataset.id);
-    my.setStorageSync({
-      key: 'globalAddress',
-      data: globalAddress[0]
-    });
+    const defaultGlobalAddress = addressList.filter((addressItem) => addressItem.id === e.target.dataset.id);
+    const app = getApp()
+    app.globalData.defaultGlobalAddress = defaultGlobalAddress[0]
     my.navigateTo({
       url: '/page/editAddress/editAddress?from=addressList'
     })
   },
-  geAddressList() {
-    const { page, page_size, access_token } = this.data
+  getAddressList() {
+    const { page, page_size } = this.data
     return get('/user/address', {
       params: {
         type: 2,
         page,
-        page_size,
-        access_token
+        page_size
       }
     })
   },
@@ -159,39 +144,35 @@ Page({
     this.setData({
       addressList: newAddressList
     })
+  },
+  async deleteFun(e){
+    const { id } = e.target.dataset
+    const { addressList } = this.data
+    try {
+      loading.show();
+      const { data, status } = await this.postDelete(id)
+      if (status === 'ok') {
+        const newAddressList = addressList.filter((item) => {
+          item.id === id
+        })
+        this.setData({
+          addressList: newAddressList
+        })
+      }
+
+      // const addressList = rows.sort((a, b) => a.id - b.id < 0)
+      // this.setData({
+      //   addressList,
+      //   total
+      // })
+    }
+    catch (e) {
+
+    } finally {
+      loading.hide();
+    }
+  },
+  postDelete(id){
+    return post('/user/address-del', {id})
   }
-
-
-
-
-
-  // calculate(baseArr = [], min, max, canRepet,length){
-  //   // const baseArr = []
-  //   for (let i = 0; i < length; i++) {
-  //     const item = Math.floor(Math.random() * (max - min + 1) + min);
-  //     baseArr.push(item)
-  //   }
-
-  //   if (canRepet) {
-  //     return baseArr
-  //   }
-  //   else{
-  //     let newArray = [...new Set(baseArr)]
-  //     let repeatNum = length - newArray.length
-  //     if (repeatNum > 0) {
-  //       // return 
-  //       return this.calculate(newArray, min, max, canRepet, repeatNum, baseArr)
-  //       // return this.calculate(newArray, min, max, canRepet, repeatNum)
-  //     }
-  //     else{
-  //       return baseArr
-  //     }
-  //     //   return this.calculate(newArray, min, max, canRepet, repeatNum)
-  //     // }
-  //     // else{
-  //     //   return newArray
-  //     // }
-  //   }
-  //   // return canRepet ? array : [...new Set(array)]
-  // }
 });
