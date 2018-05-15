@@ -1,6 +1,7 @@
 {
   "pages": [
     "page/home/home",
+    "page/cardConfirm/cardConfirm",
     "page/return/return",
     "page/rentConfirm/rentConfirm",
     "page/buyCard/buyCard",
@@ -8,7 +9,6 @@
     "page/orderSuccess/orderSuccess",
     "page/orderFail/orderFail",
     "page/addressList/addressList",
-    "page/cardConfirm/cardConfirm",
     "page/login/index",
     "page/bill/bill",
     "page/detail/index",

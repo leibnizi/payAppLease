@@ -2,8 +2,10 @@
     <view class="picInfo">
         <image  src="/image/pic1.png" mode="" />
         <view class="text">
-            <text>时尚月卡￥499</text>
-            <text>总租金：￥499</text>
+            <text>会员月卡</text>
+            <text>有效期：30天</text>
+            <text>实付卡费：￥399.00</text>
+            <image src="/image/orderResult/zhima@2x.png"></image>
         </view>
     </view>
 </template>
