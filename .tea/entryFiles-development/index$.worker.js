@@ -2,12 +2,12 @@ require('./config$');
 
 function success() {
 require('../..//app');
-require('../..//page/detail/index');
 require('../..//page/home/home');
 require('../..//page/rent/rent');
 require('../..//page/addressList/addressList');
 require('../..//page/login/index');
 require('../..//page/bill/bill');
+require('../..//page/detail/index');
 require('../..//page/order/order');
 require('../..//page/logistics/logistics');
 require('../..//page/orderDetail/orderDetail');
