@@ -1,4 +1,7 @@
 require('./config$');
+require('./importScripts$');
+function success() {
+require('../..//app');
 require('../..//page/buyCard/buyCard');
 require('../..//page/home/home');
 require('../..//page/rent/rent');
@@ -17,3 +20,5 @@ require('../..//page/cardConfirm/cardConfirm');
 require('../..//page/member/member');
 require('../..//page/help/help');
 require('../..//page/orderDetail/orderDetail');
+}
+self.bootstrapApp ? self.bootstrapApp({ success }) : success();

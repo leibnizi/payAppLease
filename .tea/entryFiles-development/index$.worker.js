@@ -2,6 +2,7 @@ require('./config$');
 
 function success() {
 require('../..//app');
+require('../..//page/buyCard/buyCard');
 require('../..//page/home/home');
 require('../..//page/rent/rent');
 require('../..//page/addressList/addressList');
@@ -11,7 +12,6 @@ require('../..//page/detail/index');
 require('../..//page/order/order');
 require('../..//page/logistics/logistics');
 require('../..//page/orderDetail/orderDetail');
-require('../..//page/buyCard/buyCard');
 require('../..//page/cart/cart');
 require('../..//page/editAddress/editAddress');
 require('../..//page/user/user');
