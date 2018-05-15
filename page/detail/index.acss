@@ -6,6 +6,7 @@
 }
 .swiper-section{
   background: #FFFFFF;
+  height: 1125rpx;
 }
 .swiper-item{
   display: block;
@@ -13,7 +14,7 @@
   width: 750rpx;
   overflow: hidden;
 }
-.swiper-item image{
+.swiper-item .image{
     height: 1125rpx;
     width: 750rpx;
 }

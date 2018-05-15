@@ -12,7 +12,7 @@
         <block a:for="{{detail.image}}">
           <swiper-item>
             <view class="swiper-item">
-              <image mode="widthFix" src="{{item}}" />
+              <image class="image" style="with:750px;height:1125px" mode="widthFix" src="{{item}}" />
             </view>
           </swiper-item>
         </block>
