@@ -1,7 +1,8 @@
-import Util from '/util/util.js'
+import Util from '/util/util.js';
+import bmap from '/libs/bmap-wx.min.js';
 import animModal from '/templates/items/index.js';
 import {get, post} from '/util/httpService.js';
-import AuthLogin from '/util/authLogin.js'
+import AuthLogin from '/util/authLogin.js';
 
 Page({
   data: {
@@ -41,8 +42,7 @@ Page({
     console.log(query);
     this.getDetailInfo();
     //创建地址应用
-    this.mapCtx = my.createMapContext('map');
-    console.log(this.mapCtx);
+    this._getLocation();
   },
 
   getDetailInfo(){
@@ -61,13 +61,6 @@ Page({
         this.setData({
           detail: viewData
         });
-
-        this.mapCtx.getCenterLocation(function (res) {
-          debugger;
-          console.log(res.longitude)
-          console.log(res.latitude)
-        });
-
       }
     }, (rps)=>{
         
@@ -200,6 +193,60 @@ Page({
     }, (rps)=>{
         
     });
-  }
+  },
+  /*
+   * 获取用户的位置信息
+   */
+  _getLocation(){
+    var that = this;
+    my.getLocation({
+      success(res) {
+        my.hideLoading();
+        console.log(res)
+        // 新建百度地图对象
+        var BMap = new bmap.BMapWX({
+          ak: "y1dFiNhy70Q8xKFwrnvciFlbF2OrlkB3"
+        });
 
+        var fail = function(data) {
+          console.log(data);
+        };
+
+        var success = function(data) {
+          console.log(data);
+          /*
+          wx.setStorageSync(
+            "district",
+            data.originalData.result.addressComponent.district
+          );
+          */
+        };
+
+        // 发起regeocoding检索请求
+        BMap.regeocoding({
+          fail: fail,
+          success: success
+        });
+
+        that.setData({
+          hasLocation: true,
+          location: that._formatLocation(res.longitude, res.latitude)
+        })
+      },
+      fail() {
+        my.hideLoading();
+        my.alert({ title: '定位失败' });
+      },
+    })
+  },
+
+  _formatLocation(longitude, latitude) {
+    longitude = Number(longitude).toFixed(2)
+    latitude = Number(latitude).toFixed(2)
+
+    return {
+      longitude: longitude.toString().split('.'),
+      latitude: latitude.toString().split('.')
+    }
+  },
 });

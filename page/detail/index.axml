@@ -22,9 +22,8 @@
     <view class="page-ali-tag">
         <image src="/image/detail_tag.png" mode="widthFix"/>
     </view>
-  
-
-    <view class="page-group">
+      
+    <view class="page-group" onTap="_getCenterLocationTest">
       <view class="name">{{detail.name}}</view>
       <view a:if="{{detail.limit_tag}}" class="limit-tag">年卡专享</view>
       <view class="price-wrap">

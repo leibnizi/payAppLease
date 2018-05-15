@@ -3,6 +3,7 @@
   color:#333333;
   padding: 0;
   background: #f4f4f4; 
+  margin-bottom: 100rpx;
 }
 .swiper-section{
   background: #FFFFFF;
