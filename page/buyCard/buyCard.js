@@ -9,9 +9,7 @@ import util from "/util/util";
 Page({
     onChange,
     formatCoupon(rowData){
-        return rowData.map((item,index)=>{
-            const date = new Date(item.from_date);
-            console.log("time",date.toUTCString())
+        return rowData.map(item=>{
             return {
                 name:item.name,
                 value:item.description,
