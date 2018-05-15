@@ -1,4 +1,5 @@
 @import "/templates/msProtocal/msProtocal.acss";
+@import "/templates/couponList/couponList.acss";
 .card{
     padding:50rpx;
     text-align: center;

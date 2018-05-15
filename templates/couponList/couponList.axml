@@ -1,0 +1,25 @@
+<template name="couponList">
+    <view class="modal" a:if="{{!hidden}}">
+        <view class="modalContainer">
+            <text class="modalTitle">领取优惠券</text>
+            <view class="modalContent">
+                <block a:for="{{list}}">
+                   <view class="listItem" key="{{item.id}}">
+                       <view class="name">{{item.name}}</view>
+                       <view class="des">{{item.value}}</view>
+                       <view class="expire">
+                           <view>{{item.date}}</view>
+                           <view class="btn">领取</view>
+                       </view>
+                   </view>
+                </block>
+            </view>
+            <view class="foot" onTap="{{onClose}}">
+                关闭
+            </view>
+        </view>
+        <view class="modalMask" />
+    </view>
+
+
+</template>

@@ -1,4 +1,5 @@
 <import src="/templates/msProtocal/msProtocal.axml"/>
+<import src="/templates/couponList/couponList.axml"/>
 <view>
     <view class="card">
         <image src="{{cardImage}}"></image>
@@ -10,6 +11,10 @@
                 <text>{{item.value}}</text>
             </view>
         </block>
+        <view class="litsItem">
+            <text>优惠券</text>
+            <text onTap="showCouponList">请选择 ></text>
+        </view>
     </view>
     <view class="operations">
         <template is="msProtocal" data="{{selected,onSelect}}"/>
@@ -25,3 +30,5 @@
         </view>
     </view>
 </view>
+
+<template is="couponList" data="{{hidden,list:couponList,onClose}}"/>
