@@ -1,0 +1,7 @@
+.pv-content{
+  position: fixed;
+  bottom: 0;
+  font-size: 24rpx;
+  width: 100%;
+  background: #fff;
+}

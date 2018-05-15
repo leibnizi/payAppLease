@@ -6,8 +6,13 @@ import loading from '/util/loading.js'
 Page({
   data: {
     address_id:'',
-    address_msg:{},
-    region_code:''
+    address_msg:{}, //地址列表带过来的默认地址数据
+    region_code:'',
+    citys: [],
+    cityMsg: {
+    },
+    changeAddress: {}, //用户自己手动选择的地址
+    showPlaceCelector: false
   },
   formReset: function () {
   },
@@ -72,50 +77,61 @@ Page({
   },
   async onLoad(option) {
     if (option.from !== "add") {
-      let globalAddress = my.getStorageSync({ key: 'globalAddress' });
-
+    
+      const app = getApp()
+      const address_msg = app.globalData.defaultGlobalAddress
       this.setData({
-        address_msg: globalAddress.data
+        address_msg
       });
     } else {
-      // wx.setNavigationBarTitle({
-      //   title: "添加收货地址"
-      // });
       this.setData({
         address_msg: {},
       });
     }
-    const { data: { data } } =await this.getConfigMsg();
+    const { data: { data } } = await this.getConfigMsg();
     const citys = data["send_cities"]["send_cities"];
-    const newCtiys = this.disposeCitys(citys)
-    // const provinceObj = {};
-    // provinceObj["100000"] = {};
+    this.setData({
+      citys
+    })
+    this.disposeCitys([0, 0, 0])
+  },
+  disposeCitys(value) {
+    const { citys } = this.data
+    let shengArr = citys
+    let shiArr = []
+    let quArr = []
+    let changeAddress = {}
 
-    // const c = {};
-    // citys.forEach(province => {
-    //   const provinceId = province.key;
-    //   c[provinceId] = province.name;
-    //   const b = {};
-    //   province.cities.forEach(city => {
-    //     const cityId = city.key;
-    //     b[cityId] = city.name;
-    //     const a = {};
-    //     city.regions.forEach(regions => {
-    //       const regionsId = regions.key;
-    //       a[regionsId] = regions.name;
-    //     });
-    //     provinceObj[cityId] = a;
-    //   });
-    //   provinceObj[provinceId] = b;
-    // });
-    // provinceObj["100000"] = c;
-    // this.setData({
-    //   provinceObj
-    // });
+    shiArr = shengArr[value[0]].cities
+    quArr = shiArr[value[1]].regions
+    changeAddress = quArr[value[2]]
+    this.setData({
+      cityMsg: {
+        shengArr,
+        shiArr,
+        quArr
+      }
+    })
+    return changeAddress
+  },
+  stopBubbling(){
+    console.log('stop')
+    return false 
+  },
+  onChange(e) {
+    const { value } = e.detail
+    const { address_msg } = this.data
+    const changeAddress = this.disposeCitys(value);
+
+    this.setData({
+      changeAddress
+    })
   },
 
   async formSubmit(e) {
     const { value } = e.detail;
+
+    console.log(value)
 
     const { address_id } = this.data;
     const {
@@ -125,15 +141,15 @@ Page({
       region_name
     } = value
 
-    const { region_code, address_msg: {id} } = this.data;
+    const { changeAddress, address_msg: {id} } = this.data;
 
     if (!this.savePersonInfo(value)) return false;
-    const { status } = await this.postForm({
+    const { data: { status } } = await this.postForm({
       address_detail,
       contact_mobile,
       contact_name,
-      id,
-      region_code: region_code || "110105",
+      id:id || '',
+      region_code: changeAddress.key || address_msg.region_code,
       region_name: region_name || ""
     });
     if (status === 'ok') {
@@ -149,36 +165,6 @@ Page({
       });
     }
   },
-  disposeCitys (citys) {
-    // citys.map((sheng, index) => {
-    //   sheng.cities.map((shi, index) => {
-    //     shi.regions.map((qu, index) => {
-    //       return {
-    //         city: qu.name,
-    //         adCode: qu.key,
-    //         spell: qu.pinyin
-    //       },
-    //     })
-    //   })
-    // })
-  },
-
-  changePlace(e){
-    my.chooseCity({
-      cities: [
-        {
-          city: '朝阳区',
-          adCode: '110105',
-          spell: 'chaoyang'
-        }
-      ],
-      success: (res) => {
-        my.alert({
-          content: res.city + ':' + res.adCode
-        });
-      },
-    });
-  },
   getConfigMsg() {
     return get('/common/configs', {
       params: {
@@ -188,8 +174,17 @@ Page({
   },
   postForm (data) {
     return post('/user/address', data,{
-      params: {
-      }
+    })
+  },
+  showPlaceCelectorFun(){
+    this.setData({
+      showPlaceCelector: true
+    })
+  },
+  hidePlaceCelectorFun() {
+    console.log(22222)
+    this.setData({
+      showPlaceCelector: false
     })
   }
 });

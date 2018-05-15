@@ -13,9 +13,11 @@ Page({
         size: 'S M L XL'
       }
     ],
-    page: 1
+    page: 1,
+    page_size: 10,
   },
-
+  async onLoad() {
+  },
   async onShow() {
     loading.show();
     try {
@@ -31,7 +33,6 @@ Page({
       }
     }
     catch (e) {
-      console.log("Result", e)
     } finally {
       loading.hide();
     }
@@ -48,7 +49,6 @@ Page({
         data.rows.map( (item, idx) => {
           data.rows[idx]['toDetailUrl'] = '/page/detail/index?id=' + item.id;
         });
-        console.log(data.rows);
         this.setData({
           productList: [...productList, ...data.rows]
         })
@@ -60,7 +60,6 @@ Page({
       loading.hide();
     }
   },
-
   getData() {
     return get('/product/filter', {
       params: {
@@ -72,8 +71,7 @@ Page({
     })
     
   },
-
   goPath(e){
     push(e.currentTarget.dataset.path)
-  }
+  },
 });

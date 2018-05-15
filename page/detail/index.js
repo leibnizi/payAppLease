@@ -14,7 +14,9 @@ Page({
     'indicator-active-color': '#F03A80',//当前选中的指示点颜色
     'indicator-color': '#F15F97',//指示点颜色
     detail:{
-      image: [],
+      image: [
+        'https://static-rs.msparis.com/uploads/4/9/49201651c32306bd26e5745b930c0fc6.png'
+      ],
       name:'',
       id: '42595',
       brand:'R13',
@@ -44,6 +46,12 @@ Page({
       if(rps.data && rps.data.data && rps.data.status == 'ok'){
 
         viewData = rps.data.data;
+console.log(viewData.image);
+        viewData.image.map( (item,idx) => {
+          viewData.image[idx] = item + '!w750'
+        });
+
+        console.log(viewData);
        
         viewData =   Object.assign({},viewData, {'size': viewData.specifications[0] && viewData.specifications[0].options,'market_price': Util.formatPrice(viewData.market_price)});
 
@@ -71,7 +79,7 @@ Page({
   },
 
   /*
-  *  选择尺寸
+   * 选择尺寸
   */
   _selectSize(event){
     var targetData = event.target.dataset.option;
@@ -143,7 +151,7 @@ Page({
           if(rps.data && rps.data.status == 'error' && rps.data.error){
             Util.toast({
               type:'fail',
-              content: res.data.error.message || '',
+              content: rps.data.error.message || '',
               duration: 3000
             });
           }else{

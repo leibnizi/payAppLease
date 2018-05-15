@@ -7,7 +7,6 @@ Page({
   data: {
     page: 1,
     addressList:[],
-    total: 0,
     noMoreList: true,
     page_size: 10,
     distanceStart: 0,
@@ -15,21 +14,26 @@ Page({
     touchAddressId: ''
     // isIphoneX: app.globalData.isIphoneX ? true : false,
   },
-  async onShow(){
-    try {
-      loading.show();
-      const { data: { data: { rows, total }}, status } = await this.geAddressList()
-      const addressList = rows.sort((a,b) => a.id - b.id < 0)
-      this.setData({
-        addressList ,
-        total
-      })
-    }
-    catch (e) {
+  onShow(){
+    const app = getApp()
+    const addressList = app.globalData.globalAddressList
+    this.setData({
+      addressList
+    })
+    // try {
+    //   loading.show();
+    //   const { data: { data: { rows, total }}, status } = await this.getAddressList()
+    //   const addressList = rows.sort((a,b) => a.id - b.id < 0)
+    //   this.setData({
+    //     addressList ,
+    //     total
+    //   })
+    // }
+    // catch (e) {
 
-    } finally {
-      loading.hide();
-    }
+    // } finally {
+    //   loading.hide();
+    // }
   },
   // async onReachBottom() {
   //   let { page } = this.data
@@ -38,7 +42,7 @@ Page({
   //     page: ++page
   //   })
   //   try {
-  //     const { data:{data}, status } = await this.geAddressList();
+  //     const { data:{data}, status } = await this.getAddressList();
   //     if (data && typeof data.rows === "object") {
   //       this.setData({
   //         productList: data.rows
@@ -55,34 +59,37 @@ Page({
   // },
   selectedAddress(e){
     const { addressList } = this.data
-    const globalAddress = addressList.filter((addressItem) => addressItem.id === e.target.dataset.id);
-    my.setStorageSync({
-      key: 'globalAddress',
-      data: globalAddress[0]
+    const defaultGlobalAddress = addressList.filter((addressItem) => addressItem.id === e.target.dataset.id);
+    const app = getApp()
+    app.globalData.defaultGlobalAddress = defaultGlobalAddress[0]
+    
+    my.showToast({
+      type: 'success',
+      content: '设置默认地址成功',
+      duration: 1000,
+      success: () => {
+        my.navigateBack({
+          delta: 1
+        })
+      },
     });
-    my.navigateBack({
-      delta: 1
-    })
   },
   editAddress(e){
     const { addressList } = this.data
-    const globalAddress = addressList.filter((addressItem) => addressItem.id === e.target.dataset.id);
-    my.setStorageSync({
-      key: 'globalAddress',
-      data: globalAddress[0]
-    });
+    const defaultGlobalAddress = addressList.filter((addressItem) => addressItem.id === e.target.dataset.id);
+    const app = getApp()
+    app.globalData.defaultGlobalAddress = defaultGlobalAddress[0]
     my.navigateTo({
       url: '/page/editAddress/editAddress?from=addressList'
     })
   },
-  geAddressList() {
-    const { page, page_size, access_token } = this.data
+  getAddressList() {
+    const { page, page_size } = this.data
     return get('/user/address', {
       params: {
         type: 2,
         page,
-        page_size,
-        access_token
+        page_size
       }
     })
   },
