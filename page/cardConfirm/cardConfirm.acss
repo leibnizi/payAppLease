@@ -1,6 +1,6 @@
 @import '/templates/cardInfo/cardInfo.acss';
 @import '/templates/msButton/msButton.acss';
-
+@import "/templates/msProtocal/msProtocal.acss";
 .orderInfo{
     margin-top:15rpx;
     background: white;
@@ -32,7 +32,6 @@
 
 
 .orderInfo .down{
-    height: 50%;
     padding:10rpx
 }
 
@@ -55,24 +54,15 @@
 
 .btnArea{
     background: #FFFFFF;
-    padding:65rpx 20rpx;
+    padding:60rpx 20rpx;
     position: absolute;
     bottom: 0;
     left: 0;
     right: 0;
     background: white;
+    height: 310rpx;
+    box-sizing: border-box;
 }
-.btnArea label {
-    font-family: PingFangSC-Regular;
-    font-size: 28rpx;
-    color: #333333;
-    line-height: 44rpx;
-    margin-bottom: 20rpx;
-}
-.blue{
-    color: dodgerblue;
-}
-
-.a-radio-checked{
-    background: #F03A80;
+.btnArea .inner{
+    height: 88rpx;
 }

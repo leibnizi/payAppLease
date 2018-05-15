@@ -1,5 +1,6 @@
 <import src="/templates/cardInfo/cardInfo.axml"/>
 <import src="/templates/msButton/msButton.axml"/>
+<import src="/templates/msProtocal/msProtocal.axml"/>
 <view>
   <template is="cardInfo" />
   <view class="orderInfo">
@@ -44,9 +45,9 @@
     </view>
   </view>
   <view class="btnArea">
-    <radio-group onChange="onAgreeChange">
-      <label><radio value="{{agree}}" checked="{{agree}}"/> 我已阅读并同意<text class="blue">下单协议待定，回收买断协议待定</text></label>
-    </radio-group>
-    <template is="msButton" data="{{text,onSubmit}}"/>
+    <template is="msProtocal" data="{{selected,onSelect}}"/>
+    <view class="inner">
+      <template is="msButton" data="{{text,onSubmit}}"/>
+    </view>
   </view>
 </view>

@@ -19,7 +19,7 @@
                 <text>￥499.00</text>
                 <text>(不含押金)</text>
             </view>
-            <view class="btn">
+            <view class="btn" onTap="buyCard">
                 <text>申请免押购卡</text>
             </view>
         </view>

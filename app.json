@@ -1,11 +1,11 @@
 {
   "pages": [
-    "page/orderSuccess/orderSuccess",
     "page/home/home",
     "page/rent/rent",
-
+    "page/orderSuccess/orderSuccess",
     "page/orderFail/orderFail",
     "page/addressList/addressList",
+    "page/cardConfirm/cardConfirm",
     "page/login/index",
     "page/bill/bill",
     "page/detail/index",
@@ -17,7 +17,6 @@
     "page/editAddress/editAddress",
     "page/user/user",
     "page/bill/bill",
-    "page/cardConfirm/cardConfirm",
     "page/member/member",
     "page/help/help",
     "page/orderDetail/orderDetail"

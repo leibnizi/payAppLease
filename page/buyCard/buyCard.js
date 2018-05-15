@@ -1,5 +1,6 @@
 import {onChange} from '/templates/msProtocal/msProtocal.js';
 import {imagePath} from "../../config/config";
+import {push} from "../../util/navigator";
 
 Page({
     onChange,
@@ -18,5 +19,8 @@ Page({
     },
     onSelected(e){
         onChange(e,this)
+    },
+    buyCard(){
+        push("/page/cardConfirm/cardConfirm")
     }
 });
