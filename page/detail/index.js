@@ -40,6 +40,9 @@ Page({
   onLoad(query) {
     console.log(query);
     this.getDetailInfo();
+    //创建地址应用
+    this.mapCtx = my.createMapContext('map');
+    console.log(this.mapCtx);
   },
 
   getDetailInfo(){
@@ -48,25 +51,29 @@ Page({
       if(rps.data && rps.data.data && rps.data.status == 'ok'){
 
         viewData = rps.data.data;
-console.log(viewData.image);
+
         viewData.image.map( (item,idx) => {
           viewData.image[idx] = item + '!w750'
         });
-
-        console.log(viewData);
        
         viewData =   Object.assign({},viewData, {'size': viewData.specifications[0] && viewData.specifications[0].options,'market_price': Util.formatPrice(viewData.market_price)});
 
         this.setData({
           detail: viewData
         });
+
+        this.mapCtx.getCenterLocation(function (res) {
+          debugger;
+          console.log(res.longitude)
+          console.log(res.latitude)
+        });
+
       }
     }, (rps)=>{
         
     });
   },
   _productIntroduction(event){
-    console.log(event);
     this.setData({
       tabView: 1
     });
@@ -139,7 +146,7 @@ console.log(viewData.image);
       Util.toast({
         type:'none',
         content: '请选择尺码信息！',
-        duration: 1000
+        duration: 2000
       });
       return false;
     }

@@ -15,6 +15,8 @@ App({
     console.log('App Hide');
   },
   globalData: {
-    hasLogin: false
+    hasLogin: false,
+    item_id: '2018032901000222123469565693',
+    category: 'ZMSC_1_4_1' //线上租赁服装服饰
   }
 });
