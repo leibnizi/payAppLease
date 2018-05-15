@@ -1,7 +1,7 @@
 {
   "pages": [
-    "page/logistics/logistics",
     "page/order/order",
+    "page/logistics/logistics",
     "page/orderDetail/orderDetail",
     "page/rent/rent",
     "page/buyCard/buyCard",
