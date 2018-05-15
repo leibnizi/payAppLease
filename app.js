@@ -11,10 +11,8 @@ App({
     this.globalData.globalAddressList = rows
   },
   onShow() {
-    console.log('App Show');
-    console.log(aliApi.hello);
     aliApi.getAuthCode({scope:'auth_code'}).then(rsp=>{
-      console.log("Response",rsp)
+
     })
   },
   onHide() {
@@ -25,10 +23,14 @@ App({
     item_id: '2018032901000222123469565693',
     category: 'ZMSC_1_4_1',
     globalAddressList:[],
-    defaultGlobalAddress: {}
+    defaultGlobalAddress: {},
+    location: {
+      district:'黄埔',
+      districtAdcode:'110101'
+    }
   },
   getAddress() {
-    return get('/user/address', {
+    return get('user/address', {
       params: {
         type: 2,
         page: 1,

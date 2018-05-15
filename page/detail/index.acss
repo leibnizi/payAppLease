@@ -211,16 +211,16 @@
 }
 .tab-bar-box .cart .num-tag{
   position: absolute;
-  width: 30rpx;
-  height: 30rpx;
+  width: 25rpx;
+  height: 25rpx;
   background: #F03A80;
   color: #FFFFFF;
-  font-size: 14rpx;
+  font-size: 16rpx;
   right: 20rpx;
   top: 10;
   border-radius: 15rpx;
   border-radius: 15rpx;
-  line-height: 30rpx;
+  line-height: 25rpx;
   text-align: center;
   overflow: hidden;
 }
@@ -321,8 +321,21 @@
   float: left;
 }
 .page-group-location .location{
-  width: 390rpx;
-  float: right;
+  width: 440rpx;
+  float: left;
   text-align: right;
   color: #999999;
+}
+.page-group-location .icon_arrows_right_gray{
+  display: block;
+  overflow: hidden;
+  height: 50rpx;
+  width: 50rpx;
+  background: url("/image/icon_arrows_right_gray.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 20rpx;
+  float: right;
+  line-height: 50rpx;
+  margin-top: 10rpx;
 }

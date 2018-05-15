@@ -1,9 +1,10 @@
 import { get, post } from '/util/httpService.js';
 import loading from '/util/loading.js'
-
-
+import tabBar from '/templates/tab-bar/index.js';
+var globalData = getApp().globalData;
 Page({
   data: {
+    tabBar: tabBar,
     productList:[],
     activeProductList:[],
     loseProductList:[],
@@ -41,6 +42,8 @@ Page({
       // loading.hide();
       my.hideLoading()
     }
+    // 获取购物车商品数量供tabbar展示
+    this._getCart();
   },
   async deleteProduct(e) { 
     const { id } = e.target.dataset;
@@ -155,5 +158,24 @@ Page({
       plan_id: '1',
       plan_item_ids: '2'
     })
+  },
+  /*
+  * 获取购物车数据供tabbar
+  */
+  _getCart(){
+    get('alipaymini-plan/cart', { params: { 'delivery_region': globalData.location.districtAdcode }}).then((rps)=>{
+      var viewData = this.data.tabBar;
+      if(rps.data && rps.data.data && rps.data.status == 'ok'){
+        this.setData({
+          tabBar: Object.assign({},viewData,{cartNum:rps.data.data.length, tabCurrent:'cart'})
+        });
+      }else{
+        this.setData({
+          tabBar: Object.assign({},viewData,{cartNum:rps.data.data.length || 0, tabCurrent:'cart'})
+        });
+      }
+    }, (rps)=>{
+        
+    });
   },
 });

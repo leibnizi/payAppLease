@@ -2,7 +2,7 @@ import Util from '/util/util.js';
 import animModal from '/templates/items/index.js';
 import {get, post} from '/util/httpService.js';
 import AuthLogin from '/util/authLogin.js';
-
+var globalData = getApp().globalData;
 Page({
   data: {
     id:'',//产品id
@@ -31,7 +31,7 @@ Page({
     specification_key:'',
     selectInfoState: false, //加入购物车的选择浮层的状态
     days: 7,//租期默认7天
-    delivery_region:'110101', //配送区域
+    location: globalData.location, //配送区域
     cartNum: 0,//购物车小标的数据显示
   },
   onShow(){
@@ -144,7 +144,7 @@ Page({
       return false;
     }
     post('alipaymini-plan/product', { 
-      delivery_region: this.data.delivery_region,
+      delivery_region: this.data.location.districtAdcode,
       product_id: this.data.id,
       source: 1,
       specification_key: this.data.specification_key
@@ -179,10 +179,10 @@ Page({
   },
 
   /*
-   * 获取购物车数据
+   * 获取购物车数据供tabbar
    */
   _getCart(){
-    get('alipaymini-plan/cart', { params: { 'delivery_region': this.data.delivery_region }}).then((rps)=>{
+    get('alipaymini-plan/cart', { params: { 'delivery_region': this.data.location.districtAdcode }}).then((rps)=>{
       var viewData = [];
       if(rps.data && rps.data.data && rps.data.status == 'ok'){
         viewData = rps.data.data;
@@ -204,8 +204,8 @@ Page({
       success(res) {
         my.hideLoading();
         console.log(res)
+        globalData.location = res;
         that.setData({
-          hasLocation: true,
           location: res
         })
       },

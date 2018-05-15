@@ -1,4 +1,5 @@
 @import '/templates/product-list/product-list.acss';
+@import '/templates/tab-bar/index.acss';
 .banner{
     height: 430rpx;
 }
@@ -9,76 +10,4 @@
     width:690rpx; 
     height:180rpx;
     margin: 30rpx;
-}
-
-/* 购物车bar */
-.tab-bar-box-home{
-  width: 750rpx;
-  height: 100rpx;
-  border-top:1rpx solid #F5F5F5;
-  display: block;
-  bottom: 0;
-  position: fixed;
-  background: #FFFFFF;
-  z-index: 99;
-}
-.tab-bar-box-home .tab-bar{
-  overflow: hidden;
-  width: 750rpx;
-  height: 100rpx;
-}
-.tab-bar-box-home .home{
-  width: 250rpx;
-  float: left;
-  height: 100rpx;
-  line-height: 100rpx;
-  position: relative;
-  text-align: center;
-  background-image: url("/image/icon_home2.png");
-  background-repeat: no-repeat;
-  background-size: 20%;
-  background-position: center;
-  text-indent: -500rpx;
-  overflow: hidden;
-}
-
-.tab-bar-box-home .cart{
-  width: 250rpx;
-  float: left;
-  height: 100rpx;
-  line-height: 100rpx;
-  position: relative;
-  text-align: center;
-  background-image: url("/image/icon_cart2.png");
-  background-repeat: no-repeat;
-  background-size: 30%;
-  background-position: center;
-}
-.tab-bar-box-home .cart .num-tag{
-  position: absolute;
-  width: 30rpx;
-  height: 30rpx;
-  background: #F03A80;
-  color: #FFFFFF;
-  font-size: 14rpx;
-  right: 20rpx;
-  top: 10;
-  border-radius: 15rpx;
-  border-radius: 15rpx;
-  line-height: 20rpx;
-  text-align: center;
-  overflow: hidden;
-}
-
-.tab-bar-box-home .add-cart{
-  width: 250rpx;
-  float: right;
-  height: 100rpx;
-  line-height: 100rpx;
-  position: relative;
-  text-align: center;
-  background-image: url("/image/icon_user.png");
-  background-repeat: no-repeat;
-  background-size: 18%;
-  background-position: center;
 }
