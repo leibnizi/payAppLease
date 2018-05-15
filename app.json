@@ -1,5 +1,7 @@
 {
   "pages": [
+    "page/rentConfirm/rentConfirm",
+    "page/buyCard/buyCard",
     "page/home/home",
     "page/rent/rent",
     "page/addressList/addressList",
@@ -9,7 +11,6 @@
     "page/order/order",
     "page/logistics/logistics",
     "page/orderDetail/orderDetail",
-    "page/buyCard/buyCard",
     "page/cart/cart",
     "page/editAddress/editAddress",
     "page/user/user",
