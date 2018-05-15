@@ -2,15 +2,12 @@
 <view>
   <navigator url="/page/addressList/addressList"> 去地址列表 </navigator>
   <view class="banner">
-    banner1
+    <image style="width:100%; height: 430rpx;" src="../../image/home/banner.png" width="100%"></image>
+  </view> 
+  <view class="liucheng">
+    <image src="../../image/home/liucheng.png"></image>
   </view> 
   <view class="rent-flow">
     <template is="product-list"  data ="{{productList,a}}" />
-  </view>
-  <view>
-  注册送2800图片
-  </view>
-  <view>
-  免费四件不重样图片
   </view>
 </view>

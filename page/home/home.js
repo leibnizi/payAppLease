@@ -10,27 +10,7 @@ Page({
         brand: "nike",
         name: 'ttt',
         size: 'S M L XL'
-      },
-      {
-        brand: "nike",
-        name: 'ttt',
-        size: 'S M L XL'
-      },
-      {
-        brand: "nike",
-        name: 'ttt',
-        size: 'S M L XL'
-      },
-      {
-        brand: "nike",
-        name: 'ttt',
-        size: 'S M L XL'
-      },
-      {
-        brand: "nike",
-        name: 'ttt',
-        size: 'S M L XL'
-      },
+      }
     ],
     page: 1
   },
@@ -53,7 +33,7 @@ Page({
     }
   },
   async onReachBottom(){
-    let { page } = this.data
+    let { page, productList } = this.data
     loading.show();
     this.setData({
       page: ++page
@@ -62,7 +42,7 @@ Page({
       const { data: { data }, status } = await this.getData();
       if (data && typeof data.rows === "object") {
         this.setData({
-          productList: data.rows
+          productList: [...productList, ...data.rows]
         })
       }
     }
@@ -83,30 +63,9 @@ Page({
       }
     })
     
-    // .then((rps) => {
-    //   if (rps.data && rps.data.status == 'error' && rps.data.error && rps.data.error.code == '10017') {
-    //     clearInterval(setIntervalTime);
-    //     this.setData({
-    //       intervalTime: 0,
-    //       codeText: '重新获取'
-    //     });
-    //   } else {
-    //     this.setData({
-    //       intervalTime: 0
-    //     });
-    //     this._setIntervalTime();
-    //   }
-    // }, (rps) => {
-    //   clearInterval(setIntervalTime);
-    //   this.setData({
-    //     intervalTime: 0,
-    //     codeText: '重新获取'
-    //   });
-    // });
   },
 
   goPath(e){
-    console.log(e);
     push(e.currentTarget.dataset.path)
   }
 });
