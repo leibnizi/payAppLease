@@ -1,7 +1,7 @@
 <import src="/templates/msProtocal/msProtocal.axml"/>
 <view>
     <view class="card">
-        <image src="/image/buyCard/buyCard@2x.png"></image>
+        <image src="{{cardImage}}"></image>
     </view>
     <view class="list">
         <block a:for="{{list}}">

@@ -13,13 +13,6 @@
   <view a:else="{{empty === false}}">
     <view class="up">
     <template is="cardInfo"/>
-    <!-- <view class="picInfo">
-      <image  src="/image/pic1.png" mode="" />
-      <view class="text">
-        <text>时尚月卡￥499</text>
-        <text>总租金：￥499</text>
-      </view>
-    </view> -->
     <view class="seperator"></view>
     <view class="moneyInfo">
       <view class="moneyList">

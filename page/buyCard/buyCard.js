@@ -1,4 +1,6 @@
 import {onChange} from '/templates/msProtocal/msProtocal.js';
+import {imagePath} from "../../config/config";
+
 Page({
     onChange,
     data: {
@@ -9,7 +11,8 @@ Page({
             {name: "优惠券", value: "请选择 >"}
         ],
         selected: false,
-        onSelect:'onSelected'
+        onSelect:'onSelected',
+        cardImage:`${imagePath}/buyCard/buyCard@2x.png`
     },
     onLoad() {
     },
