@@ -27,24 +27,5 @@
     "pullRefresh": false,
     "allowsBounceVertical": true
   },
-  "tabBar": {
-    "textColor": "#404040",
-    "selectedColor": "#108ee9",
-    "backgroundColor": "#F5F5F9",
-    "items": [
-      {
-        "pagePath": "page/home/home",
-        "name": "租赁"
-      },
-      {
-        "pagePath": "page/cart/cart",
-        "name": "购物车"
-      },
-      {
-        "pagePath": "page/user/user",
-        "name": "我的"
-      }
-    ]
-  },
   "debug": true
 }

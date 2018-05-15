@@ -55,22 +55,22 @@
             <view class="tab-container current">
 
                 <view class="des-box">
-                <view class="label">面料</view> <view class="text">91%聚酯纤维 9%氨纶</view>
+                <view class="label">面料</view> <view class="text">{{detail.fabric}}</view>
                 </view>
                 
                 <view class="des-box">
-                <view class="label">品牌</view> <view class="text">JUST CAVALLI</view>
+                <view class="label">品牌</view> <view class="text">{{detail.brand}}</view>
                 </view>
 
                 <view class="des-box-evaluate">
-                <view class="label">设计师点评</view> <view class="text-evaluate">美衣整体设计非常出彩，整体剪裁很好的展现穿搭者的身材比好高呀例，特别推荐超级百搭。</view>
+                <view class="label">品牌描述</view> <view class="text-evaluate">{{detail.brand_desc}}</view>
                 </view>
                 
             </view>
           </block>
           <block a:elif="{{tabView == 2}}">
             <view class="tab-container current">
-              <image class="img" mode="widthFix" src="http://static-r.msparis.com/m-site/images/product/size@3x.jpg" />
+              <image class="img" mode="widthFix" src="/image/detail_size.jpg" />
             </view>
           </block>
           

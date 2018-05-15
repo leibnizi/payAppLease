@@ -34,7 +34,9 @@ Page({
     delivery_region:'110101', //配送区域
     cartNum: 0,//购物车小标的数据显示
   },
-
+  onShow(){
+    this._getCart();
+  },
   onLoad(query) {
     console.log(query);
     this.getDetailInfo();

@@ -2,12 +2,27 @@
 <view>
   <navigator url="/page/addressList/addressList"> 去地址列表 </navigator>
   <view class="banner">
-    <image style="width:100%; height: 430rpx;" src="../../image/home/banner.png" width="100%"></image>
+    <image style="width:100%; height: 430rpx;" src="/image/home/banner.png" width="100%"></image>
   </view> 
   <view class="liucheng">
-    <image src="../../image/home/liucheng.png"></image>
+    <image src="/image/home/liucheng.png"></image>
   </view> 
   <view class="rent-flow">
     <template is="product-list"  data ="{{productList,a}}" />
   </view>
+      <view class="tab-bar-box-home">
+        <view class="tab-bar">
+          <navigator url="/page/home/home">
+            <view class="home">home</view>
+          </navigator>
+          <navigator url="/page/cart/cart">
+          <view class="cart">
+            <view class="num-tag" a:if={{cartNum}}>{{cartNum}}</view>
+          </view>
+        </navigator>
+        <navigator url="/page/user/user">
+          <view class="add-cart"></view>
+        </navigator>
+        </view>
+    <view>
 </view>
