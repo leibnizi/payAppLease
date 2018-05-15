@@ -1,6 +1,7 @@
 @import "/templates/msButton/msButton.acss";
 @import "/templates/buttomLogo/buttomLogo.acss";
 .container .top{
+    box-sizing: border-box;
     width: 100%;
     height: 400rpx;
     background: #FFFFFF;
@@ -8,12 +9,15 @@
     flex-direction: column;
     align-items: center;
     padding:60rpx 0rpx;
-    border-bottom: 1rpx solid #BFBFBF;
-    box-shadow:0px 0px  5px 1px #aaa;
 }
 .container .top image{
     width: 120rpx;
     height: 123rpx;
+}
+.container .top image.zhima{
+    margin-top: 20rpx;
+    width: 176rpx;
+    height: 26rpx;
 }
 .container .top text:first-child{
     font-family: PingFangSC-Regular;
@@ -50,5 +54,56 @@
     margin-left: 30rpx;
 }
 
+.container .middle{
+    margin-top: 20rpx;
+    box-sizing: border-box;
+    padding:40rpx 30rpx;
+    height: 436rpx;
+    background: #FFFFFF;
+    font-family: PingFangSC-Regular;
+}
+.container .middle .middleTop{
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    padding-bottom: 20rpx;
+    border-bottom: 1rpx solid #DDDDDD;
+}
+.container .middle .middleTop view + view{
+    margin-top: 20rpx;
+}
+.container .middle .middleTop view:first-child text{
+    font-size: 28rpx;
+    color: #333333;
+    line-height: 28rpx;
+}
+.container .middle .middleTop view:last-child text{
+    font-size: 24rpx;
+    line-height: 24rpx;
+}
+.container .middle .middleTop view text{
+    color: #999999;
+}
+.container .middle .middleTop view,.container .middle .middleButtom view{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.container .middle .middleTop view text:first-child,.container .middle .middleButtom view text:first-child{
+    text-align: left;
+}
+.container .middle .middleTop view text:last-child,.container .middle .middleButtom view text:last-child{
+    text-align: right;
+}
+
+.container .middle .middleButtom{
+    padding:40rpx 0rpx;
+}
+.container .middle .middleButtom view:first-child{
+    color: #999999;
+}
+.container .middle .middleButtom view + view{
+    margin-top: 20rpx;
+}
 
 

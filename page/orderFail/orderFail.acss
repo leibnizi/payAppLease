@@ -1,6 +1,7 @@
 @import "/templates/msButton/msButton.acss";
 @import "/templates/buttomLogo/buttomLogo.acss";
 .container .top{
+    box-sizing: border-box;
     width: 100%;
     height: 400rpx;
     background: #FFFFFF;
