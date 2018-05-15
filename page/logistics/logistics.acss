@@ -1,0 +1,111 @@
+.name{
+    display: flex;
+    height: 140rpx;
+    padding: 0 30rpx;
+    background: #ffffff;
+}
+.logistics-icon{
+    width: 80rpx;
+    height: 80rpx;
+    margin-right: 20rpx;
+    align-self: center;
+    background: url("/image/order/logistics-icon@2x.png") no-repeat center center;background-size: contain;
+}
+.express{
+    align-self: center;
+    display: flex;
+    justify-content: space-between;
+    flex: auto;
+}
+.left{
+    height: 80rpx;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    font-size: 28rpx;
+    color: #222222;
+    letter-spacing: 0;
+    line-height: 28rpx;
+}
+.gray{
+    color: #666666;
+}
+.copy{
+    align-self: flex-end;
+    width: 120rpx;
+    height: 48rpx;
+    line-height: 48rpx;
+    border: 1rpx solid #F03A80;
+    border-radius: 24rpx;
+    font-size: 24rpx;
+    color: #F03A80;
+    text-align: center;
+}
+/* 物流信息列表 */
+.list{
+    margin-top: 20rpx;
+    padding: 0 40rpx;
+    background: #ffffff;
+}
+.item{
+    display: flex;
+    justify-content: space-between;
+    color: #999999;
+}
+.item:first-child{
+    color: #222222;
+}
+.item:first-child .time{
+    color: #666666;
+}
+.item:last-child .line{
+    height: 50%;
+    margin-top: 0;
+}
+.item:first-child .line .dot{
+    background: #F03A80;
+    width: 22rpx;
+    height: 22rpx;
+    margin-top: 29rpx;
+    margin-left: -10rpx;
+}
+.item:last-child .line .dot{
+    margin-top: 70rpx;
+}
+.time{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    padding: 30rpx 0;
+}
+.time:first-child{
+    font-size: 28rpx;
+    line-height: 40rpx;
+}
+.time:last-child{
+    font-size: 22rpx;
+    line-height: 30rpx;
+}
+.line{
+    margin-top: 30rpx;
+    width: 1px;
+    height: 100%;
+    background: #eeeeee;
+    position: relative;
+}
+.dot{
+    position: absolute;
+    margin-left: -6rpx;
+    margin-top: 33rpx;
+    width: 14rpx;
+    height: 14rpx;
+    background: #eeeeee;
+    border-radius: 50%;
+}
+.txt{
+    width: 470rpx;
+    align-self: center;
+    font-size: 26rpx;
+    line-height: 40rpx;
+}
