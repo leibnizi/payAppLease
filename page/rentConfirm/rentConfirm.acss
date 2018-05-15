@@ -1,3 +1,6 @@
+.layout-view{
+    padding-bottom: 250rpx;
+}
 .address-info{
     padding: 30rpx;
     background: #ffffff;    
@@ -41,3 +44,12 @@
 }
 @import "/templates/order/order.acss";
 @import "/templates/msProtocal/msProtocal.acss";
+@import '/templates/msButton/msButton.acss';
+.supernatant{
+    position: fixed;
+    bottom: 0;
+    width: 750rpx;
+    height: 250rpx;
+    background: #ffffff;
+}
+

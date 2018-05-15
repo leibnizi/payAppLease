@@ -4,10 +4,15 @@ Page({
   data: {
     ...order,
     ...data,
-    onSelect:'onSelected'
+    onSelect:'onSelected',
+    text:"提交订单",
+    onSubmit:'onSubmit'
   },
   onLoad() {},
   onSelected(e){
       onChange(e,this)
   },
+  onSubmit(e){
+    console.log("Hello",e)
+  }
 });
