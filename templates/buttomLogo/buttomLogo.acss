@@ -1,0 +1,7 @@
+.buttom{
+    width: 324rpx;
+    height: 87rpx;
+    position: absolute;
+    bottom: 50rpx;
+    left:210rpx;
+}

@@ -1,9 +1,8 @@
 {
   "pages": [
-    "page/home/home",
-    "page/orderFail/orderFail",
     "page/orderSuccess/orderSuccess",
-
+    "page/orderFail/orderFail",
+    "page/home/home",
     "page/rent/rent",
     "page/addressList/addressList",
     "page/login/index",

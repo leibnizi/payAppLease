@@ -1,3 +1,16 @@
-<view>
-  New Page
+<import src="/templates/msButton/msButton.axml" />
+<import src="/templates/buttomLogo/buttomLogo.axml"/>
+<view class="container">
+  <view class="top">
+    <image src="{{successImage}}"></image>
+    <text>下单失败</text>
+    <text>这里是下单失败的文案</text>
+  </view>
+
+
+  <view class="btnArea">
+    <view><template is="msButton" data="{{text:orderDetail,white:true}}"/></view>
+    <view><template is="msButton" data="{{text:home}}"/></view>
+  </view>
+  <template is="buttomLogo" data="{{buttomImage}}"/>
 </view>
