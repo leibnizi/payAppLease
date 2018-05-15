@@ -45,7 +45,7 @@
 /* 物流信息列表 */
 .list{
     margin-top: 20rpx;
-    padding: 40rpx;
+    padding: 0 40rpx;
     background: #ffffff;
 }
 .item{
@@ -56,20 +56,56 @@
 .item:first-child{
     color: #222222;
 }
+.item:first-child .time{
+    color: #666666;
+}
+.item:last-child .line{
+    height: 50%;
+    margin-top: 0;
+}
+.item:first-child .line .dot{
+    background: #F03A80;
+    width: 22rpx;
+    height: 22rpx;
+    margin-top: 29rpx;
+    margin-left: -10rpx;
+}
+.item:last-child .line .dot{
+    margin-top: 70rpx;
+}
 .time{
     display: flex;
     flex-direction: column;
     align-items: flex-end;
+    padding: 30rpx 0;
+}
+.time:first-child{
+    font-size: 28rpx;
+    line-height: 40rpx;
+}
+.time:last-child{
+    font-size: 22rpx;
+    line-height: 30rpx;
 }
 .line{
+    margin-top: 30rpx;
     width: 1px;
-    background: #222222;
+    height: 100%;
+    background: #eeeeee;
+    position: relative;
+}
+.dot{
+    position: absolute;
+    margin-left: -6rpx;
+    margin-top: 33rpx;
+    width: 14rpx;
+    height: 14rpx;
+    background: #eeeeee;
+    border-radius: 50%;
 }
 .txt{
     width: 470rpx;
-    padding-bottom: 74rpx;
     align-self: center;
-}
-.item:last-child > .txt{
-    padding-bottom: 0;
+    font-size: 26rpx;
+    line-height: 40rpx;
 }
