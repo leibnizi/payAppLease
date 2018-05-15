@@ -125,6 +125,7 @@ Page({
    * 确认添加购物车
   */
   _affirmAddCart(){
+    debugger;
     if(!this.data.specification_key){
       Util.toast({
         type:'none',
@@ -140,10 +141,11 @@ Page({
       specification_key: this.data.specification_key
       },{}).then(
         (rps)=>{
+          debugger;
           if(rps.data && rps.data.status == 'error' && rps.data.error){
             Util.toast({
               type:'fail',
-              content: res.data.error.message || '',
+              content: rps.data.error.message || '',
               duration: 3000
             });
           }else{
