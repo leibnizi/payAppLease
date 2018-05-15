@@ -80,22 +80,26 @@
 
     <view class="tab-bar-box">
       <view class="tab-bar">
-        <view class="home">home</view>
+        <navigator url="/page/home/home">
+          <view class="home">home</view>
+        </navigator>
+        <navigator url="/page/cart/cart">
         <view class="cart">
-          <view class="num-tag">2</view>
+          <view class="num-tag" a:if={{cartNum}}>{{cartNum}}</view>
         </view>
-        <view class="add-cart" onTap="_actionSheetTap">加入购物车</view>
+        </navigator>
+        <view class="add-cart" onTap="_addCart">加入购物车</view>
       </view>
-      <block a:if="{{selectInfoState}}"></block>
+      <block a:if="{{selectInfoState}}">
       <view class="mask"></view>
       <view class="select-info">
-          <view class="close-box"></view>
+          <view class="close-box" onTap="_closeSelectInfo"></view>
+
           <view class="wrap-box">
             <view>尺码</view>
             <view class="sect-box">
 
               <view a:for="{{detail.size}}">
-                
                 <block a:if="{{item.current == true}}">
                   <view class="item-li current" onTap="_selectSize" data-option="{{item}}">
                     {{item.value}}
@@ -107,8 +111,11 @@
                   </view>
                 </block>
               </view>
+
             </view>
+
           </view>
+
           <view class="wrap-box">
             <view>租期</view>
             <view class="sect-box">
@@ -117,10 +124,12 @@
               </view>
             </view>
           </view>
-          <view class="wrap-box">
-            <view class="submit-confirm" onTap="_addCart">确定</view>
-          </view>
-        </view>
-    <view>
 
+          <view class="wrap-box">
+            <view class="submit-confirm" onTap="_affirmAddCart">确定</view>
+          </view>
+
+        </view>
+        </block>
+    <view>
 <view>

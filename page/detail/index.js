@@ -1,6 +1,7 @@
 import Util from '/util/util.js'
 import animModal from '/templates/items/index.js';
-import {get, post} from '/util/httpService.js'
+import {get, post} from '/util/httpService.js';
+import AuthLogin from '/util/authLogin.js'
 
 Page({
   data: {
@@ -27,6 +28,9 @@ Page({
     tabView: 1,
     specification_key:'',
     selectInfoState: false, //加入购物车的选择浮层的状态
+    days: 7,//租期默认7天
+    delivery_region:'110101', //配送区域
+    cartNum: 0,//购物车小标的数据显示
   },
 
   onLoad(query) {
@@ -43,7 +47,6 @@ Page({
        
         viewData =   Object.assign({},viewData, {'size': viewData.specifications[0] && viewData.specifications[0].options,'market_price': Util.formatPrice(viewData.market_price)});
 
-        console.log(viewData);
         this.setData({
           detail: viewData
         });
@@ -94,11 +97,92 @@ Page({
   },
 
   /*
+  * 关闭浮层
+  */
+  _closeSelectInfo(){
+    this.setData({
+      selectInfoState: false,
+      specification_key: ''
+    });
+  },
+
+  /*
    * 加入购物车
    */
-
   _addCart(){
+    let authCode = my.getStorageSync({key:'authCode'}).data;
 
+    if(authCode){
+      AuthLogin.getAuthCode();
+    }
+
+    this.setData({
+      selectInfoState: true
+    });
+  },
+
+  /*
+   * 确认添加购物车
+  */
+  _affirmAddCart(){
+    if(!this.data.specification_key){
+      Util.toast({
+        type:'none',
+        content: '请选择尺码信息！',
+        duration: 1000
+      });
+      return false;
+    }
+    post('alipaymini-plan/product', { 
+      delivery_region: this.data.delivery_region,
+      product_id: this.data.id,
+      source: 1,
+      specification_key: this.data.specification_key
+      },{}).then(
+        (rps)=>{
+          if(rps.data && rps.data.status == 'error' && rps.data.error){
+            Util.toast({
+              type:'fail',
+              content: res.data.error.message || '',
+              duration: 3000
+            });
+          }else{
+            Util.toast({
+              type:'success',
+              content: '添加购物车成功！',
+              duration: 3000
+            });
+
+            this.setData({
+              selectInfoState: false,
+              specification_key: ''
+            });
+          }
+        },(rps)=>{
+            Util.toast({
+              type:'fail',
+              content: '添加购物车失败！',
+              duration: 3000
+            });
+        }
+    );
+  },
+
+  /*
+   * 获取购物车数据
+   */
+  _getCart(){
+    get('alipaymini-plan/cart', { params: { 'delivery_region': this.data.delivery_region }}).then((rps)=>{
+      var viewData = [];
+      if(rps.data && rps.data.data && rps.data.status == 'ok'){
+        viewData = rps.data.data;
+        this.setData({
+          cartNum: viewData.length
+        });
+      }
+    }, (rps)=>{
+        
+    });
   }
 
 });

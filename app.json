@@ -1,9 +1,9 @@
 {
   "pages": [
-    "page/addressList/addressList",
     "page/home/home",
+    "page/editAddress/editAddress",
+    "page/addressList/addressList",
     "page/rent/rent",
-    
     "page/login/index",
     "page/bill/bill",
     "page/detail/index",
@@ -12,7 +12,6 @@
     "page/orderDetail/orderDetail",
     "page/buyCard/buyCard",
     "page/cart/cart",
-    "page/editAddress/editAddress",
     "page/user/user",
     "page/bill/bill",
     "page/cardConfirm/cardConfirm",
