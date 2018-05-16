@@ -2,9 +2,11 @@ import {onChange,data} from '/templates/msProtocal/msProtocal.js';
 import {imagePath} from "/config/config";
 import {push} from "/util/navigator";
 import * as aliApi from "/util/aliApi";
-import {get} from "../../util/httpService";
+import {get,post} from "../../util/httpService";
 import couponList from "/templates/couponList/couponList";
 import util from "/util/util";
+
+let app = getApp().globalData;
 
 Page({
     onChange,
@@ -35,7 +37,9 @@ Page({
         couponList:[],
         selectedCoupon:null,
         onClose:'onClose',
-        onReceive:'onReceive'
+        onReceive:'onReceive',
+        confirmData: {},
+        createData: {}
 
     },
     async onShow(){
@@ -56,6 +60,43 @@ Page({
             }
         }
         catch(e){}
+        this.getData();
+    },
+    /**获取当前页面数据 */
+    async getData(){
+        let params = {
+            coupon_id:'',
+            deposit_type:'zhima'
+        }
+        const res = await get("order/card-confirm-v2",params);
+        console.log(res.data)
+        if(res.data.status == 'ok'){
+            const confirmData = res.data.data
+            console.log(confirmData)
+            this.setData({
+                confirmData,
+                'list[0].value':util.formatPrice(confirmData.original_total,0)
+            })
+        }
+    },
+    /**获取卡购买订单 */
+    async createOrder(){
+        let params = {
+            card_id: this.data.confirmData.id,
+            deposit_type:'',
+            coupon_id:''
+        }
+        const res = await post("order/card-v2",params);
+        console.log(res.data)
+        if(res.data.status == 'ok'){
+            const createData = res.data.data
+            console.log(createData)
+            this.setData({
+                createData
+            })
+            app.createData = createData;
+            console.log(app)
+        }
     },
     onSelected(e){
         onChange(e,this)

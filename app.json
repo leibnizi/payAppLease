@@ -1,10 +1,10 @@
 {
   "pages": [
+    "page/buyCard/buyCard",
     "page/home/home",
     "page/cardConfirm/cardConfirm",
     "page/return/return",
     "page/rentConfirm/rentConfirm",
-    "page/buyCard/buyCard",
     "page/rent/rent",
     "page/orderSuccess/orderSuccess",
     "page/orderFail/orderFail",
