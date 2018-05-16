@@ -27,7 +27,8 @@ App({
     location: {
       district:'黄埔',
       districtAdcode:'110101'
-    }
+    },
+    createData:{},/**创建卡订单数据 */
   },
   getAddress() {
     return get('user/address', {

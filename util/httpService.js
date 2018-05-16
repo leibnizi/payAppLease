@@ -6,7 +6,7 @@ import {baseUrl} from '/config/config.js';
 import Util from '/util/util.js';
 import AuthLogin from '/util/authLogin.js';
 
-const test_access_token = 'ab67e1463d6361375030635b090f2684'
+const test_access_token = 'c9084aa020b39db759c5c8ae58aa6fbf'
 
 const initConfig = {
     params: {},
