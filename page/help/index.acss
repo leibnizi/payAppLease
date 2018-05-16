@@ -1,0 +1,28 @@
+
+.help{
+    padding:20rpx 30rpx 20rpx 30rpx;
+    color: #333333;
+    background: #FFFFFF;
+}
+.help .part{
+    padding: 0;
+    margin: 0;
+}
+.help  .qst{
+    font-size: 32rpx;
+    line-height: 42rpx;
+    padding-bottom: 10rpx;
+}
+.help .ans{
+    font-size: 28rpx;
+    line-height: 42rpx;
+    color: #666666;
+    padding-bottom: 30rpx;
+    text-indent: 30rpx;
+}
+.help .title-box{
+    font-size: 45rpx;
+    text-align: center;
+    line-height: 100rpx;
+    height: 100rpx;
+}

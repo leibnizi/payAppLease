@@ -17,7 +17,7 @@ export const userList = [
     },
     {
         name:"帮助中心",
-        path:"/page/helpCenter/helpCenter",
+        path:"/page/help/index",
         icon:"download"
     }
 ];

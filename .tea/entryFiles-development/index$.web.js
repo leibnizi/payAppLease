@@ -22,5 +22,6 @@ require('../..//page/user/user');
 require('../..//page/bill/bill');
 require('../..//page/cardConfirm/cardConfirm');
 require('../..//page/member/member');
-require('../..//page/help/help');
 require('../..//page/selectDistrict/index');
+require('../..//page/clause/index');
+require('../..//page/help/index');

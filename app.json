@@ -22,8 +22,9 @@
     "page/bill/bill",
     "page/cardConfirm/cardConfirm",
     "page/member/member",
-    "page/help/help",
-    "page/selectDistrict/index"
+    "page/selectDistrict/index",
+    "page/clause/index",
+    "page/help/index"
   ],
   "window": {
     "enableWK": "YES",
