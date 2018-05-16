@@ -2,11 +2,11 @@ require('./config$');
 
 function success() {
 require('../..//app');
+require('../..//page/buyCard/buyCard');
 require('../..//page/home/home');
 require('../..//page/cardConfirm/cardConfirm');
 require('../..//page/return/return');
 require('../..//page/rentConfirm/rentConfirm');
-require('../..//page/buyCard/buyCard');
 require('../..//page/rent/rent');
 require('../..//page/orderSuccess/orderSuccess');
 require('../..//page/orderFail/orderFail');

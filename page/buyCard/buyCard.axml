@@ -2,15 +2,21 @@
 <import src="/templates/couponList/couponList.axml"/>
 <view>
     <view class="card">
-        <image src="{{cardImage}}"></image>
+        <image src="{{cardInfo.imageUrl}}"></image>
     </view>
     <view class="list">
-        <block a:for="{{list}}">
-            <view class="litsItem">
-                <text>{{item.name}}</text>
-                <text>{{item.value}}</text>
-            </view>
-        </block>
+        <view class="litsItem">
+            <text>原价</text>
+            <text>{{cardInfo.originPrice}}</text>
+        </view>
+        <view class="litsItem">
+            <text>有效期</text>
+            <text>{{cardInfo.validDays}}</text>
+        </view>
+        <view class="litsItem">
+            <text>押金</text>
+            <text>{{cardInfo.deposit}}</text>
+        </view>
         <view class="litsItem">
             <text>优惠券</text>
             <text a:if="{{currentIndex === null}}" onTap="showCouponList">请选择 ></text>
@@ -22,7 +28,7 @@
         <view class="apply">
             <view class="price">
                 <text>总价</text>
-                <text>￥499.00</text>
+                <text>{{cardInfo.totalPrice}}</text>
                 <text>(不含押金)</text>
             </view>
             <view class="btn" onTap="createOrder">
