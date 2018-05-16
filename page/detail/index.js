@@ -1,11 +1,11 @@
-import Util from '/util/util.js'
+import Util from '/util/util.js';
 import animModal from '/templates/items/index.js';
 import {get, post} from '/util/httpService.js';
-import AuthLogin from '/util/authLogin.js'
-
+import AuthLogin from '/util/authLogin.js';
+var globalData = getApp().globalData;
 Page({
   data: {
-    id:'7836',//产品id
+    id:'',//产品id
     indicatorDots: true,
     autoplay: true,
     vertical: false,
@@ -18,26 +18,34 @@ Page({
         'https://static-rs.msparis.com/uploads/4/9/49201651c32306bd26e5745b930c0fc6.png'
       ],
       name:'',
-      id: '42595',
-      brand:'R13',
+      id: '',
+      brand:'',
       brand_desc: '',
-      brand_id: '624',
+      brand_id: '',
       tags: [],
-      market_price: 12312312,
-      rental_price: 40000,
-      size: ['XXS/XS', 'S', 'M', 'L', 'XL']
+      market_price: '',
+      rental_price: '',
+      size: []
     },
     tabView: 1,
     specification_key:'',
     selectInfoState: false, //加入购物车的选择浮层的状态
     days: 7,//租期默认7天
-    delivery_region:'110101', //配送区域
+    location: globalData.location, //配送区域
     cartNum: 0,//购物车小标的数据显示
   },
-
+  onShow(){
+    this._getCart();
+  },
   onLoad(query) {
     console.log(query);
+    this.setData({
+      id: query.id
+    });
+
     this.getDetailInfo();
+    //创建地址应用
+    this._getLocation();
   },
 
   getDetailInfo(){
@@ -46,12 +54,10 @@ Page({
       if(rps.data && rps.data.data && rps.data.status == 'ok'){
 
         viewData = rps.data.data;
-console.log(viewData.image);
+
         viewData.image.map( (item,idx) => {
           viewData.image[idx] = item + '!w750'
         });
-
-        console.log(viewData);
        
         viewData =   Object.assign({},viewData, {'size': viewData.specifications[0] && viewData.specifications[0].options,'market_price': Util.formatPrice(viewData.market_price)});
 
@@ -64,7 +70,6 @@ console.log(viewData.image);
     });
   },
   _productIntroduction(event){
-    console.log(event);
     this.setData({
       tabView: 1
     });
@@ -73,9 +78,6 @@ console.log(viewData.image);
     this.setData({
       tabView: 2
     });
-  },
-  _actionSheetTap() {
-    const items = ['XXS/XS', 'S', 'M', 'L', 'XL'];
   },
 
   /*
@@ -137,12 +139,12 @@ console.log(viewData.image);
       Util.toast({
         type:'none',
         content: '请选择尺码信息！',
-        duration: 1000
+        duration: 2000
       });
       return false;
     }
     post('alipaymini-plan/product', { 
-      delivery_region: this.data.delivery_region,
+      delivery_region: this.data.location.districtAdcode,
       product_id: this.data.id,
       source: 1,
       specification_key: this.data.specification_key
@@ -177,10 +179,10 @@ console.log(viewData.image);
   },
 
   /*
-   * 获取购物车数据
+   * 获取购物车数据供tabbar
    */
   _getCart(){
-    get('alipaymini-plan/cart', { params: { 'delivery_region': this.data.delivery_region }}).then((rps)=>{
+    get('alipaymini-plan/cart', { params: { 'delivery_region': this.data.location.districtAdcode }}).then((rps)=>{
       var viewData = [];
       if(rps.data && rps.data.data && rps.data.status == 'ok'){
         viewData = rps.data.data;
@@ -191,6 +193,26 @@ console.log(viewData.image);
     }, (rps)=>{
         
     });
+  },
+  /*
+   * 获取用户的位置信息
+   */
+  _getLocation(){
+    var that = this;
+    my.getLocation({
+      type: 1,
+      success(res) {
+        my.hideLoading();
+        console.log(res)
+        globalData.location = res;
+        that.setData({
+          location: res
+        })
+      },
+      fail() {
+        my.hideLoading();
+        my.alert({ title: '定位失败' });
+      },
+    })
   }
-
 });

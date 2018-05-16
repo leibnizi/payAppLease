@@ -1,15 +1,16 @@
 <import src="/templates/cardInfo/cardInfo.axml"/>
 <import src="/templates/msButton/msButton.axml"/>
+<import src="/templates/msProtocal/msProtocal.axml"/>
 <view>
   <template is="cardInfo" />
   <view class="orderInfo">
     <view class="up">
       <view class="item">
-        <text>总租金</text>
-        <text>￥0.00</text>
+        <text>会员原价</text>
+        <text>￥338.00</text>
       </view>
       <view class="item">
-        <text>月租金</text>
+        <text>优惠金额</text>
         <text>￥599.00</text>
       </view>
       <view class="item">
@@ -38,15 +39,15 @@
         <text>￥3,900.00</text>
       </view>
       <view class="item" a:if="{{!noPay}}">
-        <text>租金支付方式</text>
-        <text>支付宝免密支付<icon type="info" size="15" color="lightgrey" /></text>
+        <text>押金冻结方式</text>
+        <text>支付宝资金授权<icon type="info" size="15" color="lightgrey" /></text>
       </view>
     </view>
   </view>
   <view class="btnArea">
-    <radio-group onChange="onAgreeChange">
-      <label><radio value="{{agree}}" checked="{{agree}}"/> 我已阅读并同意<text class="blue">下单协议待定，回收买断协议待定</text></label>
-    </radio-group>
-    <template is="msButton" data="{{text,onSubmit}}"/>
+    <template is="msProtocal" data="{{selected,onSelect}}"/>
+    <view class="inner">
+      <template is="msButton" data="{{text,onSubmit}}"/>
+    </view>
   </view>
 </view>

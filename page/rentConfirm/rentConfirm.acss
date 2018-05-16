@@ -1,0 +1,55 @@
+.layout-view{
+    padding-bottom: 250rpx;
+}
+.address-info{
+    padding: 30rpx;
+    background: #ffffff;    
+}
+.user{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 32rpx;
+    color: #000000;
+    line-height: 32rpx;
+}
+.phone{
+    margin-left: 40rpx;
+}
+.icon-right-gray{
+    width: 26rpx;
+    height: 26rpx;
+    background: url("/image/order/arrow-right-gray@2x.png") no-repeat center center;background-size: contain;
+
+}
+.icon-location{
+    width: 20rpx;
+    height: 20rpx;
+    margin-top: 6rpx;
+    margin-right: 10rpx;
+    background: url("/image/order/location@2x.png") no-repeat center center;background-size: contain;
+    
+}
+.address{
+    display: flex;
+    justify-content: space-between;
+    font-size: 28rpx;
+    color: #888888;
+    line-height: 40rpx;
+    margin-top: 10rpx;
+}
+.gradient{
+    height: 10rpx;
+    background: url("/image/order/gap-gradient@2x.png") no-repeat center center;background-size: contain;
+}
+@import "/templates/order/order.acss";
+@import "/templates/msProtocal/msProtocal.acss";
+@import '/templates/msButton/msButton.acss';
+.supernatant{
+    position: fixed;
+    bottom: 0;
+    width: 750rpx;
+    height: 250rpx;
+    background: #ffffff;
+}
+

@@ -7,5 +7,8 @@ Page({
   onLoad() {},
   handleTap1(){
     push("/page/orderDetail/orderDetail")
+  },
+  handleTap2(){
+    push("/page/logistics/logistics")
   }
 });

@@ -166,7 +166,7 @@ Page({
     }
   },
   getConfigMsg() {
-    return get('/common/configs', {
+    return get('common/configs', {
       params: {
         send_cities: "0",
       }

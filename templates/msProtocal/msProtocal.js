@@ -3,3 +3,6 @@ export const onChange = (e,page)=>{
         selected:!e.currentTarget.dataset.selected
     })
 }
+export const data = {
+    selected:false,
+}

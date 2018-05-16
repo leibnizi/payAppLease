@@ -1,7 +1,8 @@
 <import src="/templates/msProtocal/msProtocal.axml"/>
+<import src="/templates/couponList/couponList.axml"/>
 <view>
     <view class="card">
-        <image src="/image/buyCard/buyCard@2x.png"></image>
+        <image src="{{cardImage}}"></image>
     </view>
     <view class="list">
         <block a:for="{{list}}">
@@ -10,6 +11,11 @@
                 <text>{{item.value}}</text>
             </view>
         </block>
+        <view class="litsItem">
+            <text>优惠券</text>
+            <text a:if="{{currentIndex === null}}" onTap="showCouponList">请选择 ></text>
+            <text a:else="{{currentIndex !== null}}" class="active" onTap="showCouponList">已选择 ></text>
+        </view>
     </view>
     <view class="operations">
         <template is="msProtocal" data="{{selected,onSelect}}"/>
@@ -19,9 +25,11 @@
                 <text>￥499.00</text>
                 <text>(不含押金)</text>
             </view>
-            <view class="btn">
+            <view class="btn" onTap="buyCard">
                 <text>申请免押购卡</text>
             </view>
         </view>
     </view>
 </view>
+
+<template is="couponList" data="{{hidden,currentIndex,list:couponList,onClose,onReceive}}"/>

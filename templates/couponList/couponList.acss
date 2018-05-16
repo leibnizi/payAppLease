@@ -1,0 +1,104 @@
+.modal {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+.modalMask{
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0,0,0,0.50);;
+    opacity: 0.5;
+    z-index: 99;
+}
+.modalContainer{
+    z-index: 110;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 950rpx;
+    box-sizing: border-box;
+    background: #FFFFFF;
+    padding:60rpx 30rpx 30rpx;
+    text-align: center;
+}
+.modalContainer .modalTitle{
+    font-family: PingFangSC-Medium;
+    font-size: 32rpx;
+    color: #333333;
+    text-align: center;
+    line-height: 32rpx;
+}
+.modalContainer .modalContent{
+    margin-top: 57rpx;
+    max-height: 600rpx;
+    overflow-y: scroll;
+}
+.modalContainer .modalContent .listItem{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    border-bottom: 1rpx solid #DDDDDD;
+    padding-bottom: 20rpx;
+}
+.modalContainer .modalContent .listItem .name{
+    font-family: PingFangSC-Medium;
+    font-size: 32rpx;
+    color: #F03A80;
+    line-height: 32rpx;
+    padding:20rpx 0;
+}
+.modalContainer .modalContent .listItem .des{
+    font-family: PingFangSC-Regular;
+    font-size: 28rpx;
+    color: #333333;
+    line-height: 28rpx;
+    padding-bottom: 10rpx;
+}
+.modalContainer .modalContent .listItem .expire{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.modalContainer .modalContent .listItem .expire view:first-child{
+    font-family: PingFangSC-Regular;
+    font-size: 24rpx;
+    color: #999999;
+    letter-spacing: 0;
+    line-height: 24rpx;
+}
+.modalContainer .modalContent .listItem .expire .btn{
+    width: 120rpx;
+    height: 48rpx;
+    border: 1rpx solid #F03A80;
+    border-radius: 24rpx;
+    font-family: PingFangSC-Regular;
+    font-size: 24rpx;
+    color: #F03A80;
+    text-align: center;
+   line-height: 48rpx;
+}
+.modalContainer .modalContent .listItem .expire .btn.active{
+    background: #F03A80;
+    color: white;
+}
+.modalContainer .foot{
+    position: absolute;
+    bottom:30rpx;
+    left:30rpx;
+    width: 690rpx;
+    height: 88rpx;
+    background: #F03A80;
+    border-radius: 100rpx;
+    line-height: 88rpx;
+    font-family: PingFangSC-Regular;
+    font-size: 36rpx;
+    color: #FFFFFF;
+    text-align: center;
+}

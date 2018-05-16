@@ -1,3 +1,4 @@
+@import '/templates/tabBar/index.acss';
 .listItem{
     display: flex;
     flex-direction: row;
@@ -13,4 +14,18 @@
     color: #333333;
     letter-spacing: 0;
     line-height: 42rpx;
+}
+
+.listItem .icon_arrows_right_gray{
+  display: block;
+  overflow: hidden;
+  height: 50rpx;
+  width: 50rpx;
+  background: url("/image/icon_arrows_right_gray.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 20rpx;
+  float: right;
+  line-height: 50rpx;
+  margin-top: 10rpx;
 }

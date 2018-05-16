@@ -1,5 +1,5 @@
 <template name="msButton">
-    <view class="msBtn" onTap="{{onSubmit}}">
+    <view class="{{white === true?'white':'msBtn'}}" onTap="{{onSubmit}}">
         <text>{{text?text:'点击'}}</text>
     </view>
 </template>

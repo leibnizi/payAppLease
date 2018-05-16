@@ -1,7 +1,9 @@
 .picInfo{
+    box-sizing: border-box;
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
+    align-items: center;
     width:750rpx;
     height: 240rpx;
     padding:40rpx 30rpx;
@@ -9,7 +11,7 @@
 }
 .picInfo image{
     width: 160rpx;
-    height: 160rpx;
+    height: 90rpx;
 }
 .picInfo .text{
     padding-left: 20rpx;
@@ -24,4 +26,14 @@
     font-size: 28rpx;
     color: #333333;
     line-height: 28rpx;
+}
+.picInfo .text text:nth-child(4n+2){
+    font-family: PingFangSC-Regular;
+    font-size: 24rpx;
+    color: #999999;
+    line-height: 24rpx;
+}
+.picInfo .text image{
+    width: 150rpx;
+    height: 20rpx;
 }

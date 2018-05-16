@@ -1,0 +1,32 @@
+<view>
+  <!-- 商品信息模版 -->
+  <import src='/templates/order/order.axml' />
+  <template is="order" data="{{list}}"/>
+  <!-- 归还方式 -->
+  <view class="return-item gap">
+    <text>归还方式</text>
+    <text>快递归还</text>
+  </view>
+  <!-- 地址信息 -->
+  <view class="address-info">
+    <view class="address-item">
+      <view>归还地址</view>
+      <view>杭州市萧山区钱农路8号达利园7号楼一楼</view>
+    </view>
+    <view class="line"></view>
+    <view class="return-item">
+      <text>物流公司</text>
+      <text>顺丰速运</text>
+    </view>
+    <view class="line"></view>
+    <view class="item">
+      <text>物流单号</text>
+      <text class="gary">619388421084</text>
+    </view>
+  </view>
+  <!-- tip -->
+  <view class="tip">寄件需知：归还时，请务将商品与相关配件一起寄回哦！</view>
+  <!-- 按钮模版 -->
+    <import src="/templates/msButton/msButton.axml"/>
+    <template is="msButton" data="{{text,onSubmit}}"/>
+</view>

@@ -1,0 +1,15 @@
+<import src="/templates/msButton/msButton.axml" />
+<import src="/templates/buttomLogo/buttomLogo.axml"/>
+<view class="container">
+  <view class="top">
+    <image src="{{failImage}}"></image>
+    <text>下单失败</text>
+    <text>这里是下单失败的文案</text>
+  </view>
+
+
+  <view class="btnArea">
+    <template is="msButton" data="{{text}}"/>
+  </view>
+ <template is="buttomLogo" data="{{buttomImage}}"/>
+</view>

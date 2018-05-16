@@ -1,5 +1,5 @@
 <import src="../../templates/product/product.axml"/>
-
+<import src="../../templates/tabBar/index.axml"/>
 <view class="cart-page" onTap="showDeleteFun">
   <block a:if="{{productList.length}}">
     <view a:if="{{!has_card}}" class="top-prompt-line">
@@ -55,4 +55,10 @@
       <view>
     </view>
   </block>
+
+      <view class="tab-bar-box-wrap">
+
+        <template is="tabBar" data="{{tabBar,a}}"/>
+
+      </view>
 </view>

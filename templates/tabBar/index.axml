@@ -1,0 +1,37 @@
+<template name="tabBar">
+<view class="tab-bar-box-home">
+        <view class="tab-bar">
+                        
+          <navigator url="/page/home/home">
+            <block a:if="{{tabBar.tabCurrent == 'home'}}">
+               <view class="home current">home</view>
+            </block>
+            <block a:else>
+               <view class="home">home</view>
+            </block>
+
+          </navigator>
+          <navigator url="/page/cart/cart">
+            <block a:if="{{tabBar.tabCurrent == 'cart'}}">
+              <view class="cart current">
+                <view class="num-tag" a:if="{{tabBar.cartNum}}">{{tabBar.cartNum}}</view>
+              </view>
+            </block>
+            <block a:else>
+              <view class="cart">
+                <view class="num-tag" a:if="{{tabBar.cartNum}}">{{tabBar.cartNum}}</view>
+              </view>
+            </block>
+          </navigator>
+          <navigator url="/page/user/user">
+            <block a:if="{{tabBar.tabCurrent == 'user'}}">
+               <view class="add-cart current"></view>
+            </block>
+            <block a:else>
+                <view class="add-cart"></view>
+            </block>
+
+          </navigator>
+        </view>
+<view>
+</template>

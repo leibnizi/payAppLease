@@ -1,4 +1,5 @@
-@import '../../templates/product/product.acss';
+@import '/templates/product/product.acss';
+@import '/templates/tabBar/index.acss';
 .top-prompt-line{
   display: flex;
   justify-content: space-between;

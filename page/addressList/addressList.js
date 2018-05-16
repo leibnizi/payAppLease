@@ -88,7 +88,7 @@ Page({
   },
   getAddressList() {
     const { page, page_size } = this.data
-    return get('/user/address', {
+    return get('user/address', {
       params: {
         type: 2,
         page,
@@ -180,6 +180,6 @@ Page({
     }
   },
   postDelete(id){
-    return post('/user/address-del', {id})
+    return post('user/address-del', {id})
   }
 });

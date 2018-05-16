@@ -1,0 +1,30 @@
+<view class="layout-view">
+  <!-- 地址信息 -->
+  <view class="address-info">
+    <view class="user">
+      <view>
+        <text>陈凤美</text>
+        <text class="phone">181****0093</text>
+      </view>
+      <text class="icon-right-gray"></text>
+    </view>
+    <view class="address">
+      <text class="icon-location"></text>
+      <text>北京北京市海淀区中关村街道双宜数东里3号楼友谊鲜果（菜鸟驿站:13423475456）</text>
+    </view>
+  </view>
+  <view class="gradient gap"></view>
+  <!-- 商品信息模版 -->
+  <import src='/templates/order/order.axml' />
+  <template is="order" data="{{list}}"/>
+  <!-- 浮层 -->
+  <view class="supernatant">
+    <!-- 协议模版 -->
+    <import src="/templates/msProtocal/msProtocal.axml"/>
+    <template is="msProtocal" data="{{selected,onSelect}}"/>
+    <!-- 按钮模版 -->
+    <import src="/templates/msButton/msButton.axml"/>
+    <template is="msButton" data="{{text,onSubmit}}"/>
+  </view>
+  
+</view>

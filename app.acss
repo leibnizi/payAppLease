@@ -1,16 +1,8 @@
-page {
-  background-color: #FFFFFF;
-  border: none;
-}
-.a-page{
-  background-color: #ffffff;
-}
 .page {
   font-family: -apple-system-font,Helvetica Neue,Helvetica,sans-serif;
   font-size: 24rpx;
   padding: 32rpx;
   flex: 1;
-  background-color: #FFFFFF;
   border: none;
 }
 

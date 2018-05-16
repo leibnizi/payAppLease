@@ -1,0 +1,49 @@
+<import src="/templates/msButton/msButton.axml" />
+<import src="/templates/buttomLogo/buttomLogo.axml"/>
+<view class="container">
+  <view class="top">
+    <image src="{{successImage}}"></image>
+    <text>恭喜您下单成功</text>
+    <text>立即去挑选您的美衣</text>
+    <image a:if="{{noPay === true}}" class="zhima" src="{{noPayImage}}"></image>
+  </view>
+
+  <view class="middle">
+    <view class="middleTop">
+      <view>
+        <text>会员原价</text>
+        <text>￥599.00</text>
+      </view>
+      <view>
+        <text>有效期</text>
+        <text>30天</text>
+      </view>
+      <view>
+        <text>月租金将于次月通过支付宝免密支付的方式还款</text>
+      </view>
+    </view>
+    <view class="middleButtom">
+      <block>
+        <view>
+          <text>总押金</text>
+          <text>￥400.00</text>
+        </view>
+        <view>
+          <text>芝麻信用免押金</text>
+          <text>-￥300.00</text>
+        </view>
+      </block>
+      <view>
+        <text>已冻结押金</text>
+        <text>￥100.00</text>
+      </view>
+    </view>
+  </view>
+
+
+  <view class="btnArea">
+    <view><template is="msButton" data="{{text:orderDetail,white:true}}"/></view>
+    <view><template is="msButton" data="{{text:home}}"/></view>
+  </view>
+  <template is="buttomLogo" data="{{buttomImage}}"/>
+</view>

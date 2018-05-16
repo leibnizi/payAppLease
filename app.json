@@ -1,6 +1,13 @@
 {
   "pages": [
     "page/home/home",
+    "page/cardConfirm/cardConfirm",
+    "page/return/return",
+    "page/rentConfirm/rentConfirm",
+    "page/buyCard/buyCard",
+    "page/rent/rent",
+    "page/orderSuccess/orderSuccess",
+    "page/orderFail/orderFail",
     "page/editAddress/editAddress",
     "page/addressList/addressList",
     "page/rent/rent",
@@ -10,12 +17,13 @@
     "page/order/order",
     "page/logistics/logistics",
     "page/orderDetail/orderDetail",
-    "page/buyCard/buyCard",
     "page/cart/cart",
     "page/user/user",
+    "page/bill/bill",
     "page/cardConfirm/cardConfirm",
     "page/member/member",
-    "page/help/help"
+    "page/help/help",
+    "page/selectDistrict/index"
   ],
   "window": {
     "enableWK": "YES",
@@ -24,25 +32,6 @@
     "backgroundColor": "#F5F5F9",
     "pullRefresh": false,
     "allowsBounceVertical": true
-  },
-  "tabBar": {
-    "textColor": "#404040",
-    "selectedColor": "#108ee9",
-    "backgroundColor": "#F5F5F9",
-    "items": [
-      {
-        "pagePath": "page/home/home",
-        "name": "租赁"
-      },
-      {
-        "pagePath": "page/cart/cart",
-        "name": "购物车"
-      },
-      {
-        "pagePath": "page/user/user",
-        "name": "我的"
-      }
-    ]
   },
   "debug": true
 }

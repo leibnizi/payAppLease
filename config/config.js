@@ -20,4 +20,5 @@ export const userList = [
         path:"/page/helpCenter/helpCenter",
         icon:"download"
     }
-]
+];
+export const imagePath = '/image';

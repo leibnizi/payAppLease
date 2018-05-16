@@ -1,0 +1,3 @@
+<template name="buttomLogo">
+    <image class="buttom" src="{{buttomImage}}"></image>
+</template>
