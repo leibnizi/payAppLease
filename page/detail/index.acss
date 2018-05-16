@@ -250,7 +250,7 @@
   background: #FFFFFF;
   padding: 60rpx 30rpx 30rpx 30rpx;
   width: 690rpx;
-  height: 390rpx;
+  height: 450rpx;
   position: absolute;
   z-index: 9999;
   bottom: 0;
@@ -338,4 +338,43 @@
   float: right;
   line-height: 50rpx;
   margin-top: 10rpx;
+}
+
+
+/* 加入购物车配送区域*/
+.page-group-location{
+  margin-top: 20rpx; 
+  background: #FFFFFF;
+  height: 80rpx;
+  line-height: 80rpx;
+  padding-left: 30rpx;
+  padding-right: 30rpx;
+  color: #333333;
+}
+.tab-bar-box .select-info .sect-box .label{
+  width: 150rpx;
+  float: left;
+  height: 60rpx;
+  line-height: 60rpx;
+}
+.tab-bar-box .select-info .sect-box .location{
+  width: 400rpx;
+  float: left;
+  text-align: right;
+  color: #999999;
+  height: 60rpx;
+  line-height: 60rpx;
+}
+.tab-bar-box .select-info .sect-box .icon_arrows_right_gray{
+  display: block;
+  overflow: hidden;
+  height: 50rpx;
+  width: 50rpx;
+  background: url("/image/icon_arrows_right_gray.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 20rpx;
+  float: left;
+  line-height: 50rpx;
+  margin-top: 0rpx;
 }

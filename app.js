@@ -21,6 +21,8 @@ App({
     hasLogin: false,
     item_id: '2018032901000222123469565693',
     category: 'ZMSC_1_4_1',
+    userAddressList:[], //用户全局的地址列表
+    defaultUserAddress: {},// 用户默认地址
     location: {
       id: 0,
       region_name: "",
