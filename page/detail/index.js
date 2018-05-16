@@ -33,6 +33,17 @@ Page({
     days: 7,//租期默认7天
     location: globalData.location, //配送区域
     cartNum: 0,//购物车小标的数据显示
+    location2:{
+    "id": 47043,
+    "region_name": "河北省 邯郸市 邯山区",
+    "address_detail": "asdasdasd",
+    "contact_name": "dddddccc",
+    "contact_mobile": "13124077261",
+    "region_code": "130402",
+    "area_name": "邯山区"
+    },
+    userAddressList: globalData && globalData.userAddressList || [], //用户全局的地址列表
+    defaultUserAddress: globalData && globalData.defaultUserAddress || {},// 用户默认地址
   },
   onShow(){
     this._getCart();
@@ -126,6 +137,8 @@ Page({
       AuthLogin.getAuthCode();
     }
 
+    this._getUserAddress();
+
     this.setData({
       selectInfoState: true
     });
@@ -214,5 +227,42 @@ Page({
         my.alert({ title: '定位失败' });
       },
     })
+  },
+  /*
+   * 城市选择
+  */
+  _chooseCity(){
+    my.chooseCity({
+      showLocatedCity: true,
+      showHotCities: true,
+      success: (res) => {
+        my.alert({
+          title: 'chooseAlipayContact response: ' + JSON.stringify(res),
+        });
+      },
+    });
+  },
+
+  /*
+  * 用户登录后获取 用户的地址信息
+  */
+  _getUserAddress(){
+    get('user/address',{params:{'page_size': 20, 'type': 1, 'page': 1}}).then((rps) =>{
+      if(rps.data && rps.data.data && rps.data.status == 'ok'){
+        globalData['userAddressList'] = rps.data.data.rows;
+        this.setData({
+            userAddressList: rps.data.data.rows
+        });
+        if(Util.isEmptyObject(globalData.defaultUserAddress)){
+          globalData['defaultUserAddress'] = rps.data.data.rows[0];
+          this.setData({
+            defaultUserAddress: rps.data.data.rows[0]
+          });
+        }
+      }
+      console.log(getApp());
+    },(rps) => {
+
+    });
   }
 });
