@@ -140,10 +140,12 @@ Page({
 
 
   getData() {
-    const { data } = my.getStorageSync({ key: 'globalAddress' });
+    const app = getApp()
+    const { region_code } = app.globalData.defaultGlobalAddress
+    debugger
     return get('/alipaymini-plan/cart', {
       params: {
-        delivery_region: data && data.region_code
+        delivery_region: region_code
       }
     })
   },

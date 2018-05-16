@@ -9,6 +9,7 @@ App({
       return b.id - a.id
     })
     this.globalData.globalAddressList = rows
+    this.globalData.defaultGlobalAddress = rows[0]
   },
   onShow() {
     console.log('App Show');

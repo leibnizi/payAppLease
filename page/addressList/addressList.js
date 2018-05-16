@@ -14,26 +14,29 @@ Page({
     touchAddressId: ''
     // isIphoneX: app.globalData.isIphoneX ? true : false,
   },
-  onShow(){
-    const app = getApp()
-    const addressList = app.globalData.globalAddressList
-    this.setData({
-      addressList
-    })
-    // try {
-    //   loading.show();
-    //   const { data: { data: { rows, total }}, status } = await this.getAddressList()
-    //   const addressList = rows.sort((a,b) => a.id - b.id < 0)
-    //   this.setData({
-    //     addressList ,
-    //     total
-    //   })
-    // }
-    // catch (e) {
+  async onShow(){
+    // const app = getApp()
+    // const addressList = app.globalData.globalAddressList
+    // this.setData({
+    //   addressList
+    // })
+    try {
+      loading.show();
+      const { data: { data: { rows }}, status } = await this.getAddressList()
+      const addressList = rows.sort((a,b) => a.id - b.id < 0)
 
-    // } finally {
-    //   loading.hide();
-    // }
+      const app = getApp()
+      app.globalData.globalAddressList = addressList
+      app.globalData.defaultGlobalAddress = addressList[0]
+      this.setData({
+        addressList
+      })
+    }
+    catch (e) {
+
+    } finally {
+      loading.hide();
+    }
   },
   // async onReachBottom() {
   //   let { page } = this.data
@@ -150,14 +153,19 @@ Page({
     const { addressList } = this.data
     try {
       loading.show();
-      const { data, status } = await this.postDelete(id)
+      const { data: { data, status } } = await this.postDelete(id)
       if (status === 'ok') {
-        const newAddressList = addressList.filter((item) => {
-          item.id === id
-        })
+        my.showToast({
+          type: 'success',
+          content: '删除成功',
+          duration: 1000
+        });
+        const newAddressList = addressList.filter((item) => item.id !== id)
+        
         this.setData({
           addressList: newAddressList
         })
+        
       }
 
       // const addressList = rows.sort((a, b) => a.id - b.id < 0)
@@ -169,7 +177,6 @@ Page({
     catch (e) {
 
     } finally {
-      loading.hide();
     }
   },
   postDelete(id){
