@@ -182,9 +182,9 @@ Page({
             /** 固定传rent*/
             category: "ZMSC_1_4_1",
             /** 类目(由芝麻侧业务对接人负责 􏰀供) */
-            amount: '1500.00',
+            amount: orderRes.amount,
             /** 该次支付租金总金额，单位为 元，精确到小数点后两位，取值 范围[0.01,100000000]*/
-            deposit: '200.00',
+            deposit: orderRes.deposit,
             /** 该次支付押金总金额，单位为 元，精确到小数点后两位，取值 范围[0,100000000] */
             out_order_no: orderRes.order_no,
             /**外部订单号，即商户自己的订单 号 */
@@ -198,20 +198,22 @@ Page({
                 "products": [
                     {
                         "count": 1, /** 商品件数 */
-                        "amount": '1500.00', /** 分期总金额*/
-                        "deposit":'200.00', /** 总押金*/
+                        "amount": orderRes.amount, /** 分期总金额*/
+                        "deposit":orderRes.deposit, /** 总押金*/
                         "installmentCount": 12, /** 分期数*/
-                        "name": orderRes.name /** 商品名 */
+                        "name": encodeURIComponent(orderRes.name) /** 商品名 */
                     }
                 ]
             }
             /** 商品内容 JSON，包含商品件数， 分期数，分期租金，总押金，商品名等信息 */
         }
-        console.log("信用租赁配置项",config)
         try {
             const res = await aliApi.startZMCreditRent(config);
             console.log("购卡订单成功", res)
-            push("/page/cardConfirm/cardConfirm")
+            const {
+                orderNo,outOrderNo
+            } = res;
+            push(`/page/cardConfirm/cardConfirm?orderNo=${orderNo}&outOrderNo=${outOrderNo}`)
         }
         catch (err) {
             console.log("购卡订单失败", err)

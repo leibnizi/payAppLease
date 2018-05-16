@@ -1,5 +1,6 @@
 
 import {onChange,data} from '/templates/msProtocal/msProtocal.js';
+import {push} from "../../util/navigator";
 import * as aliApi from '/util/aliApi.js';
 
 Page({
@@ -10,34 +11,38 @@ Page({
         text: "提交订单",
         onSubmit: 'onSubmit',
         ...data,
-        onSelect: 'onSelected'
+        onSelect: 'onSelected',
+        orderNo:null,
+        outOrderNo:null
     },
     onLoad(option) {
         this.setData({
-            type: option.type
+            orderNo: option.orderNo,
+            outOrderNo:option.outOrderNo
         })
     },
     onShow() {
 
     },
-    onSubmit(e) {
-        console.log("Hello", e)
-    },
     onSelected(e) {
         onChange(e, this)
     },
     async onSubmit(e) {
-        console.log("Hello", e)
+        const config = {
+            "creditRentType": "signPay", /**固定传:signPay */
+            "outOrderNo": this.data.outOrderNo, /**外部订单号，即商户自己的订单号 */
+            "zmOrderNo": this.data.orderNo, /**芝麻订单号 */
+        };
+
+        console.log("Config______",config)
         try {
-            const res = await aliApi.zmRentTransition({
-                "creditRentType": "signPay", /**固定传:signPay */
-                "out_order_no": "outOråderNo201801223123", /**外部订单号，即商户自己的订单号 */
-                "zm_order_no": "zmOrderNo201801223123", /**芝麻订单号 */
-            })
+            const res = await aliApi.zmRentTransition(config)
+            push(`/page/orderSuccess/orderSuccess?orderNo=${this.data.orderNo}&msOrder=${this.data.outOrderNo}`)
             console.log("try确认订单", res)
         }
         catch (err) {
             console.log("catch确认订单", err)
+            push("/page/orderFail/orderFai")
         }
     }
 });
