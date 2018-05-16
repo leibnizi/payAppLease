@@ -39,7 +39,7 @@
 .cart-page {
   min-height: 100vh;
   overflow: hidden;
-  padding-bottom: 160rpx;
+  padding-bottom: 240rpx;
 }
 .cart-page .btn{
   border-radius: 100rpx;
@@ -63,6 +63,7 @@
   width: 100%;
   border-top: 1px solid #f2f2f2;
   background-color: #fff;
+  margin-bottom: 100rpx;
 }
 .buy-btn{
   background: #F03A80;
@@ -70,7 +71,7 @@
   margin: 0;
   height: 100rpx;
   text-align: center;
-  font-size: 32rpx;
+  font-size: 30rpx;
   color: #FFFFFF;
   line-height: 100rpx;
   font-weight: 300;

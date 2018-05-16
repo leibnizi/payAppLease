@@ -68,7 +68,10 @@
   right: -100rpx;
 }
 
-
+.run-out-product-detail view {
+  font-weight: 200;
+  margin-bottom: 10rpx;
+}
 
 .run-out-product-detail > .brand{
   color: #ccc;

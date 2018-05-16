@@ -10,7 +10,7 @@
       
     </view>
     <!-- 右侧详情 -->
-    <view a:if="{{item.status === 2 || item.status === 3}}" class="product-detail-box">
+    <view a:if="{{!item.is_valid}}" class="product-detail-box">
       <view  class="run-out-product-detail">
         <view class="brand">
           {{item.brand}}
@@ -19,8 +19,7 @@
           {{item.name}}
         </view>
         <view class="run-out">
-          {{item.status === 2 ? '对不起，美衣暂时没有租期':''}}
-          {{item.status === 3 ? '对不起，商品已下架':''}}
+          "对不起，美衣暂时没有租期"
         </view>
       </view>
     </view>

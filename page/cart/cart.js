@@ -10,9 +10,14 @@ Page({
     invalid_items:[],
     showDelete: false,
     has_card: true,
+    isInitPage: true
   },
   onLoad() {},
   async onShow() {
+    
+    if (!globalData.location.region_code) {
+      return false
+    }
     loading.show();
     try {
       const { data: { data, status } } = await this.getData();
@@ -43,6 +48,9 @@ Page({
       console.log("Result", e)
     } finally {
       // loading.hide();
+      this.setData({
+        isInitPage:false
+      })
       my.hideLoading()
     }
     // 获取购物车商品数量供tabbar展示
@@ -50,17 +58,33 @@ Page({
   },
   async deleteProduct(e) { 
     const { id } = e.target.dataset;
+    const { region_code } = globalData.location
     loading.show();
     try {
-      const { status } = await post('alipaymini-plan/cart-product-del', { 
+      const { data: { status , data} } = await post('alipaymini-plan/cart-product-del', { 
+        delivery_region: region_code,
         plan_id: this.data.planMsg.plan_id,
         plan_item_id: id,
       })
       if (status === "ok") {
-        const { productList } = this.data;
-        const newProductList = productList.filter(item => item.plan_item_id !== id)
+        // const productList =  data
+        
+        const { valid_items, invalid_items } = data
+
+        const planMsg = {
+          price: data.price,
+          is_disabled: data.is_disabled,
+          is_valid: data.is_valid,
+          is_full: data.is_full,
+          plan_id: data.plan_id,
+          have_invalid_product: data.have_invalid_product
+        }
+        
         this.setData({
-          productList: newProductList
+          planMsg,
+          valid_items,
+          invalid_items,
+          productList: [...valid_items, ...invalid_items],
         })
       }
     }
@@ -73,7 +97,9 @@ Page({
   async goToBuy(){
     try {
       loading.show();
-      const {data, status, error} = await this.postConfirm()
+      const { data: { data: {status, error} }} = await this.postConfirm()
+
+      return false
       if (data && data instanceof Object) {
         my.navigateTo({
           url:'/page/order'
@@ -117,7 +143,6 @@ Page({
       valid_items: newProductList.filter(item => item.is_valid === true ),
       invalid_items: newProductList.filter(item => item.is_valid === false)
     })
-    console.log(newProductList,"@@@")
   },
   closeTopFun(){
     //手动关闭却改变语义完全的不同的状态名，会不会有啥问题
@@ -126,17 +151,26 @@ Page({
     })
   },
   postConfirm() {
-    return post('/confirm/mall',{
-
-    }, {
-      params: {
+    const { planMsg: { plan_id }, valid_items } = this.data
+    const { region_code } = globalData.location
+    const order_item = valid_items.map(item => {
+      return {
+        plan_item_id: item.plan_item_id
       }
     })
+    return post('confirm/alipaymini-plan-daily',{
+      delivery_region: region_code,
+      plan_id,
+      order_item: order_item
+    }, {
+        headers: {
+        'Content-type': 'application/json'
+      }})
   },
   async deleteLoseFun() {
     loading.show();
     try {
-      const { status } = await this.postDeleteLose()
+      const { data: { status } } = await this.postDeleteLose()
       if (status === "ok") {
         this.setData({
           invalid_items: []
@@ -165,11 +199,10 @@ Page({
   postDeleteLose() {
     const { planMsg: { plan_id }, invalid_items}  = this.data
     const deleteLostParam = invalid_items.map(item => {
-      return item.plan_item_ids
+      return item.plan_item_id
     }).join(",")
-    debugger
     return post('alipaymini-plan/invalid-product-del', {
-      
+      // delivery_region: region_code,
       plan_id: this.data.planMsg.plan_id,
       plan_item_ids: deleteLostParam
     })
