@@ -1,4 +1,4 @@
-@import '/templates/tab-bar/index.acss';
+@import '/templates/tabBar/index.acss';
 .listItem{
     display: flex;
     flex-direction: row;

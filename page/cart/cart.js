@@ -1,6 +1,6 @@
 import { get, post } from '/util/httpService.js';
 import loading from '/util/loading.js'
-import tabBar from '/templates/tab-bar/index.js';
+import tabBar from '/templates/tabBar/index.js';
 var globalData = getApp().globalData;
 Page({
   data: {

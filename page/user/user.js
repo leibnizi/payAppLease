@@ -1,7 +1,7 @@
 import { get, post } from '/util/httpService.js';
 import {userList} from '/config/config.js';
 import {push} from '/util/navigator.js';
-import tabBar from '/templates/tab-bar/index.js';
+import tabBar from '/templates/tabBar/index.js';
 var globalData = getApp().globalData;
 Page({
   data: {

@@ -1,4 +1,4 @@
-<import src="/templates/tab-bar/index.axml"/>
+<import src="/templates/tabBar/index.axml"/>
 <view>
   <view a:for="{{list}}">
     <view data-path="{{item.path}}" class="listItem" onTap="goPath">

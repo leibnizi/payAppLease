@@ -3,7 +3,7 @@ import { push } from '/util/navigator.js';
 import { get } from '/util/httpService.js';
 import loading from '/util/loading.js';
 import Util from '/util/util.js'
-import tabBar from '/templates/tab-bar/index.js';
+import tabBar from '/templates/tabBar/index.js';
 var globalData = getApp().globalData;
 Page({
   data: {
