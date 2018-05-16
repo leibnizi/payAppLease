@@ -31,7 +31,7 @@ Page({
         ],
         selected: false,
         onSelect:'onSelected',
-        cardImage:`${imagePath}/buyCard/buyCard@2x.png`,
+        cardImage:`${imagePath}/buyCard/buyCard2x.png`,
         couponList:[],
         selectedCoupon:null,
         onClose:'onClose',

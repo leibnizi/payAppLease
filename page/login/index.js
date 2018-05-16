@@ -12,14 +12,9 @@ Page({
     mobile: '',
     invitation_code: '',
     access_token: '',
-    toUrl: '', //登录成功后返回地址
   },
   onLoad(query) {
     console.log(query);
-    AuthLogin.getAccessToken();
-    this.setData({
-      toUrl: ''
-    });
   },
 
   onChangeMobile(event){

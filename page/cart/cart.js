@@ -11,7 +11,11 @@ Page({
     showDelete: false,
     has_card: true,
   },
-  onLoad() {},
+  onLoad() {
+    this.setData({
+      tabBar: {'tabCurrent':'cart'},//当前tabber亮灯标识
+    });
+  },
   async onShow() {
     loading.show();
     try {
@@ -42,6 +46,9 @@ Page({
       // loading.hide();
       my.hideLoading()
     }
+    this.setData({
+      tabBar: {'tabCurrent':'cart'},//当前tabber亮灯标识
+    });
     // 获取购物车商品数量供tabbar展示
     this._getCart();
   },
@@ -49,7 +56,7 @@ Page({
     const { id } = e.target.dataset;
     loading.show();
     try {
-      const { status } = await post('/alipaymini-plan/cart-product-del', { 
+      const { status } = await post('alipaymini-plan/cart-product-del', { 
         sale_item_id: id,
       } ,{
         params: {
@@ -74,7 +81,7 @@ Page({
       const {data, status, error} = await this.postConfirm()
       if (data && data instanceof Object) {
         my.navigateTo({
-          url:'/page/order'
+          url:'/page/order/order'
         })
       }
       else if (error && error instanceof Object ){
@@ -118,7 +125,7 @@ Page({
     })
   },
   postConfirm() {
-    return post('/confirm/mall',{
+    return post('confirm/mall',{
 
     }, {
       params: {
@@ -144,17 +151,17 @@ Page({
 
   getData() {
     const { data } = my.getStorageSync({ key: 'globalAddress' });
-    return get('/alipaymini-plan/cart', {
+    return get('alipaymini-plan/cart', {
       params: {
         delivery_region: data && data.region_code
       }
     })
   },
   getCheckCardStatus() {
-    return get('/alipaymini-user/own-card')
+    return get('alipaymini-user/own-card')
   },
   postDeleteLose() {
-    return post('/alipaymini-plan/cart', {
+    return post('alipaymini-plan/cart', {
       plan_id: '1',
       plan_item_ids: '2'
     })
@@ -163,19 +170,18 @@ Page({
   * 获取购物车数据供tabbar
   */
   _getCart(){
-    get('alipaymini-plan/cart', { params: { 'delivery_region': globalData.location.districtAdcode }}).then((rps)=>{
-      var viewData = this.data.tabBar;
-      if(rps.data && rps.data.data && rps.data.status == 'ok'){
-        this.setData({
-          tabBar: Object.assign({},viewData,{cartNum:rps.data.data.length, tabCurrent:'cart'})
-        });
-      }else{
-        this.setData({
-          tabBar: Object.assign({},viewData,{cartNum:rps.data.data.length || 0, tabCurrent:'cart'})
-        });
-      }
-    }, (rps)=>{
-        
-    });
-  },
+    var userInfo = my.getStorageSync({'key': 'userInfo'}).data;
+    if(userInfo && userInfo.token_type == 2 && globalData.defaultUserAddress.region_code){
+      get('alipaymini-plan/cart', { params: { 'delivery_region': globalData.defaultUserAddress.region_code }}).then((rps)=>{
+        var viewData = this.data.tabBar;
+        if(rps.data && rps.data.data && rps.data.status == 'ok'){
+          this.setData({
+            tabBar: Object.assign({},viewData,{cartNum:rps.data.data.length})
+          });
+        }
+      }, (rps)=>{
+          
+      });
+    }
+  }
 });

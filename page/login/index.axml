@@ -1,6 +1,6 @@
 <view class="container">
   <view class="login-wrap">
-    <form onSubmit="onSubmit" onReset="onReset">
+    <form onSubmit="onSubmit">
       <view class="form-row">
         <view class="form-row-label">手机号</view>
         <view class="form-row-content">

@@ -6,7 +6,8 @@ import {baseUrl} from '/config/config.js';
 import Util from '/util/util.js';
 import AuthLogin from '/util/authLogin.js';
 
-const test_access_token = 'ab67e1463d6361375030635b090f2684'
+var oneTargetLogin = true;
+const test_access_token = ''
 
 const initConfig = {
     params: {},
@@ -18,10 +19,17 @@ const parseUrl = (reUrl,queryStringObject)=>{
     let url = `${baseUrl}/${reUrl}`;
     let access_token = my.getStorageSync({ key: 'access_token' }).data || test_access_token;
     let platform = 'alipaymini'; //标识支付宝应用
-    queryStringObject = Object.assign({}, queryStringObject, {
-        platform,
-        access_token
-    });
+    if(!queryStringObject.isAccess){
+        queryStringObject = Object.assign({}, queryStringObject, {
+            platform
+        });
+    }else{
+        queryStringObject = Object.assign({}, queryStringObject, {
+            platform,
+            access_token
+        });
+    }
+
 
     if(queryStringObject && !Util.isEmptyObject(queryStringObject)){
         url += '?' + Util.objectToString(queryStringObject);
@@ -33,15 +41,19 @@ const erroCodeState = (res) => {
     if(res.status == 200){
         if(res.data && res.data.status != 'ok' && res.data.error){
             //支付宝token超时状态 和 单点登录状态 access_token 超时 从新触发登录
-            if(res.data.error.code == '11008' || res.data.error.code == '26001'){
+            if((res.data.error.code == '11008' || res.data.error.code == '26001' || res.data.error.code == '17003') && oneTargetLogin){
                 AuthLogin.login();
+                oneTargetLogin = false;
             }else{
                 my.showToast({
                     type:'none',
                     content: res.data.error.message || res.data.error.code,
                     duration: 1000
                 });
+                oneTargetLogin = true;
             }
+        }else{
+            oneTargetLogin = true;
         }
     }
 }

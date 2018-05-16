@@ -56,7 +56,7 @@ Page({
 
     this.getDetailInfo();
     //创建地址应用
-    this._getLocation();
+    //this._getLocation();
   },
 
   getDetailInfo(){
@@ -121,9 +121,15 @@ Page({
   * 关闭浮层
   */
   _closeSelectInfo(){
+    var detail = this.data.detail;
+        detail.size.map((item,idx) => {
+          detail.size[idx] = Object.assign({}, item, {current: false});
+        });
+      
     this.setData({
       selectInfoState: false,
-      specification_key: ''
+      specification_key: '',
+      detail: detail
     });
   },
 
@@ -132,12 +138,10 @@ Page({
    */
   _addCart(){
     let authCode = my.getStorageSync({key:'authCode'}).data;
+    
+    AuthLogin.login();
 
-    if(authCode){
-      AuthLogin.getAuthCode();
-    }
-
-    this._getUserAddress();
+    //this._getUserAddress();
 
     this.setData({
       selectInfoState: true
@@ -157,7 +161,7 @@ Page({
       return false;
     }
     post('alipaymini-plan/product', { 
-      delivery_region: this.data.location.districtAdcode,
+      delivery_region: this.data.defaultUserAddress.region_code,
       product_id: this.data.id,
       source: 1,
       specification_key: this.data.specification_key
@@ -195,7 +199,7 @@ Page({
    * 获取购物车数据供tabbar
    */
   _getCart(){
-    get('alipaymini-plan/cart', { params: { 'delivery_region': this.data.location.districtAdcode }}).then((rps)=>{
+    get('alipaymini-plan/cart', { params: { 'delivery_region': this.data.defaultUserAddress.region_code }}).then((rps)=>{
       var viewData = [];
       if(rps.data && rps.data.data && rps.data.status == 'ok'){
         viewData = rps.data.data;
@@ -260,7 +264,6 @@ Page({
           });
         }
       }
-      console.log(getApp());
     },(rps) => {
 
     });

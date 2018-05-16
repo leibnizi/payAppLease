@@ -132,7 +132,7 @@
 
           <view class="wrap-box">
             <view class="sect-box">
-              <view class="label">配送区域</view> <navigator url="/page/addressList/addressList"><view class="location">{{defaultUserAddress.region_code}}</view> <view class="icon icon_arrows_right_gray"></view></navigator>
+              <view class="label">配送区域</view> <navigator url="/page/addressList/addressList"><view class="location">{{defaultUserAddress.area_name}}</view> <view class="icon icon_arrows_right_gray"></view></navigator>
             </view>
           </view>
 
