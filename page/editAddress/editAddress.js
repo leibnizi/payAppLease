@@ -2,6 +2,7 @@ import {userList} from '/config/config.js';
 import { push } from '/util/navigator.js';
 import { get, post } from '/util/httpService.js';
 import loading from '/util/loading.js'
+const app = getApp()
 
 Page({
   data: {
@@ -76,12 +77,11 @@ Page({
   },
   async onLoad(option) {
     if (option.from !== "add") {
-    
-      const app = getApp()
-      const address_msg = app.globalData.defaultGlobalAddress
+      const address_msg = app.globalData.location
       this.setData({
         address_msg
       });
+      console.log(address_msg,"yyyyyy")
     } else {
       this.setData({
         address_msg: {},

@@ -39,6 +39,7 @@
 .cart-page {
   min-height: 100vh;
   overflow: hidden;
+  padding-bottom: 160rpx;
 }
 .cart-page .btn{
   border-radius: 100rpx;

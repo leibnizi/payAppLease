@@ -1,22 +1,22 @@
 <template name="cascade">
   <view class="pv-content" catchTap="stopBubbling">
     <view>
-        <picker-view value="{{value}}" onChange="onChange">
-        <picker-view-column>
-            <block a:for="{{shengArr}}">
-                <view> {{item.name}} </view>
-            </block>
-        </picker-view-column>
-        <picker-view-column>
-            <block a:for="{{shiArr}}">
-                <view> {{item.name}} </view>
-            </block>
-        </picker-view-column>
-        <picker-view-column>
-            <block a:for="{{quArr}}">
-                <view> {{item.name}} </view>
-            </block>
-        </picker-view-column>
+        <picker-view class="picker-view" value="{{value}}" onChange="onChange">
+            <picker-view-column>
+                <block a:for="{{shengArr}}">
+                    <view> {{item.name}} </view>
+                </block>
+            </picker-view-column>
+            <picker-view-column>
+                <block a:for="{{shiArr}}">
+                    <view> {{item.name}} </view>
+                </block>
+            </picker-view-column>
+            <picker-view-column>
+                <block a:for="{{quArr}}">
+                    <view> {{item.name}} </view>
+                </block>
+            </picker-view-column>
         </picker-view>
     </view>
 

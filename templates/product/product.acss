@@ -22,7 +22,10 @@
   margin-left: 10rpx;
   font-size: 28rpx;
 }
-
+.product-detail view {
+  font-weight: 200;
+  margin-bottom: 10rpx;
+}
 .product-detail > .brand{
   color: #333;
 }

@@ -3,13 +3,11 @@ import { get } from '/util/httpService.js';
 
 App({
   async onLaunch(options) {
-    console.log('App Launch', options);
     const { data: { data: { rows } }, status } = await this.getAddress();
     rows.sort((a, b) => {
       return b.id - a.id
     })
-    this.globalData.globalAddressList = rows
-    this.globalData.defaultGlobalAddress = rows[0]
+    this.globalData.location = rows[0]
   },
   onShow() {
     aliApi.getAuthCode({scope:'auth_code'}).then(rsp=>{
@@ -23,18 +21,21 @@ App({
     hasLogin: false,
     item_id: '2018032901000222123469565693',
     category: 'ZMSC_1_4_1',
-    globalAddressList:[],
-    defaultGlobalAddress: {},
     location: {
-      district:'黄埔',
-      districtAdcode:'110101'
+      id: 0,
+      region_name: "",
+      address_detail: "",
+      contact_name: "",
+      contact_mobile: "",
+      region_code: "",
+      area_name: ""
     }
   },
   getAddress() {
     return get('user/address', {
       params: {
         type: 2,
-        page: 1,
+        page: 1,  
         page_size: 20
       }
     })
