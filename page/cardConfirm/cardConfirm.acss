@@ -6,14 +6,12 @@
     background: white;
     height: 616rpx;
 }
-
 .orderInfo .up{
     box-sizing: border-box;
     height: 50%;
     border-bottom: 1rpx solid #DDDDDD;
     padding: 10rpx;
 }
-
 .orderInfo .up .item{
     flex: 1;
     display: flex;
@@ -26,16 +24,12 @@
     line-height: 28rpx;
     margin-bottom: 15rpx;
 }
-
 .orderInfo .up .item:nth-child(5n+2){
     color: #333333;
 }
-
-
 .orderInfo .down{
     padding:10rpx
 }
-
 .orderInfo .down .item{
     flex: 1;
     display: flex;
@@ -48,11 +42,9 @@
     line-height: 28rpx;
     margin-bottom: 20rpx;
 }
-
 .orderInfo .down .item:nth-child(5n+2),.orderInfo .down .item:nth-child(5n+3){
     color: #333333;
 }
-
 .btnArea{
     background: #FFFFFF;
     padding:60rpx 20rpx;

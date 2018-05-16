@@ -16,7 +16,7 @@ Page({
             return {
                 name: item.name,
                 value: item.description,
-                date: `${util.formatTime(new Date(item.from_date))}-${util.formatTime(new Date(item.to_date))}`,
+                date: `${util.formatTime(item.from_date)} 至 ${util.formatTime(item.to_date)}`,
                 id: item.coupon_id,
                 type: item.type,
                 cardType: item.bind_card_type,
@@ -42,7 +42,8 @@ Page({
             deposit: null,
             totalPrice: null,
             imageUrl: "",
-            id:null
+            id:null,
+            depositeType:null
         }
 
     },
@@ -60,9 +61,6 @@ Page({
         return get("/order/card-confirm-v2", config)
     },
 
-    /*
-      获取当前卡信息，每次更换优惠券之后，需要重新从服务端拿数据
-     */
     async getCardInfoAsync(first = false) {
         loading.show()
         try {
@@ -78,7 +76,8 @@ Page({
                         deposit: card.deposit,
                         totalPrice: card.total,
                         imageUrl: `http://static-r.msparis.com/${card.cover_img}`,
-                        id:card.id
+                        id:card.id,
+                        depositeType:card.deposit_type
                     })
                 })
             }
@@ -92,8 +91,8 @@ Page({
     _createMsOrder() {
         let params = {
             card_id: this.data.cardInfo.id,
-            deposit_type: '',
-            coupon_id: ''
+            deposit_type: this.data.cardInfo.depositeType,
+            coupon_id: this.data.currentSelect
         }
         return post("order/card-v2", params);
     },
@@ -167,9 +166,20 @@ Page({
             loading.toast({content: "请勾选协议"})
             return;
         }
+        try{
+            const res = await this._createMsOrder();
+            console.log("Get Ms Order",res)
+            if(res.data.status === 'ok')
+            {
+                this.buyCard(res.data.data);
+            } else {
 
-        const res = await this._createMsOrder();
-        this.buyCard(res.data.data);
+            }
+
+        } catch (e) {
+            console.log("Error",e)
+        }
+
 
     },
     onSelected(e) {
@@ -213,7 +223,7 @@ Page({
             const {
                 orderNo,outOrderNo
             } = res;
-            push(`/page/cardConfirm/cardConfirm?orderNo=${orderNo}&outOrderNo=${outOrderNo}`)
+            push(`/page/cardConfirm/cardConfirm?orderNo=${orderNo}&outOrderNo=${outOrderNo}&id=${this.data.cardInfo.id}`)
         }
         catch (err) {
             console.log("购卡订单失败", err)
