@@ -52,7 +52,8 @@
           <image  src="../../image/cartEmpty.png"></image>
         </view>
         <view class="empty-text">购物车是空的哦{{isInitPage}}</view>
-        <navigator class="btn" open-type="switchTab" url="/page/home/home">去逛逛</button></navigator>
+        <navigator url="/page/home/home" class="btn" open-type="redirect">去逛逛</button></navigator>
+
       <view>
     </view>
   </block>

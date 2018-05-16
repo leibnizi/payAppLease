@@ -66,7 +66,7 @@ Page({
         plan_id: this.data.planMsg.plan_id,
         plan_item_id: id,
       })
-      if (status === "ok") {
+      if (status === "ok" && data) {
         // const productList =  data
         
         const { valid_items, invalid_items } = data
@@ -85,6 +85,14 @@ Page({
           valid_items,
           invalid_items,
           productList: [...valid_items, ...invalid_items],
+        })
+      }
+      else if (status === "ok" && !data) {
+        this.setData({
+          planMsg:{},
+          valid_items:[],
+          invalid_items:[],
+          productList: []
         })
       }
     }
@@ -126,11 +134,9 @@ Page({
   showDeleteFun(e){
     const { productList, valid_items, invalid_items } = this.data;
     const { id } = e.target.dataset;
-    console.log(id, "kkk")
     const newProductList = productList.map((item, index) => {
       if (item.plan_item_id == id) {
         item.showDelete = !(item.showDelete)
-        console.log(id, "kkk;;")
       }
       else{
         item.showDelete = false
@@ -152,14 +158,16 @@ Page({
   },
   postConfirm() {
     const { planMsg: { plan_id }, valid_items } = this.data
-    const { region_code } = globalData.location
+    const { region_code, id } = globalData.location
     const order_item = valid_items.map(item => {
       return {
         plan_item_id: item.plan_item_id
       }
     })
+    console.log(globalData.location,"<<<<<")
     return post('confirm/alipaymini-plan-daily',{
       delivery_region: region_code,
+      user_address_id: id,
       plan_id,
       order_item: order_item
     }, {
