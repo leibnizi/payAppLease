@@ -1,8 +1,8 @@
 require('@alipay/appx-compiler/lib/sjsEnvInit');
 require('./config$');
-require('../..//page/buyCard/buyCard');
 require('../..//page/home/home');
 require('../..//page/login/index');
+require('../..//page/buyCard/buyCard');
 require('../..//page/cardConfirm/cardConfirm');
 require('../..//page/return/return');
 require('../..//page/rentConfirm/rentConfirm');
