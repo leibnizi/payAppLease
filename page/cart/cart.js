@@ -14,57 +14,78 @@ Page({
   },
   onLoad() {},
   async onShow() {
-    if (!globalData.defaultUserAddress.region_code) {
-      
-      return false
-    }
-    loading.show();
-    try {
-      const { data: { data, status, error } } = await this.getData();
-      const { data: { has_card } } = await this.getCheckCardStatus();
-      if (status === 'ok') {
-        const { valid_items, invalid_items } = data
+    
+    var userInfo = my.getStorageSync({ 'key': 'userInfo' }).data;
 
-        const planMsg = {
-          price: data.price,
-          is_disabled: data.is_disabled,
-          is_valid: data.is_valid,
-          is_full: data.is_full,
-          plan_id: data.plan_id,
-          have_invalid_product: data.have_invalid_product
+    console.log(userInfo,"???")
+
+    if (userInfo && userInfo.token_type == 2 && globalData.defaultUserAddress.region_code) {
+      loading.show();
+      var viewData = this.data.tabBar;
+      try {
+        const { data: { data, status, error } } = await this.getData();
+        const { data: { has_card } } = await this.getCheckCardStatus();
+        if (status === 'ok') {
+          const { valid_items, invalid_items } = data
+
+          const planMsg = {
+            price: data.price,
+            is_disabled: data.is_disabled,
+            is_valid: data.is_valid,
+            is_full: data.is_full,
+            plan_id: data.plan_id,
+            have_invalid_product: data.have_invalid_product
+          }
+
+          const productList = [...valid_items, ...invalid_items];
+          this.setData({
+            planMsg,
+            valid_items,
+            invalid_items,
+            productList,
+            has_card,
+            tabBar: Object.assign({}, viewData, { cartNum: productList.length })
+          })
         }
-
-        this.setData({
-          planMsg,
-          valid_items,
-          invalid_items,
-          productList: [...valid_items, ...invalid_items],
-          has_card
-        })
+        else {
+          my.showToast({
+            type: 'fail',
+            content: error.message,
+            duration: 2000,
+          });
+        }
       }
-      else{
-        my.showToast({
-          type: 'fail',
-          content: error.message,
-          duration: 2000,
-          // success: () => {
-          //   my.alert({
-          //     title: 'toast 消失了',
-          //   });
-          // },
-        });
+      catch (e) {
+      } finally {
+        // loading.hide();
+        this.setData({
+          isInitPage: false
+        })
+        // my.hideLoading()
       }
     }
-    catch (e) {
-    } finally {
-      // loading.hide();
-      this.setData({
-        isInitPage:false
-      })
-      my.hideLoading()
+    else{
+      my.showToast({
+        type: 'fail',
+        content: "获取不到userInfo && userInfo.token_type == 2 && globalData.defaultUserAddress.region_code",
+        duration: 2000,
+      });
     }
     // 获取购物车商品数量供tabbar展示
     // this._getCart();
+  },
+  _getCart() {
+    
+    if (userInfo && userInfo.token_type == 2 && globalData.defaultUserAddress.region_code) {
+      get('alipaymini-plan/cart', { params: { 'delivery_region': globalData.defaultUserAddress.region_code } }).then((rps) => {
+        
+        if (rps.data && rps.data.data && rps.data.status == 'ok') {
+          
+        }
+      }, (rps) => {
+
+      });
+    }
   },
   async deleteProduct(e) { 
     const { id } = e.target.dataset;
@@ -79,8 +100,13 @@ Page({
       if (status === "ok" && data) {
         // const productList =  data
         
+        my.showToast({
+          type: 'success',
+          content: '删除成功',
+          duration: 1500,
+        });
         const { valid_items, invalid_items } = data
-
+        
         const planMsg = {
           price: data.price,
           is_disabled: data.is_disabled,
@@ -107,8 +133,9 @@ Page({
       }
     }
     catch (e) {
-    } finally {
       loading.hide();
+    } finally {
+      
     }
   },
   async goToBuy(){
@@ -233,19 +260,4 @@ Page({
   /*
   * 获取购物车数据供tabbar
   */
-  _getCart(){
-    var userInfo = my.getStorageSync({'key': 'userInfo'}).data;
-    if(userInfo && userInfo.token_type == 2 && globalData.defaultUserAddress.region_code){
-      get('alipaymini-plan/cart', { params: { 'delivery_region': globalData.defaultUserAddress.region_code }}).then((rps)=>{
-        var viewData = this.data.tabBar;
-        if(rps.data && rps.data.data && rps.data.status == 'ok'){
-          this.setData({
-            tabBar: Object.assign({},viewData,{cartNum:rps.data.data.length})
-          });
-        }
-      }, (rps)=>{
-          
-      });
-    }
-  }
 });

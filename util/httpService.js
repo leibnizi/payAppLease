@@ -48,6 +48,7 @@ const erroCodeState = (res, config) => {
                 return false;
             }else{
                 if(config.isToast){
+                    debugger
                     my.showToast({
                         type:'none',
                         content: res.data.error.message || res.data.error.code,

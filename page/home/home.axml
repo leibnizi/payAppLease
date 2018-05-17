@@ -2,20 +2,19 @@
 <import src="/templates/tabBar/index.axml"/>
 <view>
   <view class="banner">
+    <!-- <navigator url="/page/addressList/addressList" hover-class="navigator-hover">
+      添加一个新地址
+    </navigator> -->
     <image style="width:100%; height: 430rpx;" src="/image/home/banner.png" width="100%"></image>
   </view> 
   <view class="liucheng">
     <image src="/image/home/liucheng.png"></image>
-  </view> 
+  </view>  
   <view class="rent-flow">
     <template is="productList"  data ="{{productList,a}}" />
   </view>
-
-      <view class="tab-bar-box-wrap">
-
-        <template is="tabBar" data="{{tabBar,a}}"/>
-
-      </view>
-
+    <view class="tab-bar-box-wrap">
+      <template is="tabBar" data="{{tabBar,a}}"/>
+    </view>
 </view>
 </view>
