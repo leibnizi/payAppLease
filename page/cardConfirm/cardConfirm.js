@@ -71,6 +71,8 @@ Page({
         catch (err) {
             console.log("catch确认订单", err)
             push("/page/orderFail/orderFai")
+        } finally {
+            loading.hide()
         }
     }
 });
