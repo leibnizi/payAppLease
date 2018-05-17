@@ -2,10 +2,10 @@ import {userList} from '/config/config.js';
 import { push } from '/util/navigator.js';
 import { get, post } from '/util/httpService.js';
 import loading from '/util/loading.js'
+const app = getApp()
 
 Page({
   data: {
-    address_id:'',
     address_msg:{}, //地址列表带过来的默认地址数据
     region_code:'',
     citys: [],
@@ -77,12 +77,11 @@ Page({
   },
   async onLoad(option) {
     if (option.from !== "add") {
-    
-      const app = getApp()
-      const address_msg = app.globalData.defaultGlobalAddress
+      const address_msg = app.globalData.location
       this.setData({
         address_msg
       });
+      console.log(address_msg,"yyyyyy")
     } else {
       this.setData({
         address_msg: {},
@@ -131,9 +130,8 @@ Page({
   async formSubmit(e) {
     const { value } = e.detail;
 
-    console.log(value)
 
-    const { address_id } = this.data;
+    const { address_msg, address_msg: { id }, changeAddress  } = this.data;
     const {
       address_detail,
       contact_mobile,
@@ -141,17 +139,19 @@ Page({
       region_name
     } = value
 
-    const { changeAddress, address_msg: {id} } = this.data;
-
     if (!this.savePersonInfo(value)) return false;
-    const { data: { status } } = await this.postForm({
+
+    const params = {
       address_detail,
       contact_mobile,
       contact_name,
-      id:id || '',
+      // id: id || '',
       region_code: changeAddress.key || address_msg.region_code,
       region_name: region_name || ""
-    });
+    }
+    if (id) params.id = id
+
+    const { data: { status } } = await this.postForm(params);
     if (status === 'ok') {
       my.showToast({
         type: 'success',

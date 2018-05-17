@@ -23,15 +23,20 @@ App({
       "area_name": "邯山区"
     },// 用户默认地址
     location: {
-      district:'黄埔',
-      districtAdcode:'110101'
+      id: 0,
+      region_name: "",
+      address_detail: "",
+      contact_name: "",
+      contact_mobile: "",
+      region_code: "",
+      area_name: ""
     }
   },
   getAddress() {
     return get('user/address', {
       params: {
         type: 2,
-        page: 1,
+        page: 1,  
         page_size: 20
       }
     })

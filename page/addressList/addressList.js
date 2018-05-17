@@ -14,55 +14,27 @@ Page({
     touchAddressId: ''
     // isIphoneX: app.globalData.isIphoneX ? true : false,
   },
-  onShow(){
-    const app = getApp()
-    const addressList = app.globalData.globalAddressList
-    this.setData({
-      addressList
-    })
-    // try {
-    //   loading.show();
-    //   const { data: { data: { rows, total }}, status } = await this.getAddressList()
-    //   const addressList = rows.sort((a,b) => a.id - b.id < 0)
-    //   this.setData({
-    //     addressList ,
-    //     total
-    //   })
-    // }
-    // catch (e) {
+  async onShow(){
+    loading.show();
+    try {
+      const { data: { data: { rows }, status},  } = await this.getAddressList()
+      const addressList = rows.sort((a,b) => a.id - b.id < 0)
+      this.setData({
+        addressList
+      })
+    }
+    catch (e) {
 
-    // } finally {
-    //   loading.hide();
-    // }
+    } finally {
+      loading.hide();
+    }
   },
-  // async onReachBottom() {
-  //   let { page } = this.data
-  //   loading.show();
-  //   this.setData({
-  //     page: ++page
-  //   })
-  //   try {
-  //     const { data:{data}, status } = await this.getAddressList();
-  //     if (data && typeof data.rows === "object") {
-  //       this.setData({
-  //         productList: data.rows
-  //       })
-  //     }
-  //   }
-  //   catch (e) {
-  //     this.setData({
-  //       page: --page
-  //     })
-  //   } finally {
-  //     loading.hide();
-  //   }
-  // },
   selectedAddress(e){
     const { addressList } = this.data
     const defaultGlobalAddress = addressList.filter((addressItem) => addressItem.id === e.target.dataset.id);
     const app = getApp()
-    app.globalData.defaultGlobalAddress = defaultGlobalAddress[0]
-    
+    app.globalData.location = defaultGlobalAddress[0]
+
     my.showToast({
       type: 'success',
       content: '设置默认地址成功',
@@ -76,9 +48,6 @@ Page({
   },
   editAddress(e){
     const { addressList } = this.data
-    const defaultGlobalAddress = addressList.filter((addressItem) => addressItem.id === e.target.dataset.id);
-    const app = getApp()
-    app.globalData.defaultGlobalAddress = defaultGlobalAddress[0]
     my.navigateTo({
       url: '/page/editAddress/editAddress?from=addressList'
     })
@@ -118,15 +87,6 @@ Page({
         addressList: newAddressList
       })
     }
-    
-    // this.setData({
-    //   distanceEnd: clientX
-    // })
-
-    // if (clientX - this.data.distanceStart < 0) {
-    //   this.setData({
-    //   })
-    // }
   },
   hideDeleteBar(e){
     const { addressList } = this.data
@@ -150,14 +110,19 @@ Page({
     const { addressList } = this.data
     try {
       loading.show();
-      const { data, status } = await this.postDelete(id)
+      const { data: { data, status } } = await this.postDelete(id)
       if (status === 'ok') {
-        const newAddressList = addressList.filter((item) => {
-          item.id === id
-        })
+        my.showToast({
+          type: 'success',
+          content: '删除成功',
+          duration: 1000
+        });
+        const newAddressList = addressList.filter((item) => item.id !== id)
+        
         this.setData({
           addressList: newAddressList
         })
+        
       }
 
       // const addressList = rows.sort((a, b) => a.id - b.id < 0)
@@ -169,7 +134,6 @@ Page({
     catch (e) {
 
     } finally {
-      loading.hide();
     }
   },
   postDelete(id){

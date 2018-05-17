@@ -5,6 +5,7 @@
   background-color: #fff;
   width: 100%;
   overflow: hidden;
+  min-height: 95vh
 }
 .btn-box{
   position: fixed;

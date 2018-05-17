@@ -11,8 +11,8 @@ const test_access_token = ''
 
 const initConfig = {
     params: {},
-    headrs: {
-        'Content-Type': 'application/x-www-form-urlencoded'
+    headers: {
+        'Content-Type': 'application/json'
     }
 };
 const parseUrl = (reUrl,queryStringObject)=>{
@@ -64,7 +64,7 @@ export const get = (url,config)=>{
         let requstConfig = {
             method:'get',
             url:parseUrl(url,config.params),
-            headrs:config.headrs || {},
+            headers:config.headers || {},
             success:(...arg)=>{
                 erroCodeState(...arg);
                 resolve(...arg);
@@ -81,11 +81,11 @@ export const post = (url,data,config)=>{
         let access_token = my.getStorageSync({ key: 'access_token' }).data || test_access_token;
         let platform = 'alipaymini'; //标识支付宝应用
         data = Object.assign({}, data, {access_token,platform});
-    
+        data = JSON.stringify(data)
         let requstConfig = {
             method:'post',
             url:parseUrl(url,config.params),
-            headrs:config.headrs || {},
+            headers:config.headers || {},
             data,
             success:(...arg)=>{
                 erroCodeState(...arg);
@@ -106,7 +106,7 @@ export const put = (url,data,config)=>{
         let requstConfig = {
             method:'put',
             url:parseUrl(url,config.params),
-            headrs:config.headrs || {},
+            headers:config.headers || {},
             data,
             success:(...arg)=>{
                 erroCodeState(...arg);
@@ -127,7 +127,7 @@ export const del = (url, data, params)=>{
         let requstConfig = {
             method:'delete',
             url:parseUrl(url,config.params),
-            headrs:config.headrs || {},
+            headers:config.headers || {},
             data,
             success:(...arg)=>{
                 erroCodeState(...arg);
