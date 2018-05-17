@@ -1,6 +1,6 @@
 <view class="container">
   <view class="card">
-    <!--<image src=""></image>-->
+    <image src=""></image>
     <view class="textInfo" a:if="{{hasMember === true}}">
       <text>2018.03.01到期</text>
     </view>

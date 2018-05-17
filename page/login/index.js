@@ -40,6 +40,7 @@ Page({
 
   },
   onSubmit(){
+
     let userInfo = my.getStorageSync({key:'userInfo'}).data;
     if(userInfo && userInfo.token_type == 2){
       my.alert({
@@ -48,7 +49,8 @@ Page({
       });
       return false;
     }
-    if(Util.checkPhone(this.data.mobile)){
+    
+    if(!Util.checkPhone(this.data.mobile)){
       Util.toast({
         type:'none',
         content: '请输入有效手机号！',
@@ -56,6 +58,7 @@ Page({
       });
       return false;
     }
+
     if(this.data.code.length != 4){
       Util.toast({
         type:'none',

@@ -9,7 +9,7 @@ page{
 
 .card{
     position: relative;
-    background-image: url("../../image/member/memberCard@2x.png");
+    background-image: url("/image/member/memberCard2x.png");
     background-size: 100%;
     background-repeat: no-repeat;
     width:690rpx;
