@@ -14,8 +14,9 @@ Page({
   },
   onLoad() {},
   async onShow() {
-    
-    if (!globalData.location.region_code) {
+    console.log("!globalData.defaultUserAddress.region_code","kkj")
+    if (!globalData.defaultUserAddress.region_code) {
+      
       return false
     }
     loading.show();
@@ -54,11 +55,11 @@ Page({
       my.hideLoading()
     }
     // 获取购物车商品数量供tabbar展示
-    this._getCart();
+    // this._getCart();
   },
   async deleteProduct(e) { 
     const { id } = e.target.dataset;
-    const { region_code } = globalData.location
+    const { region_code } = globalData.defaultUserAddress
     loading.show();
     try {
       const { data: { status , data} } = await post('alipaymini-plan/cart-product-del', { 
@@ -158,13 +159,12 @@ Page({
   },
   postConfirm() {
     const { planMsg: { plan_id }, valid_items } = this.data
-    const { region_code, id } = globalData.location
+    const { region_code, id } = globalData.defaultUserAddress
     const order_item = valid_items.map(item => {
       return {
         plan_item_id: item.plan_item_id
       }
     })
-    console.log(globalData.location,"<<<<<")
     return post('confirm/alipaymini-plan-daily',{
       delivery_region: region_code,
       user_address_id: id,
@@ -194,7 +194,7 @@ Page({
 
 
   getData() {
-    const { region_code } = globalData.location
+    const { region_code } = globalData.defaultUserAddress
     return get('alipaymini-plan/cart', {
       params: {
         delivery_region: region_code

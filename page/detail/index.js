@@ -31,7 +31,7 @@ Page({
     specification_key:'',
     selectInfoState: false, //加入购物车的选择浮层的状态
     days: 7,//租期默认7天
-    location: globalData.location, //配送区域
+    location: globalData.defaultUserAddress, //配送区域
     cartNum: 0,//购物车小标的数据显示
     location2:{
     "id": 47043,
@@ -221,7 +221,7 @@ Page({
       success(res) {
         my.hideLoading();
         console.log(res)
-        globalData.location = res;
+        globalData.defaultUserAddress = res;
         that.setData({
           location: res
         })

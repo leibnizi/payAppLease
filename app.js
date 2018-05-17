@@ -22,15 +22,15 @@ App({
       "region_code": "130402",
       "area_name": "邯山区"
     },// 用户默认地址
-    location: {
-      id: 0,
-      region_name: "",
-      address_detail: "",
-      contact_name: "",
-      contact_mobile: "",
-      region_code: "",
-      area_name: ""
-    }
+    // location: {
+    //   id: 0,
+    //   region_name: "",
+    //   address_detail: "",
+    //   contact_name: "",
+    //   contact_mobile: "",
+    //   region_code: "",
+    //   area_name: ""
+    // }
   },
   getAddress() {
     return get('user/address', {

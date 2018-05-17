@@ -33,7 +33,7 @@ Page({
     const { addressList } = this.data
     const defaultGlobalAddress = addressList.filter((addressItem) => addressItem.id === e.target.dataset.id);
     const app = getApp()
-    app.globalData.location = defaultGlobalAddress[0]
+    app.globalData.defaultUserAddress = defaultGlobalAddress[0]
 
     my.showToast({
       type: 'success',

@@ -77,7 +77,7 @@ Page({
   },
   async onLoad(option) {
     if (option.from !== "add") {
-      const address_msg = app.globalData.location
+      const address_msg = app.globalData.defaultUserAddress
       this.setData({
         address_msg
       });
