@@ -44,6 +44,7 @@ Page({
     },
     userAddressList: globalData && globalData.userAddressList || [], //用户全局的地址列表
     defaultUserAddress: globalData && globalData.defaultUserAddress || {},// 用户默认地址
+    isUserCard: false, //用户是否有卡
   },
   onShow(){
     this._getCart();
@@ -138,16 +139,32 @@ Page({
    */
   async _addCart(){
     let authCode = await my.getStorageSync({key:'authCode'}).data;
-    
+    //第一步登录
     await AuthLogin.login();
-
+    //第二部 判断用户是否有卡，获取用户地址列表
     let userCard =  await this._getUserCart();
+ 
+    if(userCard && userCard.data && userCard.data.data){
+      this.setData({
+        isUserCard: userCard.data.data.has_card
+      });
+    }else{
+      this.setData({
+        isUserCard: false
+      });
+    }
 
-    //this._getUserAddress();
+    await this._getUserAddress();
 
-    this.setData({
-      selectInfoState: true
-    });
+    if(userCard && userCard.data && userCard.data.data && !userCard.data.data.has_card){
+      my.navigateTo({
+          url:'/page/buyCard/buyCard'
+      });
+    }else{
+      this.setData({
+        selectInfoState: true
+      });
+    }
   },
 
   /*

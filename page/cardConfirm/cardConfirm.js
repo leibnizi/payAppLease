@@ -1,6 +1,9 @@
 
 import {onChange,data} from '/templates/msProtocal/msProtocal.js';
+import {push} from "../../util/navigator";
 import * as aliApi from '/util/aliApi.js';
+import {post} from '/util/httpService';
+import loading from '/util/loading';
 
 Page({
     data: {
@@ -10,34 +13,64 @@ Page({
         text: "提交订单",
         onSubmit: 'onSubmit',
         ...data,
-        onSelect: 'onSelected'
+        onSelect: 'onSelected',
+        orderNo:null,
+        outOrderNo:null,
+        id:null
     },
     onLoad(option) {
+        console.log(option)
         this.setData({
-            type: option.type
+            orderNo: option.orderNo,
+            outOrderNo:option.outOrderNo,
+            id:option.id
         })
     },
     onShow() {
 
     },
-    onSubmit(e) {
-        console.log("Hello", e)
-    },
     onSelected(e) {
         onChange(e, this)
     },
-    async onSubmit(e) {
-        console.log("Hello", e)
-        try {
-            const res = await aliApi.zmRentTransition({
-                "creditRentType": "signPay", /**固定传:signPay */
-                "out_order_no": "outOråderNo201801223123", /**外部订单号，即商户自己的订单号 */
-                "zm_order_no": "zmOrderNo201801223123", /**芝麻订单号 */
-            })
+    async _pollQuery(){
+        const orderRes = await post('/order/payment-done',{id:this.data.id,type:3});
+        console.log("Order",this.data.outOrderNo);
+        console.log("Pay",orderRes);
+        if(orderRes.data.status === 'ok')
+        {
+            push(`/page/orderSuccess/orderSuccess?orderNo=${this.data.orderNo}&msOrder=${this.data.outOrderNo}`)
             console.log("try确认订单", res)
+        }
+    },
+    async onSubmit(e) {
+        loading.show();
+        const config = {
+            "creditRentType": "signPay", /**固定传:signPay */
+            "outOrderNo": this.data.outOrderNo, /**外部订单号，即商户自己的订单号 */
+            "zmOrderNo": this.data.orderNo, /**芝麻订单号 */
+        };
+
+        console.log("Config______",config)
+        try {
+            const res = await aliApi.zmRentTransition(config)
+            console.log("支付宝支付结果——————————",res)
+            if(res.error_code && res.error_code === 'SUCCESS' || (res.order_status && res.order_status === 'SUCCESS' && res.error_code && res.error_code === 'SUCCESS'))
+            {
+                //支付宝接口支付成功，调用我们的api查询支付结果
+                const poll = setInterval(()=>this._pollQuery(),800)
+
+                setTimeout(()=>{
+                    clearInterval(poll)
+                    push("/page/orderFail/orderFail")
+                },10 * 1000)
+
+
+            }
+            console.log("支付出现问题")
         }
         catch (err) {
             console.log("catch确认订单", err)
+            push("/page/orderFail/orderFai")
         }
     }
 });

@@ -51,6 +51,23 @@ const AuthLogin = {
                                         my.navigateTo({
                                             url:'/page/login/index'
                                         });
+                                    }else{
+                                        /*
+                                        my.httpRequest({
+                                            url: baseUrl + '/alipaymini-user/own-card',
+                                            method:'GET',
+                                            data: {
+                                                access_token: res.data.data.access_token
+                                            },
+                                            success: (res) => {
+                                                debugger;
+                                                my.setStorageSync({key:'has_card', data:res.data.data.has_card});
+                                            },
+                                            fail: (res) => {
+
+                                            }
+                                        });
+                                        */
                                     }
                                 }
                             }else{
