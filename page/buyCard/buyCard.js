@@ -66,7 +66,6 @@ Page({
     },
 
     async getCardInfoAsync(first = false) {
-        loading.show()
         try {
             console.log("Start Request")
             const cardInfo = await this._getCardInfo(first)
@@ -89,9 +88,7 @@ Page({
                 })
             }
         } catch (e) {
-
-        } finally {
-            loading.hide()
+            //action on error
         }
     },
 
@@ -135,6 +132,8 @@ Page({
                 page_size: 20
             }
         }
+        loading.show()
+        this.getCardInfoAsync(true);
         try {
             const response = await get("user/coupon", config);
             if (response.data.status == 'ok') {
@@ -146,8 +145,10 @@ Page({
             }
         }
         catch (e) {
+        } finally {
+            loading.hide()
         }
-        this.getCardInfoAsync(true)
+
         //this.getData();
 
     },
