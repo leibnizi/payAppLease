@@ -20,7 +20,7 @@ const parseUrl = (reUrl,queryStringObject)=>{
     let access_token = my.getStorageSync({ key: 'access_token' }).data || test_access_token;
 
     let platform = 'alipaymini'; //标识支付宝应用
-    if(!queryStringObject.isAccess){
+    if(queryStringObject.isAccess){ //true 是不需要权限的， false 是需要权限
         queryStringObject = Object.assign({}, queryStringObject, {
             platform
         });
