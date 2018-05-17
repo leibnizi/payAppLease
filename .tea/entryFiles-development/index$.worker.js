@@ -3,6 +3,7 @@ require('./config$');
 function success() {
 require('../..//app');
 require('../..//page/home/home');
+require('../..//page/buyCard/buyCard');
 require('../..//page/login/index');
 require('../..//page/buyCard/buyCard');
 require('../..//page/cardConfirm/cardConfirm');
