@@ -38,9 +38,12 @@ Page({
         createData: {},
         cardInfo: {
             originPrice: null,
+            oShow:null,
             validDays: null,
             deposit: null,
+            dShow:null,
             totalPrice: null,
+            tShow:null,
             imageUrl: "",
             id: null,
             depositeType: null
@@ -72,9 +75,12 @@ Page({
                 this.setData({
                     cardInfo: Object.assign({}, {
                         originPrice: card.original_total,
+                        oShow:util.formatPrice(card.original_total,0),
                         validDays: card.days,
                         deposit: card.deposit,
+                        dShow:util.formatPrice(card.deposit,0),
                         totalPrice: card.total,
+                        tShow:util.formatPrice(card.total,0),
                         imageUrl: `http://static-r.msparis.com/${card.cover_img}`,
                         id: card.id,
                         depositeType: card.deposit_type
@@ -255,5 +261,8 @@ Page({
     },
     onReceive(e) {
         couponList.op.onReceive(e, this)
+    },
+    formatMoney(p){
+        util.formatPrice(p,0)
     }
 });

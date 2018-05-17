@@ -6,7 +6,7 @@ import {baseUrl} from '/config/config.js';
 import Util from '/util/util.js';
 import AuthLogin from '/util/authLogin.js';
 
-const token_for_dalao =   'e3ec2e594f074dbc49dd3d6cfd8a0254'
+const token_for_dalao =   '2f2abfdbe199028d54f9695df8e86c3e'
 const test_access_token = 'c9084aa020b39db759c5c8ae58aa6fbf'
 
 const initConfig = {
@@ -17,7 +17,7 @@ const initConfig = {
 };
 const parseUrl = (reUrl,queryStringObject)=>{
     let url = `${baseUrl}/${reUrl}`;
-    let access_token = my.getStorageSync({ key: 'access_token' }).data || test_access_token;
+    let access_token = my.getStorageSync({ key: 'access_token' }).data || token_for_dalao;
     let platform = 'alipaymini'; //标识支付宝应用
     queryStringObject = Object.assign({}, queryStringObject, {
         platform,

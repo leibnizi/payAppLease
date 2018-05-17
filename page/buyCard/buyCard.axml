@@ -7,7 +7,7 @@
     <view class="list">
         <view class="litsItem">
             <text>原价</text>
-            <text>{{cardInfo.originPrice}}</text>
+            <text>{{cardInfo.oShow}}</text>
         </view>
         <view class="litsItem">
             <text>有效期</text>
@@ -15,7 +15,7 @@
         </view>
         <view class="litsItem">
             <text>押金</text>
-            <text>{{cardInfo.deposit}}</text>
+            <text>{{cardInfo.dShow}}</text>
         </view>
         <view class="litsItem">
             <text>优惠券</text>
@@ -28,7 +28,7 @@
         <view class="apply">
             <view class="price">
                 <text>总价</text>
-                <text>{{cardInfo.totalPrice}}</text>
+                <text>{{cardInfo.tShow}}</text>
                 <text>(不含押金)</text>
             </view>
             <view class="btn" onTap="createOrder">
