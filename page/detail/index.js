@@ -189,47 +189,64 @@ Page({
     if(userInfo && userInfo.token_type == 2){
       console.log('userAddress');
       let userAddress = await this._getUserAddress();
+      console.log(userAddress);
+
       if(userAddress.data && userAddress.data.data && userAddress.data.status == 'ok' && userAddress.data.data.length > 0){
         globalData['userAddressList'] = userAddress.data.data.rows;
-        
+          console.log(2);
         this.setData({
             userAddressList: userAddress.data.data.rows
         });
-
+        console.log(3);
         if(Util.isEmptyObject(globalData.defaultUserAddress)){
+          console.log(4);
           globalData['defaultUserAddress'] = userAddress.data.data.rows[0];
           this.setData({
             defaultUserAddress: userAddress.data.data.rows[0]
           });
         }
       }else{
-
-        let getLocationData = my.getLocation({type: 1});
+console.log(5);
+        //let getLocationData = aliApi.getLocation({type: 1});
         let setDefaultUserAddress = {};
-        
-        if(getLocationData){
-          setDefaultUserAddress['region_code'] = getLocationData.districtAdcode;
-          setDefaultUserAddress['area_name'] = getLocationData.district;
+        //TUDO: 无法实现同步封装
+        my.getLocation({
+          type: 1,
+          success: (res) => {
+            setDefaultUserAddress['region_code'] = res.districtAdcode;
+            setDefaultUserAddress['area_name'] = res.district;
             this.setData({
               defaultUserAddress: setDefaultUserAddress 
             });
-        }else{
-          my.alert({ title: '定位失败，请返回尝试！' });
-        }
+          },
+          fail: () => {
+            //my.alert({ title: '定位失败，请返回尝试！' });
+            setDefaultUserAddress['region_code'] = '310101';
+            setDefaultUserAddress['area_name'] = '黄浦区';
+            this.setData({
+              defaultUserAddress: setDefaultUserAddress 
+            });
+          }
+        });
       }
     }
 
     //判断用户是否有卡
     console.log(userCard);
-    if(userCard && userCard.data && userCard.data.data && !userCard.data.data.has_card && userInfo && userInfo.token_type == 2){
-      my.navigateTo({
-          url:'/page/buyCard/buyCard'
-      });
-    }else{
-      this.setData({
-        selectInfoState: true
-      });
-    }
+    
+    setTimeout(()=>{
+      if(userCard && userCard.data && userCard.data.data && !userCard.data.data.has_card && userInfo && userInfo.token_type == 2){
+        console.log(8);
+        my.navigateTo({
+            url:'/page/buyCard/buyCard'
+        });
+      }else{
+        this.setData({
+          selectInfoState: true
+        });
+      }
+    }, 500);
+
   },
 
   /*

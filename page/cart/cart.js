@@ -13,7 +13,10 @@ Page({
     isInitPage: true
   },
   onLoad() {
-    
+    //当前tabber亮灯标识
+    this.setData({
+      tabBar: {'tabCurrent':'cart'}
+    });
   },
   async onShow() {
     var userInfo = my.getStorageSync({ 'key': 'userInfo' }).data;
@@ -43,8 +46,9 @@ Page({
             invalid_items,
             productList,
             has_card,
-            tabBar: Object.assign({}, viewData, { cartNum: productList.length })
+            tabBar: Object.assign({}, this.data.tabBar, { cartNum: productList.length })
           })
+        console.log(this.data);
         }
         else {
           my.showToast({
@@ -71,6 +75,9 @@ Page({
       });
     }
     // 获取购物车商品数量供tabbar展示
+    this.setData({
+      tabBar: {'tabCurrent':'cart'}
+    });
   },
   async deleteProduct(e) { 
     const { id } = e.target.dataset;
@@ -241,8 +248,5 @@ Page({
       plan_id: this.data.planMsg.plan_id,
       plan_item_ids: deleteLostParam
     })
-  },
-  /*
-  * 获取购物车数据供tabbar
-  */
+  }
 });

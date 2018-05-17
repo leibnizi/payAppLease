@@ -1,7 +1,7 @@
 {
   "pages": [
-    "page/buyCard/buyCard",
     "page/home/home",
+    "page/buyCard/buyCard",
     "page/login/index",
     "page/cardConfirm/cardConfirm",
     "page/return/return",

@@ -6,6 +6,7 @@ import {baseUrl} from '/config/config.js';
 import Util from '/util/util.js';
 import loading from '/util/loading.js'
 import AuthLogin from '/util/authLogin.js';
+import * as aliApi from '/util/aliApi.js';
 
 var oneTargetLogin = true;
 const test_access_token = ''
@@ -52,7 +53,7 @@ const erroCodeState = (res, config) => {
                 }else{
                     loading.hide();
                     if(config.isToast){
-                        my.showToast({
+                        aliApi.showToast({
                             type:'none',
                             content: res.data.error.message || res.data.error.code,
                             duration: 1000
