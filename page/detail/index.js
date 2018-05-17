@@ -39,6 +39,7 @@ Page({
     isUserCard: false, //用户是否有卡
   },
   onShow(){
+    this.getDetailInfo();
     this._getCart();
     if(globalData.defaultUserAddress && globalData.userAddressList){
       this.setData({
@@ -53,12 +54,33 @@ Page({
     });
 
     this.getDetailInfo();
-    //创建地址应用
-    //this._getLocation();
   },
 
-  getDetailInfo(){
-    get('product', { params: { id: this.data.id }}).then((rps)=>{
+  async getDetailInfo(){
+    let productInfo = await get('product', { params: { id: this.data.id }});
+    
+      let viewData = {};
+      if(productInfo.data && productInfo.data.data && productInfo.data.status == 'ok'){
+
+        viewData = productInfo.data.data;
+
+        viewData.image.map( (item,idx) => {
+          viewData.image[idx] = item + '!w750'
+        });
+       
+        viewData =   Object.assign({},viewData, {'size': viewData.specifications[0] && viewData.specifications[0].options,'market_price': Util.formatPrice(viewData.market_price)});
+
+        this.setData({
+          detail: viewData
+        });
+          my.setNavigationBar({
+            reset: true,
+            title: viewData.name
+          });
+      }
+      
+    /*
+    .then((rps)=>{
       var viewData = {};
       if(rps.data && rps.data.data && rps.data.status == 'ok'){
 
@@ -81,6 +103,7 @@ Page({
     }, (rps)=>{
         
     });
+    */
   },
   _productIntroduction(event){
     this.setData({
@@ -139,15 +162,17 @@ Page({
    * 加入购物车
    */
   async _addCart(){
-    //let authCode = await aliApi.getStorageSync({key:'authCode'}).data;
 
+    //let authCode = my.getStorageSync({key:'authCode'}).data;
+    let userCard = null;
     //第一步登录
     await AuthLogin.login();
-    let userInfo = await aliApi.getStorageSync({'key': 'userInfo'}).data;
+  
+    let userInfo =  my.getStorageSync({'key': 'userInfo'}).data;
 
     //第二部 判断用户是否有卡，获取用户地址列表
     if(userInfo && userInfo.token_type == 2){
-      let userCard =  await this._checkUserCart();
+      userCard =  await this._checkUserCart();
   
       if(userCard && userCard.data && userCard.data.data){
         this.setData({
@@ -177,10 +202,10 @@ Page({
           });
         }
       }else{
-        //debugger;
+
         let getLocationData = await aliApi.getLocation({type: 1});
         let setDefaultUserAddress = {};
-        //debugger;
+        
         if(getLocationData){
           setDefaultUserAddress['region_code'] = getLocationData.districtAdcode;
           setDefaultUserAddress['area_name'] = getLocationData.district;

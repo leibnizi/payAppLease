@@ -33,7 +33,7 @@ const AuthLogin = {
      * 拿 authCode 去换取 access_token 和 用户信息
     */
     login: async () => {
-
+        
         let authCode = await AuthLogin.getAuthCodeFn();
         console.log('获取authCode:',authCode);
         if(authCode){
