@@ -33,6 +33,7 @@ Page({
         onChange(e, this)
     },
     async _pollQuery(){
+        loading.show();
         const orderRes = await post('/order/payment-done',{id:this.data.id,type:3});
         console.log("Order",this.data.outOrderNo);
         console.log("Pay",orderRes);

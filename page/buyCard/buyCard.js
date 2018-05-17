@@ -38,15 +38,16 @@ Page({
         createData: {},
         cardInfo: {
             originPrice: null,
-            oShow:null,
+            oShow: null,
             validDays: null,
             deposit: null,
-            dShow:null,
+            dShow: null,
             totalPrice: null,
-            tShow:null,
+            tShow: null,
             imageUrl: "",
             id: null,
-            depositeType: null
+            depositeType: null,
+            orderId: null
         }
 
     },
@@ -75,12 +76,12 @@ Page({
                 this.setData({
                     cardInfo: Object.assign({}, {
                         originPrice: card.original_total,
-                        oShow:util.formatPrice(card.original_total,0),
+                        oShow: util.formatPrice(card.original_total, 0),
                         validDays: card.days,
                         deposit: card.deposit,
-                        dShow:util.formatPrice(card.deposit,0),
+                        dShow: util.formatPrice(card.deposit, 0),
                         totalPrice: card.total,
-                        tShow:util.formatPrice(card.total,0),
+                        tShow: util.formatPrice(card.total, 0),
                         imageUrl: `http://static-r.msparis.com/${card.cover_img}`,
                         id: card.id,
                         depositeType: card.deposit_type
@@ -100,7 +101,7 @@ Page({
             deposit_type: this.data.cardInfo.depositeType,
             coupon_id: this.data.currentSelect
         }
-        console.log("Params",params)
+        console.log("Params", params)
         return post("order/card-v2", params);
     },
 
@@ -179,17 +180,18 @@ Page({
             const res = await this._createMsOrder();
             console.log("Get Ms Order", res)
             if (res.data.status === 'ok') {
+                this.setData({orderId: res.data.data.order_id});
                 this.buyCard(res.data.data);
             } else {
                 if (res.data.status === 'error') {
-                    loading.toast({content: res.data.error?res.data.error.message: "优惠券失效"})
+                    loading.toast({content: res.data.error ? res.data.error.message : "优惠券失效"})
                 }
             }
 
         } catch (e) {
             console.log("Error", e)
         } finally {
-             loading.hide()
+            loading.hide()
         }
 
 
@@ -264,7 +266,7 @@ Page({
     onReceive(e) {
         couponList.op.onReceive(e, this)
     },
-    formatMoney(p){
-        util.formatPrice(p,0)
+    formatMoney(p) {
+        util.formatPrice(p, 0)
     }
 });

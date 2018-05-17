@@ -2,8 +2,8 @@ require('./config$');
 
 function success() {
 require('../..//app');
-require('../..//page/buyCard/buyCard');
 require('../..//page/home/home');
+require('../..//page/buyCard/buyCard');
 require('../..//page/login/index');
 require('../..//page/cardConfirm/cardConfirm');
 require('../..//page/return/return');
