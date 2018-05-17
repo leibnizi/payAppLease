@@ -8,7 +8,7 @@ import AuthLogin from '/util/authLogin.js';
 
 
 var oneTargetLogin = true;
-const test_access_token = ''
+const test_access_token = '5f647d83dc195c14327428116bb438b7'
 
 const initConfig = {
     params: {},
