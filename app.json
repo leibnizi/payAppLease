@@ -1,6 +1,7 @@
 {
   "pages": [
     "page/home/home",
+    "page/buyCard/buyCard",
     "page/login/index",
     "page/buyCard/buyCard",
     "page/cardConfirm/cardConfirm",

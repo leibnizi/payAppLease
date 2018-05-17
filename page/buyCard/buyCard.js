@@ -244,6 +244,8 @@ Page({
         }
         catch (err) {
             console.log("购卡订单失败", err)
+        } finally {
+            loading.hide()
         }
         console.log("申请免押购卡")
     },

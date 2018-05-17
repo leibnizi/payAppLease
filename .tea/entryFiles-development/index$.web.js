@@ -1,4 +1,3 @@
-require('@alipay/appx-compiler/lib/sjsEnvInit');
 require('./config$');
 require('../..//page/home/home');
 require('../..//page/login/index');
