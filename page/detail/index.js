@@ -2,6 +2,7 @@ import Util from '/util/util.js';
 import animModal from '/templates/items/index.js';
 import {get, post} from '/util/httpService.js';
 import AuthLogin from '/util/authLogin.js';
+import * as aliApi from '/util/aliApi.js';
 var globalData = getApp().globalData;
 Page({
   data: {
@@ -48,6 +49,13 @@ Page({
   },
   onShow(){
     this._getCart();
+
+    console.log(this.data.defaultUserAddress, globalData.defaultUserAddress);
+    if(globalData.defaultUserAddress && globalData.userAddressList){
+      this.setData({
+        defaultUserAddress: globalData.defaultUserAddress
+      });
+    }
   },
   onLoad(query) {
     console.log(query);
@@ -138,11 +146,11 @@ Page({
    * 加入购物车
    */
   async _addCart(){
-    let authCode = await my.getStorageSync({key:'authCode'}).data;
+    let authCode = await aliApi.getStorageSync({key:'authCode'}).data;
     //第一步登录
     await AuthLogin.login();
     //第二部 判断用户是否有卡，获取用户地址列表
-    let userCard =  await this._getUserCart();
+    let userCard =  await this._checkUserCart();
  
     if(userCard && userCard.data && userCard.data.data){
       this.setData({
@@ -154,7 +162,36 @@ Page({
       });
     }
 
-    await this._getUserAddress();
+    let userAddress = await this._getUserAddress();
+    //debugger;
+    if(false && userAddress.data && userAddress.data.data && userAddress.data.status == 'ok' && userAddress.data.data.length > 0){
+      globalData['userAddressList'] = userAddress.data.data.rows;
+      
+      this.setData({
+          userAddressList: userAddress.data.data.rows
+      });
+
+      if(Util.isEmptyObject(globalData.defaultUserAddress)){
+        globalData['defaultUserAddress'] = userAddress.data.data.rows[0];
+        this.setData({
+          defaultUserAddress: userAddress.data.data.rows[0]
+        });
+      }
+    }else{
+      //debugger;
+      let getLocationData = await aliApi.getLocation({type: 1});
+      let setDefaultUserAddress = {};
+      //debugger;
+      if(getLocationData){
+        setDefaultUserAddress['region_code'] = getLocationData.districtAdcode;
+        setDefaultUserAddress['area_name'] = getLocationData.district;
+          this.setData({
+            defaultUserAddress: setDefaultUserAddress 
+          });
+      }else{
+        my.alert({ title: '定位失败，请返回尝试！' });
+      }
+    }
 
     if(userCard && userCard.data && userCard.data.data && !userCard.data.data.has_card){
       my.navigateTo({
@@ -233,11 +270,15 @@ Page({
   /*
    * 获取用户的位置信息
    */
-  _getLocation(){
-    var that = this;
-    my.getLocation({
-      type: 1,
-      success(res) {
+  async _getLocation(){
+    debugger;
+    let getLocation = await aliApi.getLocation({type: 1});
+ 
+
+    /**
+    
+    
+    success(res) {
         my.hideLoading();
         console.log(res)
         globalData.location = res;
@@ -249,7 +290,8 @@ Page({
         my.hideLoading();
         my.alert({ title: '定位失败' });
       },
-    })
+
+     */
   },
   /*
    * 城市选择
@@ -268,28 +310,13 @@ Page({
   /*
    * 用户拥有卡判断
    */
-  _getUserCart(){
+  _checkUserCart(){
     return get('alipaymini-user/own-card');
   },
   /*
   * 用户登录后获取 用户的地址信息
   */
   _getUserAddress(){
-    get('user/address',{params:{'page_size': 20, 'type': 1, 'page': 1}}).then((rps) =>{
-      if(rps.data && rps.data.data && rps.data.status == 'ok'){
-        globalData['userAddressList'] = rps.data.data.rows;
-        this.setData({
-            userAddressList: rps.data.data.rows
-        });
-        if(Util.isEmptyObject(globalData.defaultUserAddress)){
-          globalData['defaultUserAddress'] = rps.data.data.rows[0];
-          this.setData({
-            defaultUserAddress: rps.data.data.rows[0]
-          });
-        }
-      }
-    },(rps) => {
-
-    });
+    return get('user/address',{params:{'page_size': 20, 'type': 1, 'page': 1}});
   }
 });

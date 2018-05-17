@@ -49,10 +49,10 @@ const Util = {
      */
     isArray(arr) {
         if (typeof arr === 'object' && !isNaN(arr.length)) {
-            console.log('参数' + arr, '是数组！');
+            //console.log('参数' + arr, '是数组！');
             return true;
         } else {
-            console.log('参数' + arr, '不是数组！');
+            //console.log('参数' + arr, '不是数组！');
             return false;
         }
     },
