@@ -139,54 +139,62 @@ Page({
    * 加入购物车
    */
   async _addCart(){
-    let authCode = await aliApi.getStorageSync({key:'authCode'}).data;
+    //let authCode = await aliApi.getStorageSync({key:'authCode'}).data;
+
     //第一步登录
     await AuthLogin.login();
+    let userInfo = await aliApi.getStorageSync({'key': 'userInfo'}).data;
+
     //第二部 判断用户是否有卡，获取用户地址列表
-    let userCard =  await this._checkUserCart();
- 
-    if(userCard && userCard.data && userCard.data.data){
-      this.setData({
-        isUserCard: userCard.data.data.has_card
-      });
-    }else{
-      this.setData({
-        isUserCard: false
-      });
-    }
-
-    let userAddress = await this._getUserAddress();
-    //debugger;
-    if(false && userAddress.data && userAddress.data.data && userAddress.data.status == 'ok' && userAddress.data.data.length > 0){
-      globalData['userAddressList'] = userAddress.data.data.rows;
-      
-      this.setData({
-          userAddressList: userAddress.data.data.rows
-      });
-
-      if(Util.isEmptyObject(globalData.defaultUserAddress)){
-        globalData['defaultUserAddress'] = userAddress.data.data.rows[0];
+    if(userInfo && userInfo.token_type == 2){
+      let userCard =  await this._checkUserCart();
+  
+      if(userCard && userCard.data && userCard.data.data){
         this.setData({
-          defaultUserAddress: userAddress.data.data.rows[0]
+          isUserCard: userCard.data.data.has_card
+        });
+      }else{
+        this.setData({
+          isUserCard: false
         });
       }
-    }else{
-      //debugger;
-      let getLocationData = await aliApi.getLocation({type: 1});
-      let setDefaultUserAddress = {};
-      //debugger;
-      if(getLocationData){
-        setDefaultUserAddress['region_code'] = getLocationData.districtAdcode;
-        setDefaultUserAddress['area_name'] = getLocationData.district;
+    }
+
+    // 已绑定用户获取用户地址
+    if(userInfo && userInfo.token_type == 2){
+      let userAddress = await this._getUserAddress();
+      if(false && userAddress.data && userAddress.data.data && userAddress.data.status == 'ok' && userAddress.data.data.length > 0){
+        globalData['userAddressList'] = userAddress.data.data.rows;
+        
+        this.setData({
+            userAddressList: userAddress.data.data.rows
+        });
+
+        if(Util.isEmptyObject(globalData.defaultUserAddress)){
+          globalData['defaultUserAddress'] = userAddress.data.data.rows[0];
           this.setData({
-            defaultUserAddress: setDefaultUserAddress 
+            defaultUserAddress: userAddress.data.data.rows[0]
           });
+        }
       }else{
-        my.alert({ title: '定位失败，请返回尝试！' });
+        //debugger;
+        let getLocationData = await aliApi.getLocation({type: 1});
+        let setDefaultUserAddress = {};
+        //debugger;
+        if(getLocationData){
+          setDefaultUserAddress['region_code'] = getLocationData.districtAdcode;
+          setDefaultUserAddress['area_name'] = getLocationData.district;
+            this.setData({
+              defaultUserAddress: setDefaultUserAddress 
+            });
+        }else{
+          my.alert({ title: '定位失败，请返回尝试！' });
+        }
       }
     }
 
-    if(userCard && userCard.data && userCard.data.data && !userCard.data.data.has_card){
+    //判断用户是否有卡
+    if(userCard && userCard.data && userCard.data.data && !userCard.data.data.has_card && userInfo && userInfo.token_type == 2){
       my.navigateTo({
           url:'/page/buyCard/buyCard'
       });
@@ -248,17 +256,19 @@ Page({
    * 获取购物车数据供tabbar
    */
   _getCart(){
-    get('alipaymini-plan/cart', { params: { 'delivery_region': this.data.defaultUserAddress.region_code }}).then((rps)=>{
-      var viewData = [];
-      if(rps.data && rps.data.data && rps.data.status == 'ok'){
-        viewData = rps.data.data;
-        this.setData({
-          cartNum: viewData.length
-        });
-      }
-    }, (rps)=>{
-        
-    });
+    var userInfo = my.getStorageSync({'key': 'userInfo'}).data;
+    if(userInfo && userInfo.token_type == 2 && globalData.defaultUserAddress.region_code){
+      get('alipaymini-plan/cart', { params: { 'delivery_region': globalData.defaultUserAddress.region_code }}).then((rps)=>{
+        var viewData = this.data.tabBar;
+        if(rps.data && rps.data.data && rps.data.status == 'ok'){
+          this.setData({
+            tabBar: Object.assign({},viewData,{cartNum:rps.data.data.length})
+          });
+        }
+      }, (rps)=>{
+          
+      });
+    }
   },
   /*
    * 获取用户的位置信息

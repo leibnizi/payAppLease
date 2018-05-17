@@ -43,7 +43,7 @@ const parseUrl = (reUrl,queryStringObject)=>{
 const erroCodeState = (res, config) => {
     if(config.isCheckErroCode){
         if(res.status == 200){
-            if( res.data && res.data.status != 'ok' && res.data.error){
+            if(res.data && res.data.status != 'ok' && res.data.error){
                 //支付宝token超时状态 和 单点登录状态 access_token 超时 从新触发登录
                 if((res.data.error.code == '11008' || res.data.error.code == '26001' || res.data.error.code == '17003') && oneTargetLogin){
                     AuthLogin.login();
