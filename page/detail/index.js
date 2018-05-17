@@ -33,6 +33,18 @@ Page({
     days: 7,//租期默认7天
     location: globalData.location, //配送区域
     cartNum: 0,//购物车小标的数据显示
+    location2:{
+    "id": 47043,
+    "region_name": "河北省 邯郸市 邯山区",
+    "address_detail": "asdasdasd",
+    "contact_name": "dddddccc",
+    "contact_mobile": "13124077261",
+    "region_code": "130402",
+    "area_name": "邯山区"
+    },
+    userAddressList: globalData && globalData.userAddressList || [], //用户全局的地址列表
+    defaultUserAddress: globalData && globalData.defaultUserAddress || {},// 用户默认地址
+    isUserCard: false, //用户是否有卡
   },
   onShow(){
     this._getCart();
@@ -45,7 +57,7 @@ Page({
 
     this.getDetailInfo();
     //创建地址应用
-    this._getLocation();
+    //this._getLocation();
   },
 
   getDetailInfo(){
@@ -110,25 +122,49 @@ Page({
   * 关闭浮层
   */
   _closeSelectInfo(){
+    var detail = this.data.detail;
+        detail.size.map((item,idx) => {
+          detail.size[idx] = Object.assign({}, item, {current: false});
+        });
+      
     this.setData({
       selectInfoState: false,
-      specification_key: ''
+      specification_key: '',
+      detail: detail
     });
   },
 
   /*
    * 加入购物车
    */
-  _addCart(){
-    let authCode = my.getStorageSync({key:'authCode'}).data;
-
-    if(authCode){
-      AuthLogin.getAuthCode();
+  async _addCart(){
+    let authCode = await my.getStorageSync({key:'authCode'}).data;
+    //第一步登录
+    await AuthLogin.login();
+    //第二部 判断用户是否有卡，获取用户地址列表
+    let userCard =  await this._getUserCart();
+ 
+    if(userCard && userCard.data && userCard.data.data){
+      this.setData({
+        isUserCard: userCard.data.data.has_card
+      });
+    }else{
+      this.setData({
+        isUserCard: false
+      });
     }
 
-    this.setData({
-      selectInfoState: true
-    });
+    await this._getUserAddress();
+
+    if(userCard && userCard.data && userCard.data.data && !userCard.data.data.has_card){
+      my.navigateTo({
+          url:'/page/buyCard/buyCard'
+      });
+    }else{
+      this.setData({
+        selectInfoState: true
+      });
+    }
   },
 
   /*
@@ -144,7 +180,7 @@ Page({
       return false;
     }
     post('alipaymini-plan/product', { 
-      delivery_region: this.data.location.districtAdcode,
+      delivery_region: this.data.defaultUserAddress.region_code,
       product_id: this.data.id,
       source: 1,
       specification_key: this.data.specification_key
@@ -182,7 +218,7 @@ Page({
    * 获取购物车数据供tabbar
    */
   _getCart(){
-    get('alipaymini-plan/cart', { params: { 'delivery_region': this.data.location.districtAdcode }}).then((rps)=>{
+    get('alipaymini-plan/cart', { params: { 'delivery_region': this.data.defaultUserAddress.region_code }}).then((rps)=>{
       var viewData = [];
       if(rps.data && rps.data.data && rps.data.status == 'ok'){
         viewData = rps.data.data;
@@ -214,5 +250,46 @@ Page({
         my.alert({ title: '定位失败' });
       },
     })
+  },
+  /*
+   * 城市选择
+  */
+  _chooseCity(){
+    my.chooseCity({
+      showLocatedCity: true,
+      showHotCities: true,
+      success: (res) => {
+        my.alert({
+          title: 'chooseAlipayContact response: ' + JSON.stringify(res),
+        });
+      },
+    });
+  },
+  /*
+   * 用户拥有卡判断
+   */
+  _getUserCart(){
+    return get('alipaymini-user/own-card');
+  },
+  /*
+  * 用户登录后获取 用户的地址信息
+  */
+  _getUserAddress(){
+    get('user/address',{params:{'page_size': 20, 'type': 1, 'page': 1}}).then((rps) =>{
+      if(rps.data && rps.data.data && rps.data.status == 'ok'){
+        globalData['userAddressList'] = rps.data.data.rows;
+        this.setData({
+            userAddressList: rps.data.data.rows
+        });
+        if(Util.isEmptyObject(globalData.defaultUserAddress)){
+          globalData['defaultUserAddress'] = rps.data.data.rows[0];
+          this.setData({
+            defaultUserAddress: rps.data.data.rows[0]
+          });
+        }
+      }
+    },(rps) => {
+
+    });
   }
 });

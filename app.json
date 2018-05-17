@@ -2,6 +2,7 @@
   "pages": [
     "page/buyCard/buyCard",
     "page/home/home",
+    "page/login/index",
     "page/cardConfirm/cardConfirm",
     "page/return/return",
     "page/rentConfirm/rentConfirm",
@@ -10,8 +11,6 @@
     "page/orderFail/orderFail",
     "page/editAddress/editAddress",
     "page/addressList/addressList",
-    "page/rent/rent",
-    "page/login/index",
     "page/bill/bill",
     "page/detail/index",
     "page/order/order",
@@ -22,8 +21,9 @@
     "page/bill/bill",
     "page/cardConfirm/cardConfirm",
     "page/member/member",
-    "page/help/help",
-    "page/selectDistrict/index"
+    "page/selectDistrict/index",
+    "page/clause/index",
+    "page/help/index"
   ],
   "window": {
     "enableWK": "YES",

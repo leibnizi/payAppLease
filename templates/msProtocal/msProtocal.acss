@@ -8,10 +8,10 @@
     width: 44rpx;
     height: 44rpx;
     margin-right: 20rpx;
-    background-image: url("/image/noSelected@2x.png");
+    background-image: url("/image/noSelected2x.png");
 }
 .select.active image{
-    background-image: url("/image/selected@2x.png");
+    background-image: url("/image/selected2x.png");
 }
 .select text{
     font-family: PingFangSC-Regular;

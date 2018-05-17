@@ -12,14 +12,9 @@ Page({
     mobile: '',
     invitation_code: '',
     access_token: '',
-    toUrl: '', //登录成功后返回地址
   },
   onLoad(query) {
     console.log(query);
-    AuthLogin.getAccessToken();
-    this.setData({
-      toUrl: ''
-    });
   },
 
   onChangeMobile(event){
@@ -53,7 +48,7 @@ Page({
       });
       return false;
     }
-    if(!Util.checkPhone(this.data.mobile)){
+    if(Util.checkPhone(this.data.mobile)){
       Util.toast({
         type:'none',
         content: '请输入有效手机号！',

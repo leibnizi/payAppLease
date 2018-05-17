@@ -6,40 +6,51 @@ Page({
   data: {
     tabBar: tabBar,
     productList:[],
-    activeProductList:[],
-    loseProductList:[],
+    valid_items:[],
+    invalid_items:[],
     showDelete: false,
     has_card: true,
+    isInitPage: true
   },
   onLoad() {},
   async onShow() {
+    
+    if (!globalData.location.region_code) {
+      return false
+    }
     loading.show();
     try {
-      const { data: { data }, status } = await this.getData();
-      const { has_card } = await this.getCheckCardStatus();
-      // console.log(has_card,"kkuu")
-      if (data && typeof data.items === "object") {
+      const { data: { data, status } } = await this.getData();
+      const { data: { has_card } } = await this.getCheckCardStatus();
+      if (status === 'ok') {
+        const { valid_items, invalid_items } = data
 
-        const activeProductList = data.filter((item) => {
-          return item.status === 1
-        })
-        
-        const loseProductList = data.filter((item) => {
-          return item.status === 2 || item.status === 3
-        })
+        const planMsg = {
+          price: data.price,
+          is_disabled: data.is_disabled,
+          is_valid: data.is_valid,
+          is_full: data.is_full,
+          plan_id: data.plan_id,
+          have_invalid_product: data.have_invalid_product
+        }
 
         this.setData({
-          productList: data.items,
-          activeProductList,
-          loseProductList,
+          planMsg,
+          valid_items,
+          invalid_items,
+          productList: [...valid_items, ...invalid_items],
           has_card
         })
+
       }
     }
     catch (e) {
       console.log("Result", e)
     } finally {
       // loading.hide();
+      this.setData({
+        isInitPage:false
+      })
       my.hideLoading()
     }
     // 获取购物车商品数量供tabbar展示
@@ -47,23 +58,46 @@ Page({
   },
   async deleteProduct(e) { 
     const { id } = e.target.dataset;
+    const { region_code } = globalData.location
     loading.show();
     try {
-      const { status } = await post('/alipaymini-plan/cart-product-del', { 
-        sale_item_id: id,
-      } ,{
-        params: {
-        }
+      const { data: { status , data} } = await post('alipaymini-plan/cart-product-del', { 
+        delivery_region: region_code,
+        plan_id: this.data.planMsg.plan_id,
+        plan_item_id: id,
       })
-      if (status === "ok") {
-        const { productList } = this.data;
-        const newProductList = productList.filter(item => item.sale_item_id !== id)
+      if (status === "ok" && data) {
+        // const productList =  data
+        
+        const { valid_items, invalid_items } = data
+
+        const planMsg = {
+          price: data.price,
+          is_disabled: data.is_disabled,
+          is_valid: data.is_valid,
+          is_full: data.is_full,
+          plan_id: data.plan_id,
+          have_invalid_product: data.have_invalid_product
+        }
+        
         this.setData({
-          productList: newProductList
+          planMsg,
+          valid_items,
+          invalid_items,
+          productList: [...valid_items, ...invalid_items],
+        })
+      }
+      else if (status === "ok" && !data) {
+        this.setData({
+          planMsg:{},
+          valid_items:[],
+          invalid_items:[],
+          productList: []
         })
       }
     }
     catch (e) {
+      console.log(e,"??>>>")
     } finally {
       loading.hide();
     }
@@ -71,7 +105,9 @@ Page({
   async goToBuy(){
     try {
       loading.show();
-      const {data, status, error} = await this.postConfirm()
+      const { data: { data: {status, error} }} = await this.postConfirm()
+
+      return false
       if (data && data instanceof Object) {
         my.navigateTo({
           url:'/page/order'
@@ -96,10 +132,10 @@ Page({
     }
   },
   showDeleteFun(e){
-    const { productList } = this.data;
+    const { productList, valid_items, invalid_items } = this.data;
     const { id } = e.target.dataset;
     const newProductList = productList.map((item, index) => {
-      if (item.sale_item_id == id) {
+      if (item.plan_item_id == id) {
         item.showDelete = !(item.showDelete)
       }
       else{
@@ -107,8 +143,11 @@ Page({
       }
       return item
     })
+
     this.setData({
-      productList: newProductList
+      productList: newProductList,
+      valid_items: newProductList.filter(item => item.is_valid === true ),
+      invalid_items: newProductList.filter(item => item.is_valid === false)
     })
   },
   closeTopFun(){
@@ -118,24 +157,36 @@ Page({
     })
   },
   postConfirm() {
-    return post('/confirm/mall',{
-
-    }, {
-      params: {
+    const { planMsg: { plan_id }, valid_items } = this.data
+    const { region_code, id } = globalData.location
+    const order_item = valid_items.map(item => {
+      return {
+        plan_item_id: item.plan_item_id
       }
     })
+    console.log(globalData.location,"<<<<<")
+    return post('confirm/alipaymini-plan-daily',{
+      delivery_region: region_code,
+      user_address_id: id,
+      plan_id,
+      order_item: order_item
+    }, {
+        headers: {
+        'Content-type': 'application/json'
+      }})
   },
   async deleteLoseFun() {
     loading.show();
     try {
-      const { status } = await this.postDeleteLose()
+      const { data: { status } } = await this.postDeleteLose()
       if (status === "ok") {
         this.setData({
-          loseProductList: []
+          invalid_items: []
         })
       }
     }
-    catch (e) {
+    catch (err) {
+      console.log(err)
     } finally {
       loading.hide();
     }
@@ -143,39 +194,43 @@ Page({
 
 
   getData() {
-    const { data } = my.getStorageSync({ key: 'globalAddress' });
-    return get('/alipaymini-plan/cart', {
+    const { region_code } = globalData.location
+    return get('alipaymini-plan/cart', {
       params: {
-        delivery_region: data && data.region_code
+        delivery_region: region_code
       }
     })
   },
   getCheckCardStatus() {
-    return get('/alipaymini-user/own-card')
+    return get('alipaymini-user/own-card')
   },
   postDeleteLose() {
-    return post('/alipaymini-plan/cart', {
-      plan_id: '1',
-      plan_item_ids: '2'
+    const { planMsg: { plan_id }, invalid_items}  = this.data
+    const deleteLostParam = invalid_items.map(item => {
+      return item.plan_item_id
+    }).join(",")
+    return post('alipaymini-plan/invalid-product-del', {
+      // delivery_region: region_code,
+      plan_id: this.data.planMsg.plan_id,
+      plan_item_ids: deleteLostParam
     })
   },
   /*
   * 获取购物车数据供tabbar
   */
   _getCart(){
-    get('alipaymini-plan/cart', { params: { 'delivery_region': globalData.location.districtAdcode }}).then((rps)=>{
-      var viewData = this.data.tabBar;
-      if(rps.data && rps.data.data && rps.data.status == 'ok'){
-        this.setData({
-          tabBar: Object.assign({},viewData,{cartNum:rps.data.data.length, tabCurrent:'cart'})
-        });
-      }else{
-        this.setData({
-          tabBar: Object.assign({},viewData,{cartNum:rps.data.data.length || 0, tabCurrent:'cart'})
-        });
-      }
-    }, (rps)=>{
-        
-    });
-  },
+    var userInfo = my.getStorageSync({'key': 'userInfo'}).data;
+    if(userInfo && userInfo.token_type == 2 && globalData.defaultUserAddress.region_code){
+      get('alipaymini-plan/cart', { params: { 'delivery_region': globalData.defaultUserAddress.region_code }}).then((rps)=>{
+        var viewData = this.data.tabBar;
+        if(rps.data && rps.data.data && rps.data.status == 'ok'){
+          this.setData({
+            tabBar: Object.assign({},viewData,{cartNum:rps.data.data.length})
+          });
+        }
+      }, (rps)=>{
+          
+      });
+    }
+  }
 });

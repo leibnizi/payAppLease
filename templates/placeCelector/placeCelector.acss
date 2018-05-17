@@ -5,3 +5,7 @@
   width: 100%;
   background: #fff;
 }
+.picker-view{
+  height: 300rpx;
+  font-size: 24rpx;
+}

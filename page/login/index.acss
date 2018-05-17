@@ -1,8 +1,3 @@
-@import "/templates/product/product.acss";
-@import "/templates/items/index.acss";
-page{
-    background: #FFFFFF;
-}
 .container{
     margin: 0rpx 15rpx;
     background: #FFFFFF;

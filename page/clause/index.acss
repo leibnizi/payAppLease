@@ -1,0 +1,52 @@
+
+.help{
+    padding:20rpx 30rpx 20rpx 30rpx;
+    color: #333333;
+    background: #FFFFFF;
+    font-size: 32rpx;
+    line-height: 45rpx;
+}
+.help .part{
+    padding: 0;
+    margin: 0;
+}
+.help  .qst{
+    font-size: 32rpx;
+    line-height: 42rpx;
+    padding-bottom: 10rpx;
+}
+.help .ans{
+    font-size: 28rpx;
+    line-height: 42rpx;
+    color: #666666;
+    padding-bottom: 30rpx;
+    text-indent: 30rpx;
+}
+.help .title-box{
+    font-size: 45rpx;
+    text-align: center;
+    line-height: 100rpx;
+    height: 100rpx;
+}
+.help .general_rules{
+    padding-top: 10rpx;
+    padding-bottom: 10rpx;
+    text-indent: 50rpx;
+}
+.help .standard{
+    padding-bottom: 10rpx;
+    padding-top: 10rpx;
+}
+.help .standard .list{
+    float: left;
+    width: 80rpx;
+    color: #333333;
+}
+.help .standard .text{
+    color: #666666;
+}
+.help .signature{
+    height: 60rpx;
+    line-height: 60rpx;
+    text-align: right;
+}

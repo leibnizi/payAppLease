@@ -1,8 +1,7 @@
 <import src="/templates/product-list/product-list.axml"/>
 <import src="/templates/tabBar/index.axml"/>
 <view>
-  <navigator url="/page/addressList/addressList"> 去地址列表 </navigator>
-  
+
   <view class="banner">
     <image style="width:100%; height: 430rpx;" src="/image/home/banner.png" width="100%"></image>
   </view> 

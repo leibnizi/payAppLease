@@ -1,7 +1,7 @@
 <import src="../../templates/product/product.axml"/>
 <import src="../../templates/tabBar/index.axml"/>
-<view class="cart-page" onTap="showDeleteFun">
-  <block a:if="{{productList.length}}">
+<view class="cart-page">
+  <block a:if="{{productList.length && !isInitPage}}">
     <view a:if="{{!has_card}}" class="top-prompt-line">
       <view class="top-content">
         购买
@@ -23,20 +23,21 @@
     <view class="title-box">
       有效商品
     </view>
-    <block a:for="{{activeProductList}}">
-      <template a:if="{{item.status === 1}}" is="product"  data ="{{item,showDelete,deleteProduct}}" />
+    <block a:for="{{valid_items}}">
+      <template is="product"  data ="{{item, deleteProduct, showDeleteFun}}" />
     </block>
     <view class="title-box">
       <view>失效商品</view>
-      <view class="delete-lose" catchTap="deleteLoseFun">清空失效宝贝</view>
+      <view a:if="{{invalid_items.length}}" class="delete-lose" catchTap="deleteLoseFun">清空失效宝贝</view>
     </view>
-    <block a:for="{{loseProductList}}">
+    <block a:for="{{invalid_items}}">
       <template 
         is="product"  
-        data ="{{item,showDelete, deleteProduct}}" />
+        data ="{{item, deleteProduct, showDeleteFun}}" />
     </block>
     <view class="buy-box">
       <button 
+        disable="{{!valid_items.length}}"
         onTap="goToBuy"
         class="buy-btn"
       >
@@ -45,20 +46,18 @@
     </view>
   </block>
   <block a:else>
-    <view class="full-page">
+    <view a:if="{{!isInitPage}}" class="full-page">
       <view class="content">
         <view class="empty-img">
           <image  src="../../image/cartEmpty.png"></image>
         </view>
-        <view class="empty-text">购物车是空的哦</view>
-        <navigator class="btn" open-type="switchTab" url="/page/home/home">去逛逛</button></navigator>
+        <view class="empty-text">购物车是空的哦{{isInitPage}}</view>
+        <navigator url="/page/home/home" class="btn" open-type="redirect">去逛逛</button></navigator>
+
       <view>
     </view>
   </block>
-
-      <view class="tab-bar-box-wrap">
-
-        <template is="tabBar" data="{{tabBar,a}}"/>
-
-      </view>
+    <view class="tab-bar-box-wrap">
+      <template is="tabBar" data="{{tabBar,a}}"/>
+    </view>
 </view>

@@ -6,7 +6,7 @@
     justify-content:space-between;
     padding: 40rpx 30rpx 30rpx 40rpx;
     color: #FFFFFF;
-    background: url("/image/order/status-bg@2x.png") no-repeat center center;background-size: contain;
+    background: url("/image/order/status-bg2x.png") no-repeat center center;background-size: contain;
 }
 .status{
     display: flex;
@@ -18,7 +18,7 @@
     width: 36rpx;
     height: 36rpx;
     margin-right: 12rpx;
-    background: url("/image/order/dfh@2x.png") no-repeat center center;background-size: contain;
+    background: url("/image/order/dfh2x.png") no-repeat center center;background-size: contain;
 }
 .txt{
     width: 630rpx;
@@ -35,7 +35,7 @@
 .right{
     height: 190rpx;
     width: 14rpx;
-    background: url("/image/order/arrow-right@2x.png") no-repeat center center;background-size: contain;
+    background: url("/image/order/arrow-right2x.png") no-repeat center center;background-size: contain;
 }
 /* 地址信息 */
 .address-info{
@@ -62,12 +62,12 @@
     height: 20rpx;
     margin-top: 6rpx;
     margin-right: 10rpx;
-    background: url("/image/order/location@2x.png") no-repeat center center;background-size: contain;
+    background: url("/image/order/location2x.png") no-repeat center center;background-size: contain;
 }
 .gradient{
     height: 10rpx;
     /* background-image: linear-gradient(-46deg, #F24789 0%, #FE8EBA 100%); */
-    background: url("/image/order/gap-gradient@2x.png") no-repeat center center;background-size: contain;
+    background: url("/image/order/gap-gradient2x.png") no-repeat center center;background-size: contain;
 }
 @import "/templates/order/order.acss";
 .gap{

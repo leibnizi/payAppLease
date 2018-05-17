@@ -3,6 +3,8 @@
     background: #fff;
 }
 .section{
+    display: flex;
+    align-items: center;
     position: relative;
     background: #fff;
     border-bottom: 1px solid #f2f2f2;
