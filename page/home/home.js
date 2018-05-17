@@ -78,7 +78,7 @@ Page({
         page: this.data.page,
         page_size: 6,
         type: 1,
-        isAccess: false
+        isAccess: true //true 是不需要权限的， false 是需要权限
       }
     })
     

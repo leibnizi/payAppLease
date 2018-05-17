@@ -136,10 +136,12 @@ Page({
   /*
    * 加入购物车
    */
-  _addCart(){
-    let authCode = my.getStorageSync({key:'authCode'}).data;
+  async _addCart(){
+    let authCode = await my.getStorageSync({key:'authCode'}).data;
     
-    AuthLogin.login();
+    await AuthLogin.login();
+
+    let userCard =  await this._getUserCart();
 
     //this._getUserAddress();
 
@@ -250,12 +252,7 @@ Page({
    * 用户拥有卡判断
    */
   _getUserCart(){
-    get('alipaymini-user/own-card', {params: {}}).then((rps) => {
-        debugger;
-        console.log(rps);
-    },(rps) => {
-
-    });
+    return get('alipaymini-user/own-card');
   },
   /*
   * 用户登录后获取 用户的地址信息
