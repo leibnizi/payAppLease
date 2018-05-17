@@ -246,7 +246,17 @@ Page({
       },
     });
   },
+  /*
+   * 用户拥有卡判断
+   */
+  _getUserCart(){
+    get('alipaymini-user/own-card', {params: {}}).then((rps) => {
+        debugger;
+        console.log(rps);
+    },(rps) => {
 
+    });
+  },
   /*
   * 用户登录后获取 用户的地址信息
   */

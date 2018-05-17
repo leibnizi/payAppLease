@@ -48,7 +48,7 @@ Page({
       });
       return false;
     }
-    if(!Util.checkPhone(this.data.mobile)){
+    if(Util.checkPhone(this.data.mobile)){
       Util.toast({
         type:'none',
         content: '请输入有效手机号！',
