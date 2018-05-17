@@ -7,7 +7,8 @@ import couponList from "/templates/couponList/couponList";
 import util from "/util/util";
 import loading from '/util/loading'
 
-let app = getApp().globalData;
+let globalData = getApp().globalData;
+globalData.confirmPage = {};
 
 Page({
     onChange,
@@ -17,7 +18,7 @@ Page({
                 name: item.name,
                 value: item.description,
                 date: `${util.formatTime(item.from_date)} 至 ${util.formatTime(item.to_date)}`,
-                id: item.coupon_id,
+                id: item.id,
                 type: item.type,
                 cardType: item.bind_card_type,
                 discount: item.discount
@@ -45,11 +46,9 @@ Page({
             imageUrl: "",
             id: null,
             depositeType: null,
-            orderId: null
-        },
-        confirmPage:{
-            totalPrice:null,
-            creditAmount:null
+            orderId: null,
+            coupon:null,
+            cShow:null
         }
     },
 
@@ -63,9 +62,6 @@ Page({
                 deposit_type: "zhima",
                 coupon_id: this.data.currentSelect
             }
-        }
-        if (first === true) {
-            delete config.params.coupon_id
         }
         return get("/order/card-confirm-v2", config)
     },
@@ -83,61 +79,64 @@ Page({
         return post("order/card-v2", params);
     },
 
-    async getCardInfoAsync(first = false) {
-        try {
-            console.log("Start Request")
-            const cardInfo = await this._getCardInfo(first)
-            if (cardInfo.data.status === 'ok') {
-                const card = cardInfo.data.data;
-                console.log(card, "Card______")
-                this.setData({
-                    cardInfo: Object.assign({}, {
-                        originPrice: card.original_total,
-                        oShow: util.formatPrice(card.original_total, 0),
-                        validDays: card.days,
-                        deposit: card.deposit,
-                        dShow: util.formatPrice(card.deposit, 0),
-                        totalPrice: card.total,
-                        tShow: util.formatPrice(card.total, 0),
-                        imageUrl: `http://static-r.msparis.com/${card.cover_img}`,
-                        id: card.id,
-                        depositeType: card.deposit_type
-                    })
+    async _handleCardInfo(cardInfo){
+        if (cardInfo && cardInfo.data.status === 'ok') {
+            const card = cardInfo.data.data;
+            console.log(card, "Card______");
+            console.log("Coupon", card.coupon);
+            console.log("Coupon", util.formatPrice(card.coupon, 0))
+            this.setData({
+                cardInfo: Object.assign({}, {
+                    originPrice: card.card,
+                    oShow: util.formatPrice(card.card, 0),
+                    validDays: card.days,
+                    deposit: card.card_deposit,
+                    dShow: util.formatPrice(card.card_deposit, 0),
+                    totalPrice: card.total,
+                    tShow: util.formatPrice(card.total, 0),
+                    imageUrl: `http://static-r.msparis.com/${card.cover_img}`,
+                    id: card.id,
+                    coupon: card.coupon,
+                    cShow: util.formatPrice(card.coupon, 0),
+                    depositeType: card.deposit_type
                 })
-            }
-        } catch (e) {
-            //action on error
-        }
-    },
+            })
 
-    async onShow() {
-        //确认订单页数据初始化
-        app.globalData.confirmPage = {};
-
-        const config = {
-            params: {
-                page: 1,
-                page_size: 20
+            const config = {
+                params: {
+                    type:1,
+                    page: 1,
+                    page_size: 20,
+                    price:card.card
+                }
             }
-        }
-        loading.show()
-        this.getCardInfoAsync(true);
-        try {
-            const response = await get("user/coupon", config);
+            const response = await get("order/user-coupon", config);
             if (response.data.status == 'ok') {
                 const rowData = response.data.data.rows,
                     formatedData = this.formatCoupon(rowData);
                 this.setData({
                     couponList: formatedData
                 })
+
             }
+        }
+    },
+
+    async onShow() {
+        //确认订单页数据初始化
+
+        loading.show()
+        /*
+        初始化调用关闭方法
+         */
+        try {
+            const cardInfo = await this.onClose(true);
+            this._handleCardInfo(cardInfo);
         }
         catch (e) {
         } finally {
             loading.hide()
         }
-        //this.getData();
-
     },
 
     /**获取卡购买订单 */
@@ -152,8 +151,12 @@ Page({
             const res = await this._createMsOrder();
             console.log("Get Ms Order", res)
             if (res.data.status === 'ok') {
-                const {order_id,deposit} = res.data.data;
-                app.globalData.confirmPage.deposit = deposit;
+                const {order_id,deposit,discount_price,total_sale,price} = res.data.data;
+                globalData.confirmPage.deposit = deposit;
+                globalData.confirmPage.discountPrice = discount_price;
+                globalData.confirmPage.totalSale = total_sale;
+                globalData.confirmPage.price = price;
+                console.log("global",globalData)
                 this.setData({orderId: order_id});
                 this.buyCard(res.data.data);
             } else {
@@ -220,11 +223,16 @@ Page({
                     }
                 };
                 const creditOrder = await get("alipaymini/query",orderQuery);
+                console.log("CreditOrder",creditOrder)
                 if(creditOrder.data.status === 'ok'){
                     const {
                         credit_amount
                     } = creditOrder.data.data;
-                    app.globalData.confirmPage.creditAmount = credit_amount;
+
+                    console.log("hahaha--------",globalData)
+                    globalData.confirmPage.creditAmount = credit_amount;
+
+                    console.log("Final Global Data-----",globalData)
                     push(`/page/cardConfirm/cardConfirm?orderNo=${orderNo}&outOrderNo=${outOrderNo}&id=${this.data.cardInfo.id}&orderId=${this.data.orderId}`)
                 }
             } else {
@@ -259,8 +267,9 @@ Page({
         }
     },
 
-    onClose() {
-        couponList.op.onClose(this, this._getCardInfo);
+    async onClose(first = false) {
+       const res = await couponList.op.onClose(this, "_getCardInfo",first);
+       this._handleCardInfo(res)
     },
 
     onReceive(e) {

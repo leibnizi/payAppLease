@@ -1,6 +1,6 @@
 require('./config$');
-require('../..//page/home/home');
 require('../..//page/buyCard/buyCard');
+require('../..//page/home/home');
 require('../..//page/login/index');
 require('../..//page/cardConfirm/cardConfirm');
 require('../..//page/return/return');
