@@ -4,17 +4,19 @@
  */
 import {baseUrl} from '/config/config.js';
 import Util from '/util/util.js';
+import loading from '/util/loading.js'
 import AuthLogin from '/util/authLogin.js';
 
-
 var oneTargetLogin = true;
-const test_access_token = '5f647d83dc195c14327428116bb438b7'
+const test_access_token = ''
 
 const initConfig = {
     params: {},
     headers: {
         'Content-Type': 'application/json'
-    }
+    },
+    isCheckErroCode: true, // 是否检测 erroCodeState 状态
+    isToast: true // 是否走通用 Toast
 };
 const parseUrl = (reUrl,queryStringObject)=>{
     let url = `${baseUrl}/${reUrl}`;
@@ -39,25 +41,28 @@ const parseUrl = (reUrl,queryStringObject)=>{
 }
 
 const erroCodeState = (res, config) => {
-    if(res.status == 200){
-        if(res.data && res.data.status != 'ok' && res.data.error){
-            //支付宝token超时状态 和 单点登录状态 access_token 超时 从新触发登录
-            if((res.data.error.code == '11008' || res.data.error.code == '26001' || res.data.error.code == '17003') && oneTargetLogin){
-                AuthLogin.login();
-                oneTargetLogin = false;
-                return false;
-            }else{
-                if(config.isToast){
-                    my.showToast({
-                        type:'none',
-                        content: res.data.error.message || res.data.error.code,
-                        duration: 1000
-                    });
+    if(!config.isCheckErroCode){
+        if(res.status == 200){
+            if(res.data && res.data.status != 'ok' && res.data.error){
+                //支付宝token超时状态 和 单点登录状态 access_token 超时 从新触发登录
+                if((res.data.error.code == '11008' || res.data.error.code == '26001' || res.data.error.code == '17003') && oneTargetLogin){
+                    AuthLogin.login();
+                    oneTargetLogin = false;
+                    return false;
+                }else{
+                    loading.hide();
+                    if(config.isToast){
+                        my.showToast({
+                            type:'none',
+                            content: res.data.error.message || res.data.error.code,
+                            duration: 1000
+                        });
+                    }
+                    oneTargetLogin = true;
                 }
+            }else{
                 oneTargetLogin = true;
             }
-        }else{
-            oneTargetLogin = true;
         }
     }
 }

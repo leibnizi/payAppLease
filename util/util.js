@@ -143,12 +143,8 @@ const Util = {
     /*
     * 手机号校验
     */
-    checkPhone(phone) {
-        if (!(/^1[34578]\d{9}$/.test(phone))) {
-            return false;
-        } else {
-            return true;
-        }
+    isPhone(phone) {
+        return (/^1[34578]\d{9}$/.test(phone));
     },
     /*
     * toast

@@ -16,7 +16,7 @@ Page({
     'indicator-color': '#F15F97',//指示点颜色
     detail:{
       image: [
-        'https://static-rs.msparis.com/uploads/4/9/49201651c32306bd26e5745b930c0fc6.png'
+        'https://static-rs.msparis.com/uploads/4/9/49201651c32306bd26e5745b930c0fc6.png!w750'
       ],
       name:'',
       id: '',
@@ -34,23 +34,12 @@ Page({
     days: 7,//租期默认7天
     location: globalData.defaultUserAddress, //配送区域
     cartNum: 0,//购物车小标的数据显示
-    location2:{
-    "id": 47043,
-    "region_name": "河北省 邯郸市 邯山区",
-    "address_detail": "asdasdasd",
-    "contact_name": "dddddccc",
-    "contact_mobile": "13124077261",
-    "region_code": "130402",
-    "area_name": "邯山区"
-    },
     userAddressList: globalData && globalData.userAddressList || [], //用户全局的地址列表
     defaultUserAddress: globalData && globalData.defaultUserAddress || {},// 用户默认地址
     isUserCard: false, //用户是否有卡
   },
   onShow(){
     this._getCart();
-
-    console.log(this.data.defaultUserAddress, globalData.defaultUserAddress);
     if(globalData.defaultUserAddress && globalData.userAddressList){
       this.setData({
         defaultUserAddress: globalData.defaultUserAddress
@@ -84,6 +73,10 @@ Page({
         this.setData({
           detail: viewData
         });
+          my.setNavigationBar({
+            reset: true,
+            title: viewData.name
+          });
       }
     }, (rps)=>{
         
