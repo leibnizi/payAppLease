@@ -48,6 +48,12 @@ Page({
   },
   editAddress(e){
     const { addressList } = this.data
+    const editThisAddress = addressList.filter((addressItem) => addressItem.id === e.target.dataset.id);
+
+    my.setStorageSync({
+      key: 'editThisAddress',
+      data: editThisAddress[0]
+    });
     my.navigateTo({
       url: '/page/editAddress/editAddress?from=addressList'
     })
