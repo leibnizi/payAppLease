@@ -7,7 +7,8 @@ import couponList from "/templates/couponList/couponList";
 import util from "/util/util";
 import loading from '/util/loading'
 
-let app = getApp().globalData;
+let globalData = getApp().globalData;
+globalData.confirmPage = {};
 
 Page({
     onChange,
@@ -17,7 +18,7 @@ Page({
                 name: item.name,
                 value: item.description,
                 date: `${util.formatTime(item.from_date)} 至 ${util.formatTime(item.to_date)}`,
-                id: item.coupon_id,
+                id: item.id,
                 type: item.type,
                 cardType: item.bind_card_type,
                 discount: item.discount
@@ -34,8 +35,6 @@ Page({
         selectedCoupon: null,
         onClose: 'onClose',
         onReceive: 'onReceive',
-        confirmData: {},
-        createData: {},
         cardInfo: {
             originPrice: null,
             oShow: null,
@@ -47,10 +46,15 @@ Page({
             imageUrl: "",
             id: null,
             depositeType: null,
-            orderId: null
+            orderId: null,
+            coupon:null,
+            cShow:null
         }
-
     },
+
+    /*
+    获取购卡信息promise
+     */
     _getCardInfo(first) {
         let config = {
             params: {
@@ -59,39 +63,12 @@ Page({
                 coupon_id: this.data.currentSelect
             }
         }
-        if (first === true) {
-            delete config.params.coupon_id
-        }
         return get("/order/card-confirm-v2", config)
     },
 
-    async getCardInfoAsync(first = false) {
-        try {
-            console.log("Start Request")
-            const cardInfo = await this._getCardInfo(first)
-            if (cardInfo.data.status === 'ok') {
-                const card = cardInfo.data.data;
-                console.log(card, "Card______")
-                this.setData({
-                    cardInfo: Object.assign({}, {
-                        originPrice: card.original_total,
-                        oShow: util.formatPrice(card.original_total, 0),
-                        validDays: card.days,
-                        deposit: card.deposit,
-                        dShow: util.formatPrice(card.deposit, 0),
-                        totalPrice: card.total,
-                        tShow: util.formatPrice(card.total, 0),
-                        imageUrl: `http://static-r.msparis.com/${card.cover_img}`,
-                        id: card.id,
-                        depositeType: card.deposit_type
-                    })
-                })
-            } 
-        } catch (e) {
-            //action on error
-        }
-    },
-
+    /*
+    创建订单promise
+     */
     _createMsOrder() {
         let params = {
             card_id: this.data.cardInfo.id,
@@ -102,72 +79,66 @@ Page({
         return post("order/card-v2", params);
     },
 
-    async createMSOrderAsync() {
-        console.log("创建MS订单")
-        loading.show()
-
-        try {
-            const res = await this._createMsOrder()
-            console.log(res.data)
-            if (res.data.status == 'ok') {
-                const createData = res.data.data
-                console.log("OrderData", createData)
-                this.setData({
-                    createData
+    async _handleCardInfo(cardInfo){
+        if (cardInfo && cardInfo.data.status === 'ok') {
+            const card = cardInfo.data.data;
+            console.log(card, "Card______");
+            console.log("Coupon", card.coupon);
+            console.log("Coupon", util.formatPrice(card.coupon, 0))
+            this.setData({
+                cardInfo: Object.assign({}, {
+                    originPrice: card.card,
+                    oShow: util.formatPrice(card.card, 0),
+                    validDays: card.days,
+                    deposit: card.card_deposit,
+                    dShow: util.formatPrice(card.card_deposit, 0),
+                    totalPrice: card.total,
+                    tShow: util.formatPrice(card.total, 0),
+                    imageUrl: `http://static-r.msparis.com/${card.cover_img}`,
+                    id: card.id,
+                    coupon: card.coupon,
+                    cShow: util.formatPrice(card.coupon, 0),
+                    depositeType: card.deposit_type
                 })
-                app.createData = createData;
-                return createData
-            }
-        } catch (e) {
+            })
 
-        } finally {
-            loading.hide()
-        }
-    },
-
-    async onShow() {
-        const config = {
-            params: {
-                page: 1,
-                page_size: 20
+            const config = {
+                params: {
+                    type:1,
+                    page: 1,
+                    page_size: 20,
+                    price:card.card
+                }
             }
-        }
-        loading.show()
-        this.getCardInfoAsync(true);
-        try {
-            const response = await get("user/coupon", config);
+            const response = await get("order/user-coupon", config);
             if (response.data.status == 'ok') {
                 const rowData = response.data.data.rows,
                     formatedData = this.formatCoupon(rowData);
                 this.setData({
                     couponList: formatedData
                 })
+
             }
+        }
+    },
+
+    async onShow() {
+        //确认订单页数据初始化
+
+        loading.show()
+        /*
+        初始化调用关闭方法
+         */
+        try {
+            const cardInfo = await this.onClose(true);
+            this._handleCardInfo(cardInfo);
         }
         catch (e) {
         } finally {
             loading.hide()
         }
-        //this.getData();
+    },
 
-    },
-    /**获取当前页面数据 */
-    async getData() {
-        let params = {
-            coupon_id: '',
-            deposit_type: 'zhima'
-        }
-        const res = await get("order/card-confirm-v2", params);
-        console.log(res.data)
-        if (res.data.status == 'ok') {
-            const confirmData = res.data.data
-            console.log(confirmData)
-            this.setData({
-                confirmData,
-                'list[0].value': util.formatPrice(confirmData.original_total, 0)
-            })
-        }
-    },
     /**获取卡购买订单 */
     async createOrder() {
 
@@ -180,7 +151,13 @@ Page({
             const res = await this._createMsOrder();
             console.log("Get Ms Order", res)
             if (res.data.status === 'ok') {
-                this.setData({orderId: res.data.data.order_id});
+                const {order_id,deposit,discount_price,total_sale,price} = res.data.data;
+                globalData.confirmPage.deposit = deposit;
+                globalData.confirmPage.discountPrice = discount_price;
+                globalData.confirmPage.totalSale = total_sale;
+                globalData.confirmPage.price = price;
+                console.log("global",globalData)
+                this.setData({orderId: order_id});
                 this.buyCard(res.data.data);
             } else {
                 if (res.data.status === 'error') {
@@ -196,9 +173,10 @@ Page({
 
 
     },
-    onSelected(e) {
-        onChange(e, this)
-    },
+
+    /*
+   确认买卡
+    */
     async buyCard(orderRes) {
         /* 信用租赁API */
         const config = {
@@ -238,8 +216,25 @@ Page({
                 orderNo, outOrderNo
             } = res;
             if (orderRes && orderNo) {
-                //接口成功
-                push(`/page/cardConfirm/cardConfirm?orderNo=${orderNo}&outOrderNo=${outOrderNo}&id=${this.data.cardInfo.id}&orderId=${this.data.orderId}`)
+                //接口成功，查询免押订单信息，包括免押金额
+                const orderQuery = {
+                    params:{
+                        order_no:orderNo
+                    }
+                };
+                const creditOrder = await get("alipaymini/query",orderQuery);
+                console.log("CreditOrder",creditOrder)
+                if(creditOrder.data.status === 'ok'){
+                    const {
+                        credit_amount
+                    } = creditOrder.data.data;
+
+                    console.log("hahaha--------",globalData)
+                    globalData.confirmPage.creditAmount = credit_amount;
+
+                    console.log("Final Global Data-----",globalData)
+                    push(`/page/cardConfirm/cardConfirm?orderNo=${orderNo}&outOrderNo=${outOrderNo}&id=${this.data.cardInfo.id}&orderId=${this.data.orderId}`)
+                }
             } else {
                 //接口失败，停留当前页面
             }
@@ -251,6 +246,17 @@ Page({
         }
         console.log("申请免押购卡")
     },
+
+    /*
+    优惠券选择
+     */
+    onSelected(e) {
+        onChange(e, this)
+    },
+
+    /*
+    优惠券列表
+     */
     showCouponList(e) {
         if (this.data.couponList.length === 0) {
             aliApi.showToast({content: "您暂时没有可用优惠券"})
@@ -260,13 +266,13 @@ Page({
             })
         }
     },
-    onClose() {
-        couponList.op.onClose(this, this._getCardInfo);
+
+    async onClose(first = false) {
+       const res = await couponList.op.onClose(this, "_getCardInfo",first);
+       this._handleCardInfo(res)
     },
+
     onReceive(e) {
         couponList.op.onReceive(e, this)
-    },
-    formatMoney(p) {
-        util.formatPrice(p, 0)
     }
 });

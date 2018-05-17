@@ -2,20 +2,20 @@
 <import src="/templates/msButton/msButton.axml"/>
 <import src="/templates/msProtocal/msProtocal.axml"/>
 <view>
-  <template is="cardInfo" />
+  <template is="cardInfo" data="{{price:pageData.price}}"/>
   <view class="orderInfo">
     <view class="up">
       <view class="item">
         <text>会员原价</text>
-        <text>￥338.00</text>
+        <text>{{pageData.totalSale}}</text>
       </view>
       <view class="item">
         <text>优惠金额</text>
-        <text>￥599.00</text>
+        <text>{{pageData.discountPrice}}</text>
       </view>
       <view class="item">
         <text>租期</text>
-        <text>1个月</text>
+        <text>30天</text>
       </view>
       <view class="item">
         <text>租金支付方式</text>
@@ -28,11 +28,11 @@
     <view class="down">
       <view class="item">
         <text>总押金</text>
-        <text>6900.00</text>
+        <text>{{pageData.deposit}}</text>
       </view>
       <view class="item">
         <text>芝麻信用免押金</text>
-        <text>-￥3,000.00</text>
+        <text>-{{pageData.creditAmount}}</text>
       </view>
       <view class="item">
         <text>需冻结押金</text>

@@ -1,27 +1,24 @@
+const globalData = getApp().globalData;
 export default {
-    data:{
-        hidden:true,
-        currentSelect:null,
-        currentIndex:null
+    data: {
+        hidden: true,
+        currentSelect: 0,
+        currentIndex: null
     },
-    op:{
-        onClose:(page,callback)=>{
-            if(page.data.currentSelect === null){
-                callback.bind(page)(true)
-            } else {
-                callback.bind(page)()
-            }
+    op: {
+        onClose: (page, callbackName, first = true) => {
             page.setData({
-                hidden:!page.data.hidden
+                hidden: first ? first : !page.data.hidden
             })
+            return page[callbackName](page.data.currentSelect === 0)
 
         },
-        onReceive:(e,page)=>{
-            const newIndex = page.data.currentIndex === e.currentTarget.dataset.index?null:e.currentTarget.dataset.index,
-                newSelect = page.data.currentSelect === e.currentTarget.dataset.id?null:e.currentTarget.dataset.id
+        onReceive: (e, page) => {
+            const newIndex = page.data.currentIndex === e.currentTarget.dataset.index ? null : e.currentTarget.dataset.index,
+                newSelect = page.data.currentSelect === e.currentTarget.dataset.id ? 0 : e.currentTarget.dataset.id
             page.setData({
-                currentSelect:newSelect,
-                currentIndex:newIndex
+                currentSelect: newSelect,
+                currentIndex: newIndex
             })
         }
     }

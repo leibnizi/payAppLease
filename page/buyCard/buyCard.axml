@@ -20,7 +20,7 @@
         <view class="litsItem">
             <text>优惠券</text>
             <text a:if="{{currentIndex === null}}" onTap="showCouponList">请选择 ></text>
-            <text a:else="{{currentIndex !== null}}" class="active" onTap="showCouponList">已选择 ></text>
+            <text a:else="{{currentIndex !== null}}" class="active" onTap="showCouponList">-{{cardInfo.cShow}} ></text>
         </view>
     </view>
     <view class="operations">
