@@ -14,14 +14,13 @@ Page({
   },
   onLoad() {},
   async onShow() {
-    console.log("!globalData.defaultUserAddress.region_code","kkj")
     if (!globalData.defaultUserAddress.region_code) {
       
       return false
     }
     loading.show();
     try {
-      const { data: { data, status } } = await this.getData();
+      const { data: { data, status, error } } = await this.getData();
       const { data: { has_card } } = await this.getCheckCardStatus();
       if (status === 'ok') {
         const { valid_items, invalid_items } = data
@@ -42,11 +41,21 @@ Page({
           productList: [...valid_items, ...invalid_items],
           has_card
         })
-
+      }
+      else{
+        my.showToast({
+          type: 'fail',
+          content: error.message,
+          duration: 2000,
+          // success: () => {
+          //   my.alert({
+          //     title: 'toast 消失了',
+          //   });
+          // },
+        });
       }
     }
     catch (e) {
-      console.log("Result", e)
     } finally {
       // loading.hide();
       this.setData({
@@ -98,7 +107,6 @@ Page({
       }
     }
     catch (e) {
-      console.log(e,"??>>>")
     } finally {
       loading.hide();
     }
@@ -106,30 +114,38 @@ Page({
   async goToBuy(){
     try {
       loading.show();
-      const { data: { data: {status, error} }} = await this.postConfirm()
-
-      return false
+      const { data: { status, error, data } } = await this.postConfirm();
+      loading.hide();
       if (data && data instanceof Object) {
         my.navigateTo({
-          url:'/page/order'
+          url:'/page/order/order'
         })
       }
       else if (error && error instanceof Object ){
-        my.showToast({
-          type: 'success',
-          content: `${error.message}`,
-          duration: 2000,
-        });
+        // my.showToast({
+        //   type: 'fail',
+        //   content: `${error.message}`,
+        //   duration: 2000,
+        // });
       }
       else{
         loading.hide();
       }
     }
-    catch (e) {
-      console.log("Result", e)
+    catch (err) {
+      my.showToast({
+        type: 'fail',
+        content: `${errr}`,
+        duration: 2000,
+      })
+      // my.showToast({
+      //   type: 'fail',
+      //   content: error.message,
+      //   duration: 2000,
+      // });
     } 
     finally {
-      loading.hide();
+      // loading.hide();
     }
   },
   showDeleteFun(e){
@@ -186,7 +202,6 @@ Page({
       }
     }
     catch (err) {
-      console.log(err)
     } finally {
       loading.hide();
     }

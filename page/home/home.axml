@@ -1,4 +1,4 @@
-<import src="/templates/product-list/product-list.axml"/>
+<import src="/templates/productList/productList.axml"/>
 <import src="/templates/tabBar/index.axml"/>
 <view>
 
@@ -9,7 +9,7 @@
     <image src="/image/home/liucheng.png"></image>
   </view> 
   <view class="rent-flow">
-    <template is="product-list"  data ="{{productList,a}}" />
+    <template is="productList"  data ="{{productList,a}}" />
   </view>
 
       <view class="tab-bar-box-wrap">
