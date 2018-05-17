@@ -42,7 +42,7 @@ Page({
         try {
             const res = await aliApi.zmRentTransition(config)
             console.log("支付宝支付结果——————————",res)
-            if(res.errorCode && res.errorCode === 'SUCCESS' || (res.orderStatus && res.orderStatus === 'SUCCESS' && res.errorCode && res.errorCode === 'SUCCESS'))
+            if(res.error_code && res.error_code === 'SUCCESS' || (res.order_status && res.order_status === 'SUCCESS' && res.error_code && res.error_code === 'SUCCESS'))
             {
                 //支付宝接口支付成功，调用我们的api查询支付结果
                 const orderRes =await post('/order/payment-done',{id:this.data.id,type:3});
@@ -56,7 +56,7 @@ Page({
 
             }
             console.log("支付出现问题")
-            push("/page/orderFail/orderFai")
+            // push("/page/orderFail/orderFail")
         }
         catch (err) {
             console.log("catch确认订单", err)

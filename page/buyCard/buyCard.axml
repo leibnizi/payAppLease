@@ -11,7 +11,7 @@
         </view>
         <view class="litsItem">
             <text>有效期</text>
-            <text>{{cardInfo.validDays}}</text>
+            <text>{{cardInfo.validDays}}天</text>
         </view>
         <view class="litsItem">
             <text>押金</text>

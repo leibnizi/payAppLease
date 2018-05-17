@@ -42,8 +42,8 @@ Page({
             deposit: null,
             totalPrice: null,
             imageUrl: "",
-            id:null,
-            depositeType:null
+            id: null,
+            depositeType: null
         }
 
     },
@@ -76,8 +76,8 @@ Page({
                         deposit: card.deposit,
                         totalPrice: card.total,
                         imageUrl: `http://static-r.msparis.com/${card.cover_img}`,
-                        id:card.id,
-                        depositeType:card.deposit_type
+                        id: card.id,
+                        depositeType: card.deposit_type
                     })
                 })
             }
@@ -94,6 +94,7 @@ Page({
             deposit_type: this.data.cardInfo.depositeType,
             coupon_id: this.data.currentSelect
         }
+        console.log("Params",params)
         return post("order/card-v2", params);
     },
 
@@ -162,22 +163,27 @@ Page({
     },
     /**获取卡购买订单 */
     async createOrder() {
+
         if (this.data.selected === false) {
             loading.toast({content: "请勾选协议"})
             return;
         }
-        try{
+        loading.show()
+        try {
             const res = await this._createMsOrder();
-            console.log("Get Ms Order",res)
-            if(res.data.status === 'ok')
-            {
+            console.log("Get Ms Order", res)
+            if (res.data.status === 'ok') {
                 this.buyCard(res.data.data);
             } else {
-
+                if (res.data.status === 'error') {
+                    loading.toast({content: res.data.error?res.data.error.message: "优惠券失效"})
+                }
             }
 
         } catch (e) {
-            console.log("Error",e)
+            console.log("Error", e)
+        } finally {
+             loading.hide()
         }
 
 
@@ -187,7 +193,7 @@ Page({
     },
     async buyCard(orderRes) {
         /* 信用租赁API */
-        const config= {
+        const config = {
             creditRentType: "rent",
             /** 固定传rent*/
             category: "ZMSC_1_4_1",
@@ -200,7 +206,7 @@ Page({
             /**外部订单号，即商户自己的订单 号 */
             overdue_time: "2018-7-10 00:00:00",
             /**逾 期 时 间 ， yyyy-MM-dd HH:mm:ss，需要大于当前时间 */
-            order_process_url: "alipay://platformapi/startApp?appId=2018033002476889&page=pages/home/home",
+            order_process_url: "alipay://platformapi/startApp?appId=2018033002476889&page=page/home/home",
             /**订单处理 url，商户处理订单的 页面,后续发送给用户订单继续 处理的 card 中，需要跳转该链 接。如果没有链接，无法发送 card。 */
             item_id: "2018032901000222123469565693",
             /**入驻信用套餐分配的项目 id(由 芝麻侧业务对接人负责􏰀供) */
@@ -209,7 +215,7 @@ Page({
                     {
                         "count": 1, /** 商品件数 */
                         "amount": orderRes.amount, /** 分期总金额*/
-                        "deposit":orderRes.deposit, /** 总押金*/
+                        "deposit": orderRes.deposit, /** 总押金*/
                         "installmentCount": 12, /** 分期数*/
                         "name": encodeURIComponent(orderRes.name) /** 商品名 */
                     }
@@ -221,9 +227,14 @@ Page({
             const res = await aliApi.startZMCreditRent(config);
             console.log("购卡订单成功", res)
             const {
-                orderNo,outOrderNo
+                orderNo, outOrderNo
             } = res;
-            push(`/page/cardConfirm/cardConfirm?orderNo=${orderNo}&outOrderNo=${outOrderNo}&id=${this.data.cardInfo.id}`)
+            if (orderRes && orderNo) {
+                //接口成功
+                push(`/page/cardConfirm/cardConfirm?orderNo=${orderNo}&outOrderNo=${outOrderNo}&id=${this.data.cardInfo.id}`)
+            } else {
+                //接口失败，停留当前页面
+            }
         }
         catch (err) {
             console.log("购卡订单失败", err)
