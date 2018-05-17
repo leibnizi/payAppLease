@@ -21,7 +21,8 @@
 }
 .contact-mobile{
   margin-left: 30rpx;
-  color: #ccc;
+  color: #888;
+  font-weight: 300;
 }
 .nav{
   font-size: 30rpx;
@@ -29,7 +30,8 @@
 }
 .address-detail{
   padding: 10rpx 0 0;
-  color: #ccc;
+  color: #888;
+  font-weight: 200;
 }
 .show{
   transform: translateX(-150rpx)

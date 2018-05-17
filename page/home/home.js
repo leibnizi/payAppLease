@@ -28,10 +28,10 @@ Page({
     loading.show();
     try {
       const { data: { data }, status } = await this.getData();
-      // debugger
       if (data && Util.isArray(data.rows) && data.rows.length > 0) {
         data.rows.map( (item, idx) => {
           data.rows[idx]['toDetailUrl'] = '/page/detail/index?id=' + item.id;
+          data.rows[idx]['cover_image'] = `${data.rows[idx]['cover_image']}!w375`
         });
         this.setData({
           productList: data.rows
@@ -39,6 +39,8 @@ Page({
       }
     }
     catch (e) {
+    console.log(e,"ukkk")
+
     } finally {
       loading.hide();
     }
