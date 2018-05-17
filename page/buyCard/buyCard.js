@@ -34,8 +34,6 @@ Page({
         selectedCoupon: null,
         onClose: 'onClose',
         onReceive: 'onReceive',
-        confirmData: {},
-        createData: {},
         cardInfo: {
             originPrice: null,
             oShow: null,
@@ -48,9 +46,16 @@ Page({
             id: null,
             depositeType: null,
             orderId: null
+        },
+        confirmPage:{
+            totalPrice:null,
+            creditAmount:null
         }
-
     },
+
+    /*
+    获取购卡信息promise
+     */
     _getCardInfo(first) {
         let config = {
             params: {
@@ -63,6 +68,19 @@ Page({
             delete config.params.coupon_id
         }
         return get("/order/card-confirm-v2", config)
+    },
+
+    /*
+    创建订单promise
+     */
+    _createMsOrder() {
+        let params = {
+            card_id: this.data.cardInfo.id,
+            deposit_type: this.data.cardInfo.depositeType,
+            coupon_id: this.data.currentSelect
+        }
+        console.log("Params", params)
+        return post("order/card-v2", params);
     },
 
     async getCardInfoAsync(first = false) {
@@ -86,46 +104,16 @@ Page({
                         depositeType: card.deposit_type
                     })
                 })
-            } 
+            }
         } catch (e) {
             //action on error
         }
     },
 
-    _createMsOrder() {
-        let params = {
-            card_id: this.data.cardInfo.id,
-            deposit_type: this.data.cardInfo.depositeType,
-            coupon_id: this.data.currentSelect
-        }
-        console.log("Params", params)
-        return post("order/card-v2", params);
-    },
-
-    async createMSOrderAsync() {
-        console.log("创建MS订单")
-        loading.show()
-
-        try {
-            const res = await this._createMsOrder()
-            console.log(res.data)
-            if (res.data.status == 'ok') {
-                const createData = res.data.data
-                console.log("OrderData", createData)
-                this.setData({
-                    createData
-                })
-                app.createData = createData;
-                return createData
-            }
-        } catch (e) {
-
-        } finally {
-            loading.hide()
-        }
-    },
-
     async onShow() {
+        //确认订单页数据初始化
+        app.globalData.confirmPage = {};
+
         const config = {
             params: {
                 page: 1,
@@ -151,23 +139,7 @@ Page({
         //this.getData();
 
     },
-    /**获取当前页面数据 */
-    async getData() {
-        let params = {
-            coupon_id: '',
-            deposit_type: 'zhima'
-        }
-        const res = await get("order/card-confirm-v2", params);
-        console.log(res.data)
-        if (res.data.status == 'ok') {
-            const confirmData = res.data.data
-            console.log(confirmData)
-            this.setData({
-                confirmData,
-                'list[0].value': util.formatPrice(confirmData.original_total, 0)
-            })
-        }
-    },
+
     /**获取卡购买订单 */
     async createOrder() {
 
@@ -180,7 +152,9 @@ Page({
             const res = await this._createMsOrder();
             console.log("Get Ms Order", res)
             if (res.data.status === 'ok') {
-                this.setData({orderId: res.data.data.order_id});
+                const {order_id,deposit} = res.data.data;
+                app.globalData.confirmPage.deposit = deposit;
+                this.setData({orderId: order_id});
                 this.buyCard(res.data.data);
             } else {
                 if (res.data.status === 'error') {
@@ -196,9 +170,10 @@ Page({
 
 
     },
-    onSelected(e) {
-        onChange(e, this)
-    },
+
+    /*
+   确认买卡
+    */
     async buyCard(orderRes) {
         /* 信用租赁API */
         const config = {
@@ -238,8 +213,20 @@ Page({
                 orderNo, outOrderNo
             } = res;
             if (orderRes && orderNo) {
-                //接口成功
-                push(`/page/cardConfirm/cardConfirm?orderNo=${orderNo}&outOrderNo=${outOrderNo}&id=${this.data.cardInfo.id}&orderId=${this.data.orderId}`)
+                //接口成功，查询免押订单信息，包括免押金额
+                const orderQuery = {
+                    params:{
+                        order_no:orderNo
+                    }
+                };
+                const creditOrder = await get("alipaymini/query",orderQuery);
+                if(creditOrder.data.status === 'ok'){
+                    const {
+                        credit_amount
+                    } = creditOrder.data.data;
+                    app.globalData.confirmPage.creditAmount = credit_amount;
+                    push(`/page/cardConfirm/cardConfirm?orderNo=${orderNo}&outOrderNo=${outOrderNo}&id=${this.data.cardInfo.id}&orderId=${this.data.orderId}`)
+                }
             } else {
                 //接口失败，停留当前页面
             }
@@ -251,6 +238,17 @@ Page({
         }
         console.log("申请免押购卡")
     },
+
+    /*
+    优惠券选择
+     */
+    onSelected(e) {
+        onChange(e, this)
+    },
+
+    /*
+    优惠券列表
+     */
     showCouponList(e) {
         if (this.data.couponList.length === 0) {
             aliApi.showToast({content: "您暂时没有可用优惠券"})
@@ -260,13 +258,12 @@ Page({
             })
         }
     },
+
     onClose() {
         couponList.op.onClose(this, this._getCardInfo);
     },
+
     onReceive(e) {
         couponList.op.onReceive(e, this)
-    },
-    formatMoney(p) {
-        util.formatPrice(p, 0)
     }
 });

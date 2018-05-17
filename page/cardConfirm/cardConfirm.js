@@ -5,6 +5,8 @@ import * as aliApi from '/util/aliApi.js';
 import {post} from '/util/httpService';
 import loading from '/util/loading';
 
+const app = getApp();
+
 Page({
     data: {
         type: "",
@@ -17,7 +19,8 @@ Page({
         orderNo:null,
         outOrderNo:null,
         orderId:null,
-        id:null
+        id:null,
+        pageData:app.globalData.confirmPage,
     },
     onLoad(option) {
         console.log(option)
