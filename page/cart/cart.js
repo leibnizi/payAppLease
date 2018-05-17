@@ -164,7 +164,6 @@ Page({
         plan_item_id: item.plan_item_id
       }
     })
-    console.log(globalData.location,"<<<<<")
     return post('confirm/alipaymini-plan-daily',{
       delivery_region: region_code,
       user_address_id: id,
