@@ -17,12 +17,12 @@ Page({
     async onShow(){
         loading.show("加载中");
         try{
-            const res =await get("alipaymini-user/own-card",)
+            const res = await get("alipaymini-user/own-card",)
             console.log("OwnCard----",res)
             if(res.data.status == 'ok')
             {
                 this.setData({
-                    hasMember:res.data.data.has_card
+                    hasMember:!res.data.data.has_card
                 })
             }
         } catch (e){

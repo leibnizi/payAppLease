@@ -9,7 +9,6 @@
             <block a:else>
                <view class="home">home</view>
             </block>
-
           </navigator>
           <navigator url="/page/cart/cart">
             <block a:if="{{tabBar.tabCurrent == 'cart'}}">

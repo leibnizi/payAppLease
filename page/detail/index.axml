@@ -96,7 +96,7 @@
         </navigator>
         <view class="add-cart" onTap="_addCart">加入购物车</view>
       </view>
-      <block a:if="{{selectInfoState}}">
+      <block a:if="{{selectInfoState && isUserCard}}">
       <view class="mask"></view>
       <view class="select-info">
           <view class="close-box" onTap="_closeSelectInfo"></view>

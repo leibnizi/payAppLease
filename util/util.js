@@ -187,7 +187,8 @@ const Util = {
         }
     },
 
-    formatTime(date) {
+    formatTime(timeSpan) {
+        const date = new Date(timeSpan * 1000)
         const year = date.getFullYear()
         const month = date.getMonth() + 1
         const day = date.getDate()
@@ -195,7 +196,7 @@ const Util = {
         // const minute = date.getMinutes()
         // const second = date.getSeconds()
 
-        return [year, month, day].map(this.formatNumber).join('/')
+        return [year, month, day].map(this.formatNumber).join('-')
     },
     formatNumber(n) {
         n = n.toString()
