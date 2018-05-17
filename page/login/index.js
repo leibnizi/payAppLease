@@ -12,6 +12,7 @@ Page({
     mobile: '',
     invitation_code: '',
     access_token: '',
+    setIntervalTime: false //当前验证码状态
   },
   onLoad(query) {
     console.log(query);
@@ -51,7 +52,7 @@ Page({
       return false;
     }
     
-    if(Util.isPhone(this.data.mobile)){
+    if(!Util.isPhone(this.data.mobile)){
       Util.toast({
         type:'none',
         content: '请输入有效手机号！',
@@ -108,20 +109,25 @@ Page({
    * 验证码计时
    */
    _setIntervalTime(){
+     this.setData({
+       setIntervalTime: true
+     });
     clearInterval(setIntervalTime);
     var num = 30;
     setIntervalTime = setInterval(() => {
       num --;
       this.setData({
+        setIntervalTime: true,
         intervalTime: num,
-        codeText: num + 's重新获取'
+        codeText: num + '秒后重发'
       });
 
       if(num == 0){
         clearInterval(setIntervalTime);
         this.setData({
           intervalTime: 0,
-          codeText: '重新获取'
+          codeText: '重新获取',
+          setIntervalTime: false
         });
       }
     }, 1000);
@@ -131,16 +137,7 @@ Page({
    * 获取验证码
    */
   getCode (event){
-    //检测setIntervalTime是不是在执行
-    if(setIntervalTime){
-      Util.toast({
-        type:'none',
-        content: '请稍后再获取验证码！ ',
-        duration: 1000 * 1
-      });
-      return false;
-    }
-    if(Util.isPhone(this.data.mobile)){
+    if(!Util.isPhone(this.data.mobile)){
       Util.toast({
         type:'none',
         content: '请输入有效手机号！ ',
@@ -148,6 +145,17 @@ Page({
       });
       return false;
     }
+
+    //检测setIntervalTime是不是在执行
+    if(this.data.setIntervalTime && setIntervalTime){
+      Util.toast({
+        type:'none',
+        content: '请稍后再获取验证码！ ',
+        duration: 1000 * 1
+      });
+      return false;
+    }
+
     get('common/sms', { params: { mobile: this.data.mobile }}).then((rps)=>{
         if(rps.data && rps.data.status == 'error' && rps.data.error && rps.data.error.code == '10017'){
           clearInterval(setIntervalTime);

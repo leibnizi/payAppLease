@@ -53,6 +53,9 @@
     line-height: 100rpx;
     text-align: right;
 }
+.form-row-content .code.text{
+    color: #999999;
+}
 .button-wrap{
     margin-top: 60rpx;
 }

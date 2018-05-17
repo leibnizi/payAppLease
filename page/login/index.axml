@@ -14,7 +14,13 @@
         <view class="form-row-label">验证码</view>
         <view class="form-row-content">
           <input class="input" value={{code}} onInput="onChangeCode" type="number" placeholder="请输入验证码" />
-          <view class="code" onTap="getCode">{{codeText}}</view>
+          <block a:if="{{setIntervalTime}}">
+            <view class="code text">{{codeText}}</view>
+          </block>
+          <block a:else>
+            <view class="code" onTap="getCode">{{codeText}}</view>
+          </block>
+          
         </view>
       </view>
 
