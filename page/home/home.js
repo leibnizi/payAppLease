@@ -92,8 +92,8 @@ Page({
   */
   _getCart(){
     var userInfo = my.getStorageSync({'key': 'userInfo'}).data;
-    if(userInfo && userInfo.token_type == 2 && globalData.location.districtAdcode){
-      get('alipaymini-plan/cart', { params: { 'delivery_region': globalData.location.districtAdcode }}).then((rps)=>{
+    if(userInfo && userInfo.token_type == 2 && globalData.defaultUserAddress.districtAdcode){
+      get('alipaymini-plan/cart', { params: { 'delivery_region': globalData.defaultUserAddress.districtAdcode }}).then((rps)=>{
         var viewData = this.data.tabBar;
         if(rps.data && rps.data.data && rps.data.status == 'ok'){
           this.setData({

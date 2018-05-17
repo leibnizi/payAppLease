@@ -17,7 +17,7 @@
             </view>
         </view>
         <view class="address-detail">
-            {{item.address_detail}} 
+          {{item.region_name}}  {{item.address_detail}} 
         </view>
         <view class="delete-box">
             <view 

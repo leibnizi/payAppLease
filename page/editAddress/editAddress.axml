@@ -1,4 +1,4 @@
-<import src="../../templates/product-list/product-list.axml"/>
+<import src="../../templates/productList/productList.axml"/>
 <import src="../../templates/placeCelector/placeCelector.axml"/>
 
 

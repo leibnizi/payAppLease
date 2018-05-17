@@ -1,4 +1,4 @@
-@import '/templates/product-list/product-list.acss';
+@import '/templates/productList/productList.acss';
 @import '/templates/tabBar/index.acss';
 .banner{
     height: 430rpx;

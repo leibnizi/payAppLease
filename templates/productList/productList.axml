@@ -1,4 +1,4 @@
-<template name="product-list">
+<template name="productList">
   <view class="product-list clearfloat">
     <block a:for="{{productList}}">
       <navigator url="{{item.toDetailUrl}}" class="content-box">

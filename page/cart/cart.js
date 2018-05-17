@@ -14,13 +14,13 @@ Page({
   },
   onLoad() {},
   async onShow() {
-    
-    if (!globalData.location.region_code) {
+    if (!globalData.defaultUserAddress.region_code) {
+      
       return false
     }
     loading.show();
     try {
-      const { data: { data, status } } = await this.getData();
+      const { data: { data, status, error } } = await this.getData();
       const { data: { has_card } } = await this.getCheckCardStatus();
       if (status === 'ok') {
         const { valid_items, invalid_items } = data
@@ -41,11 +41,21 @@ Page({
           productList: [...valid_items, ...invalid_items],
           has_card
         })
-
+      }
+      else{
+        my.showToast({
+          type: 'fail',
+          content: error.message,
+          duration: 2000,
+          // success: () => {
+          //   my.alert({
+          //     title: 'toast 消失了',
+          //   });
+          // },
+        });
       }
     }
     catch (e) {
-      console.log("Result", e)
     } finally {
       // loading.hide();
       this.setData({
@@ -54,11 +64,11 @@ Page({
       my.hideLoading()
     }
     // 获取购物车商品数量供tabbar展示
-    this._getCart();
+    // this._getCart();
   },
   async deleteProduct(e) { 
     const { id } = e.target.dataset;
-    const { region_code } = globalData.location
+    const { region_code } = globalData.defaultUserAddress
     loading.show();
     try {
       const { data: { status , data} } = await post('alipaymini-plan/cart-product-del', { 
@@ -97,7 +107,6 @@ Page({
       }
     }
     catch (e) {
-      console.log(e,"??>>>")
     } finally {
       loading.hide();
     }
@@ -105,30 +114,38 @@ Page({
   async goToBuy(){
     try {
       loading.show();
-      const { data: { data: {status, error} }} = await this.postConfirm()
-
-      return false
+      const { data: { status, error, data } } = await this.postConfirm();
+      loading.hide();
       if (data && data instanceof Object) {
         my.navigateTo({
-          url:'/page/order'
+          url:'/page/order/order'
         })
       }
       else if (error && error instanceof Object ){
-        my.showToast({
-          type: 'success',
-          content: `${error.message}`,
-          duration: 2000,
-        });
+        // my.showToast({
+        //   type: 'fail',
+        //   content: `${error.message}`,
+        //   duration: 2000,
+        // });
       }
       else{
         loading.hide();
       }
     }
-    catch (e) {
-      console.log("Result", e)
+    catch (err) {
+      my.showToast({
+        type: 'fail',
+        content: `${errr}`,
+        duration: 2000,
+      })
+      // my.showToast({
+      //   type: 'fail',
+      //   content: error.message,
+      //   duration: 2000,
+      // });
     } 
     finally {
-      loading.hide();
+      // loading.hide();
     }
   },
   showDeleteFun(e){
@@ -158,13 +175,12 @@ Page({
   },
   postConfirm() {
     const { planMsg: { plan_id }, valid_items } = this.data
-    const { region_code, id } = globalData.location
+    const { region_code, id } = globalData.defaultUserAddress
     const order_item = valid_items.map(item => {
       return {
         plan_item_id: item.plan_item_id
       }
     })
-    console.log(globalData.location,"<<<<<")
     return post('confirm/alipaymini-plan-daily',{
       delivery_region: region_code,
       user_address_id: id,
@@ -186,7 +202,6 @@ Page({
       }
     }
     catch (err) {
-      console.log(err)
     } finally {
       loading.hide();
     }
@@ -194,7 +209,7 @@ Page({
 
 
   getData() {
-    const { region_code } = globalData.location
+    const { region_code } = globalData.defaultUserAddress
     return get('alipaymini-plan/cart', {
       params: {
         delivery_region: region_code

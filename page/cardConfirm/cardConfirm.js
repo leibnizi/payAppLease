@@ -34,6 +34,7 @@ Page({
     onSelected(e) {
         onChange(e, this)
     },
+
     async _pollQuery(self){
         loading.show()
         const orderRes = await post('/order/payment-done',{id:this.data.orderId,type:3});

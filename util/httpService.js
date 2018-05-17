@@ -19,6 +19,7 @@ const initConfig = {
 const parseUrl = (reUrl,queryStringObject)=>{
     let url = `${baseUrl}/${reUrl}`;
     let access_token = my.getStorageSync({ key: 'access_token' }).data || test_access_token;
+
     let platform = 'alipaymini'; //标识支付宝应用
     if(queryStringObject.isAccess){ //true 是不需要权限的， false 是需要权限
         queryStringObject = Object.assign({}, queryStringObject, {
@@ -30,7 +31,6 @@ const parseUrl = (reUrl,queryStringObject)=>{
             access_token
         });
     }
-
 
     if(queryStringObject && !Util.isEmptyObject(queryStringObject)){
         url += '?' + Util.objectToString(queryStringObject);
