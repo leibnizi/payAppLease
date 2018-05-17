@@ -239,7 +239,7 @@ Page({
             } = res;
             if (orderRes && orderNo) {
                 //接口成功
-                push(`/page/cardConfirm/cardConfirm?orderNo=${orderNo}&outOrderNo=${outOrderNo}&id=${this.data.cardInfo.id}`)
+                push(`/page/cardConfirm/cardConfirm?orderNo=${orderNo}&outOrderNo=${outOrderNo}&id=${this.data.cardInfo.id}&orderId=${this.data.orderId}`)
             } else {
                 //接口失败，停留当前页面
             }

@@ -16,6 +16,7 @@ Page({
         onSelect: 'onSelected',
         orderNo:null,
         outOrderNo:null,
+        orderId:null,
         id:null
     },
     onLoad(option) {
@@ -23,7 +24,8 @@ Page({
         this.setData({
             orderNo: option.orderNo,
             outOrderNo:option.outOrderNo,
-            id:option.id
+            id:option.id,
+            orderId:option.orderId
         })
     },
     onShow() {
@@ -34,12 +36,12 @@ Page({
     },
     async _pollQuery(){
         loading.show()
-        const orderRes = await post('/order/payment-done',{id:this.data.id,type:3});
+        const orderRes = await post('/order/payment-done',{id:this.data.orderId,type:3});
         console.log("Order",this.data.outOrderNo);
         console.log("Pay",orderRes);
         if(orderRes.data.status === 'ok')
         {
-            push(`/page/orderSuccess/orderSuccess?orderNo=${this.data.orderNo}&msOrder=${this.data.outOrderNo}`)
+            push(`/page/orderSuccess/orderSuccess?orderId=${this.data.orderNo}&msOrder=${this.data.outOrderNo}`)
             console.log("try确认订单", res)
         }
     },
