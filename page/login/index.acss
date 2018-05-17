@@ -1,5 +1,5 @@
 .container{
-    margin: 0rpx 15rpx;
+    padding: 0rpx 15rpx;
     background: #FFFFFF;
     overflow: hidden;
 }
@@ -26,6 +26,7 @@
     color: #333333;
     font-size: 34rpx;
     text-align: left;
+    text-indent: 10rpx;
 }
 .form-row-content{
     float: left;

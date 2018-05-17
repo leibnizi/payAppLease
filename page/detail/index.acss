@@ -6,7 +6,7 @@
   margin-bottom: 100rpx;
 }
 .swiper-section{
-  background: #FFFFFF;
+  background: #F7F7F7;
   height: 1120rpx;
 }
 .swiper-item{

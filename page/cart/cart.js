@@ -12,12 +12,11 @@ Page({
     has_card: true,
     isInitPage: true
   },
-  onLoad() {},
-  async onShow() {
+  onLoad() {
     
+  },
+  async onShow() {
     var userInfo = my.getStorageSync({ 'key': 'userInfo' }).data;
-
-    console.log(userInfo,"???")
 
     if (userInfo && userInfo.token_type == 2 && globalData.defaultUserAddress.region_code) {
       loading.show();
@@ -61,7 +60,7 @@ Page({
         this.setData({
           isInitPage: false
         })
-        // my.hideLoading()
+        my.hideLoading()
       }
     }
     else{
@@ -72,20 +71,6 @@ Page({
       });
     }
     // 获取购物车商品数量供tabbar展示
-    // this._getCart();
-  },
-  _getCart() {
-    
-    if (userInfo && userInfo.token_type == 2 && globalData.defaultUserAddress.region_code) {
-      get('alipaymini-plan/cart', { params: { 'delivery_region': globalData.defaultUserAddress.region_code } }).then((rps) => {
-        
-        if (rps.data && rps.data.data && rps.data.status == 'ok') {
-          
-        }
-      }, (rps) => {
-
-      });
-    }
   },
   async deleteProduct(e) { 
     const { id } = e.target.dataset;

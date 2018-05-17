@@ -2,7 +2,7 @@
   "enableWK": "YES",
   "enableDSL": true,
   "defaultTitle": "登录",
-  "backgroundColor": "#FFFFF",
+  "backgroundColor": "#FFFFFF",
   "pullRefresh": false,
   "allowsBounceVertical": true
 }

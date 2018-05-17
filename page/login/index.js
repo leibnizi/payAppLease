@@ -42,6 +42,7 @@ Page({
   onSubmit(){
 
     let userInfo = my.getStorageSync({key:'userInfo'}).data;
+
     if(userInfo && userInfo.token_type == 2){
       my.alert({
         title: '警告',
@@ -50,7 +51,7 @@ Page({
       return false;
     }
     
-    if(!Util.checkPhone(this.data.mobile)){
+    if(Util.isPhone(this.data.mobile)){
       Util.toast({
         type:'none',
         content: '请输入有效手机号！',
@@ -67,7 +68,7 @@ Page({
       });
       return false;
     }
-    post('alipaymini/bind', { 
+    post('alipaymini/bind', {
       mobile: this.data.mobile,
       code: this.data.code,
       },{}).then(
@@ -88,6 +89,10 @@ Page({
               invitation_code: rps.data.invitation_code,
               nickname: rps.data.nickname,
               new_user: rps.data.new_user
+            });
+
+            my.navigateBack({
+              data:1
             });
           }
         },(rps)=>{
@@ -135,7 +140,7 @@ Page({
       });
       return false;
     }
-    if(!Util.checkPhone(this.data.mobile)){
+    if(Util.isPhone(this.data.mobile)){
       Util.toast({
         type:'none',
         content: '请输入有效手机号！ ',

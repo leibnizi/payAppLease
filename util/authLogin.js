@@ -38,7 +38,7 @@ const AuthLogin = {
         console.log('获取authCode:',authCode);
         if(authCode){
             
-            let getAccessToken = await get('alipaymini/login',{params:{authcode: authCode}});
+            let getAccessToken = await get('alipaymini/login',{params:{authcode: authCode}, isCheckErroCode: false});
         
             console.log('获取access_token:', getAccessToken);
             if(getAccessToken && getAccessToken.data && getAccessToken.data.status === 'ok'){
