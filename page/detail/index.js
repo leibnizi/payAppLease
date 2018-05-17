@@ -169,7 +169,7 @@ Page({
     await AuthLogin.login();
   
     let userInfo =  my.getStorageSync({'key': 'userInfo'}).data;
-
+    console.log('获取userInfo:', userInfo);
     //第二部 判断用户是否有卡，获取用户地址列表
     if(userInfo && userInfo.token_type == 2){
       userCard =  await this._checkUserCart();
@@ -187,8 +187,9 @@ Page({
 
     // 已绑定用户获取用户地址
     if(userInfo && userInfo.token_type == 2){
+      console.log('userAddress');
       let userAddress = await this._getUserAddress();
-      if(false && userAddress.data && userAddress.data.data && userAddress.data.status == 'ok' && userAddress.data.data.length > 0){
+      if(userAddress.data && userAddress.data.data && userAddress.data.status == 'ok' && userAddress.data.data.length > 0){
         globalData['userAddressList'] = userAddress.data.data.rows;
         
         this.setData({
@@ -203,7 +204,7 @@ Page({
         }
       }else{
 
-        let getLocationData = await aliApi.getLocation({type: 1});
+        let getLocationData = my.getLocation({type: 1});
         let setDefaultUserAddress = {};
         
         if(getLocationData){
@@ -219,6 +220,7 @@ Page({
     }
 
     //判断用户是否有卡
+    console.log(userCard);
     if(userCard && userCard.data && userCard.data.data && !userCard.data.data.has_card && userInfo && userInfo.token_type == 2){
       my.navigateTo({
           url:'/page/buyCard/buyCard'
