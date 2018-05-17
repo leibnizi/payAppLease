@@ -19,8 +19,8 @@ App({
       "address_detail": "asdasdasd",
       "contact_name": "dddddccc",
       "contact_mobile": "13124077261",
-      "region_code": "",
-      "area_name": ""
+      "region_code": "130402",
+      "area_name": "邯山区"
     },// 用户默认地址
     location: {
       district:'黄埔',
