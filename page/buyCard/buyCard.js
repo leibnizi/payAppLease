@@ -65,7 +65,6 @@ Page({
     },
 
     async getCardInfoAsync(first = false) {
-        loading.show()
         try {
             console.log("Start Request")
             const cardInfo = await this._getCardInfo(first)
@@ -86,11 +85,9 @@ Page({
                         depositeType: card.deposit_type
                     })
                 })
-            }
+            } 
         } catch (e) {
 
-        } finally {
-            loading.hide()
         }
     },
 
@@ -134,6 +131,9 @@ Page({
                 page_size: 20
             }
         }
+        loading.show()
+         this.getCardInfoAsync(true);
+
         try {
             const response = await get("user/coupon", config);
             if (response.data.status == 'ok') {
@@ -145,8 +145,10 @@ Page({
             }
         }
         catch (e) {
+        } finally { 
+            loading.hide()
         }
-        this.getCardInfoAsync(true)
+       
         //this.getData();
 
     },
