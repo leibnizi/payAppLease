@@ -189,24 +189,19 @@ Page({
     if(userInfo && userInfo.token_type == 2){
       console.log('userAddress');
       let userAddress = await this._getUserAddress();
-      console.log(userAddress);
 
       if(userAddress.data && userAddress.data.data && userAddress.data.status == 'ok' && userAddress.data.data.length > 0){
         globalData['userAddressList'] = userAddress.data.data.rows;
-          console.log(2);
         this.setData({
             userAddressList: userAddress.data.data.rows
         });
-        console.log(3);
         if(Util.isEmptyObject(globalData.defaultUserAddress)){
-          console.log(4);
           globalData['defaultUserAddress'] = userAddress.data.data.rows[0];
           this.setData({
             defaultUserAddress: userAddress.data.data.rows[0]
           });
         }
       }else{
-console.log(5);
         //let getLocationData = aliApi.getLocation({type: 1});
         let setDefaultUserAddress = {};
         //TUDO: 无法实现同步封装
@@ -232,11 +227,10 @@ console.log(5);
     }
 
     //判断用户是否有卡
-    console.log(userCard);
     
     setTimeout(()=>{
       if(userCard && userCard.data && userCard.data.data && !userCard.data.data.has_card && userInfo && userInfo.token_type == 2){
-        console.log(8);
+
         my.navigateTo({
             url:'/page/buyCard/buyCard'
         });
