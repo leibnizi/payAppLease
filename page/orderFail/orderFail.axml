@@ -4,7 +4,8 @@
   <view class="top">
     <image src="{{failImage}}"></image>
     <text>下单失败</text>
-    <text>这里是下单失败的文案</text>
+    <text>下单出现问题</text>
+    <text>{{message}}</text>
   </view>
 
 

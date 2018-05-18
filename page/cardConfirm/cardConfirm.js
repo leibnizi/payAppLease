@@ -85,16 +85,14 @@ Page({
 
                 setTimeout(() => {
                     clearInterval(poll)
-                    redirectTo("/page/orderFail/orderFail")
+                    redirectTo(`/page/orderFail/orderFail?message=${res}`)
                 }, 10 * 1000)
-
-
             }
             console.log("支付出现问题")
         }
         catch (err) {
-            console.log("catch确认订单", err)
-            redirectTo("/page/orderFail/orderFai")
+            console.log("支付失败", err)
+            redirectTo(`/page/orderFail/orderFail?message=${err}`)
         } finally {
             loading.hide()
         }
